@@ -1,0 +1,9 @@
+# This playbook is designed to be run once by the Terraform
+# report module when a host is provisioned.
+#
+- hosts: all
+  become: true
+  vars:
+    hostname: "{{ ansible_hostname }}"
+  roles:
+    - iamsync

@@ -1,0 +1,61 @@
+- name: Install apt packages
+  apt:
+    pkg:
+    - 'python3-setuptools'
+    - 'python3-pip'
+    - 'python3-wheel'
+    - 'python3-venv'
+    - 'awscli'
+    update_cache: yes
+
+- name: Deploy Python virtual environment
+  pip:
+    virtualenv: '/root/venv'
+    virtualenv_command: '/usr/bin/python3 -m venv'
+    name: ['wheel', 'boto3', 'pyyaml']
+
+- name: Create /root/bin directory
+  file:
+    path: '/root/bin'
+    owner: 'root'
+    group: 'root'
+    state: 'directory'
+    mode: '0700'
+
+- name: Copy iamsync.py script
+  copy:
+    src: 'iamsync.py'
+    dest: '/root/bin/iamsync.py'
+    owner: 'root'
+    group: 'root'
+    mode: '0700'
+
+- name: Create iamsync config
+  template:
+    src: 'iamsync_config.j2'
+    dest: '/root/iam.yml'
+    owner: 'root'
+    group: 'root'
+    mode: '0600'
+
+- name: Set cron PATH for root user
+  cron:
+    name: 'PATH'
+    env: 'yes'
+    user: 'root'
+    job: 'venv/bin:/usr/sbin:/bin'
+
+- name: Set /bin/bash as cron shell
+  cronvar:
+    user: 'root'
+    name: 'SHELL'
+    value: '/bin/bash'
+
+- name: Set iamsync.py cron schedule
+  cron:
+    name: 'iamsync.py'
+    weekday: '*'
+    minute: '0,30'
+    hour: '*'
+    user: 'root'
+    job: 'sleep ${RANDOM: -1} ; python bin/iamsync.py'
