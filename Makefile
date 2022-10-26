@@ -116,11 +116,8 @@ docker:
 $(call help,make docker-run,"run the app's docker image")
 docker-run:
 	@docker run \
-		--add-host host.docker.internal:host-gateway \
-		--net report_default \
 		--env-file .docker.env \
-		--env-file .devdata.env \
-		-p 9325:9325 \
+		-p 4000:3000 \
 		hypothesis/report:$(DOCKER_TAG)
 
 .PHONY: clean
