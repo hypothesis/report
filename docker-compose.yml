@@ -1,8 +1,37 @@
 version: "3.9"
 services:
-  web:
-    build: .
+  metabase-postgres:
+    image: postgres:12
+    environment:
+      - POSTGRES_USER=metabase
+      - POSTGRES_PASSWORD=metabase
+      - POSTGRES_DB=metabase
     ports:
-      - "8000:8000"
-  redis:
-    image: "redis:alpine"
+      - 5435:5432
+    volumes:
+      - ./.volumes/metabase-postgres:/var/lib/postgresql/data
+    networks:
+      - report
+
+  metabase:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    environment:
+      - MB_DB_TYPE=postgres
+      - MB_DB_DBNAME=metabase
+      - MB_DB_PORT=5432
+      - MB_DB_USER=metabase
+      - MB_DB_PASS=metabase
+      - MB_DB_HOST=metabase-postgres
+    ports:
+      - 4000:3000
+    depends_on:
+      - metabase-postgres
+    networks:
+      - report
+ 
+networks:
+  report:
+    external: false
