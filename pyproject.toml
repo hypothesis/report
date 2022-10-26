@@ -128,5 +128,5 @@ output-format = "colorized"
 score = "no"
 
 [tool.hdev]
-project_name = "report"
+project_name = "Report"
 project_type = "application"
