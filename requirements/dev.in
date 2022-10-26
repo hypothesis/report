@@ -1,0 +1,5 @@
+pip-tools
+-r prod.txt
+factory-boy
+pyramid-ipython
+supervisor
