@@ -8,9 +8,7 @@
 
 The internal global reporting product for Hypothesis
 
-Used for internal purposes only.
-
-## Setting up Your report Development Environment
+## Setting up Your Report Development Environment
 
 First you'll need to install:
 

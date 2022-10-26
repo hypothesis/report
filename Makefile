@@ -10,15 +10,12 @@ services: args?=up -d
 services: python
 	@tox -qe dockercompose -- $(args)
 
+.PHONY: devdata
+
 .PHONY: dev
 $(call help,make dev,run the whole app \(all workers\))
 dev: python
 	@pyenv exec tox -qe dev
-
-.PHONY: web
-$(call help,make web,run just a web worker)
-web: python
-	@pyenv exec tox -qe dev --run-command 'gunicorn --bind :9325 --workers 1 --reload --timeout 0 --paste conf/development.ini'
 
 .PHONY: shell
 $(call help,make shell,"launch a Python shell in this project's virtualenv")
@@ -116,6 +113,8 @@ docker:
 $(call help,make docker-run,"run the app's docker image")
 docker-run:
 	@docker run \
+		--add-host host.docker.internal:host-gateway \
+		--net report_default \
 		--env-file .docker.env \
 		-p 4000:3000 \
 		hypothesis/report:$(DOCKER_TAG)
