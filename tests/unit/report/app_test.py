@@ -1,15 +1,5 @@
-from unittest.mock import sentinel
-
-from pyramid.router import Router
-
-from report import app
+from report.app import report
 
 
-def test_create_app():
-    wsgi_app = app.create_app({})
-
-    assert isinstance(wsgi_app, Router)
-
-
-def test_index():
-    assert app.index(sentinel.request) == {"Hello": "Pyramid!"}
+def test_report():
+    assert report() == 42

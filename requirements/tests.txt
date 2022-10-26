@@ -20,16 +20,10 @@ faker==15.1.1
     # via factory-boy
 freezegun==1.2.2
     # via -r requirements/tests.in
-gunicorn==20.1.0
-    # via -r requirements/prod.txt
 h-matchers==1.2.15
     # via -r requirements/tests.in
 httpretty==1.1.4
     # via -r requirements/tests.in
-hupper==1.10.3
-    # via
-    #   -r requirements/prod.txt
-    #   pyramid
 iniconfig==1.1.1
     # via pytest
 newrelic==8.3.0
@@ -38,29 +32,14 @@ packaging==21.3
     # via
     #   build
     #   pytest
-pastedeploy==3.0.1
-    # via
-    #   -r requirements/prod.txt
-    #   plaster-pastedeploy
 pep517==0.13.0
     # via build
 pip-tools==6.9.0
     # via -r requirements/tests.in
-plaster==1.0
-    # via
-    #   -r requirements/prod.txt
-    #   plaster-pastedeploy
-    #   pyramid
-plaster-pastedeploy==0.7
-    # via
-    #   -r requirements/prod.txt
-    #   pyramid
 pluggy==1.0.0
     # via pytest
 pyparsing==3.0.9
     # via packaging
-pyramid==2.0
-    # via -r requirements/prod.txt
 pytest==7.2.0
     # via -r requirements/tests.in
 python-dateutil==2.8.2
@@ -75,38 +54,11 @@ tomli==2.0.1
     #   coverage
     #   pep517
     #   pytest
-translationstring==1.4
-    # via
-    #   -r requirements/prod.txt
-    #   pyramid
-venusian==3.0.0
-    # via
-    #   -r requirements/prod.txt
-    #   pyramid
-webob==1.8.7
-    # via
-    #   -r requirements/prod.txt
-    #   pyramid
 wheel==0.37.1
     # via pip-tools
-zope-deprecation==4.4.0
-    # via
-    #   -r requirements/prod.txt
-    #   pyramid
-zope-interface==5.5.0
-    # via
-    #   -r requirements/prod.txt
-    #   pyramid
 
 # The following packages are considered to be unsafe in a requirements file:
 pip==22.3
     # via pip-tools
 setuptools==65.5.0
-    # via
-    #   -r requirements/prod.txt
-    #   gunicorn
-    #   pip-tools
-    #   plaster
-    #   pyramid
-    #   zope-deprecation
-    #   zope-interface
+    # via pip-tools
