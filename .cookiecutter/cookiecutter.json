@@ -1,0 +1,30 @@
+{
+  "template": "https://github.com/hypothesis/cookiecutters",
+  "checkout": null,
+  "directory": "pyramid-app",
+  "ignore": [],
+  "extra_context": {
+    "name": "report",
+    "package_name": "report",
+    "slug": "report",
+    "short_description": "The internal global reporting product for Hypothesis",
+    "python_version": "3.8.12",
+    "port": "9325",
+    "github_owner": "hypothesis",
+    "visibility": "public",
+    "copyright_holder": "Hypothesis",
+    "dependabot_pip_interval": "monthly",
+    "dependabot_npm_interval": "monthly",
+    "dependabot_docker_interval": "monthly",
+    "devdata": "yes",
+    "frontend": "no",
+    "__frontend_typechecking": "no",
+    "services": "yes",
+    "db": "yes",
+    "docker": "yes",
+    "__docker_namespace": "hypothesis",
+    "__docker_network": "report_default",
+    "__github_url": "https://github.com/hypothesis/report",
+    "__hdev_project_type": "application"
+  }
+}

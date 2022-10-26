@@ -1,0 +1,8 @@
+pip-tools
+-r prod.txt
+coverage[toml]
+pytest
+factory-boy
+h-matchers
+httpretty
+freezegun
