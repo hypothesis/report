@@ -5,7 +5,8 @@ from typing import List
 
 import jinja2
 import sqlparse
-from h.sql_tasks.sql_query import SQLQuery
+
+from report.sql_tasks.sql_query import SQLQuery
 
 
 @dataclass
@@ -40,6 +41,8 @@ class SQLScript:
 
         :param task_dir: The directory to read from
         :param template_vars: Variables to include in Jinja2 SQL files
+
+        :raises NotADirectoryError: if `task_dir` is not a directory
         """
         if not os.path.isdir(task_dir):
             raise NotADirectoryError(f"Cannot find the task directory: '{task_dir}'")

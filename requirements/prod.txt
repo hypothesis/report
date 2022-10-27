@@ -30,6 +30,8 @@ pyramid==2.0
     # via -r requirements/prod.in
 sqlalchemy==1.4.42
     # via -r requirements/prod.in
+sqlparse==0.4.3
+    # via -r requirements/prod.in
 tabulate==0.9.0
     # via -r requirements/prod.in
 translationstring==1.4
