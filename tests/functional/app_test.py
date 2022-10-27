@@ -1,5 +1,5 @@
-from report.app import report
+from report.app import create_app
 
 
 def test_it():
-    assert report()
+    assert create_app(None)

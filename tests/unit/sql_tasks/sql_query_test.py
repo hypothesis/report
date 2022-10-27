@@ -1,8 +1,9 @@
 from datetime import datetime, timedelta
 
-from h.sql_tasks.sql_query import SQLQuery
 from h_matchers import Any
 from pytest import fixture
+
+from report.sql_tasks.sql_query import SQLQuery
 
 
 class TestSQLQuery:
@@ -68,4 +69,4 @@ class TestSQLQuery:
 
     @fixture
     def query_no_rows(self):
-        return SQLQuery(0, 'ANALYZE "user"')
+        return SQLQuery(0, "ANALYZE")

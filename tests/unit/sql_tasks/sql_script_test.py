@@ -1,12 +1,13 @@
 import pytest
-from h.sql_tasks.sql_query import SQLQuery
-from h.sql_tasks.sql_script import SQLScript
 from importlib_resources import files
+
+from report.sql_tasks.sql_query import SQLQuery
+from report.sql_tasks.sql_script import SQLScript
 
 
 class TestSQLScript:
     def test_from_dir(self):
-        fixture_dir = files("tests.h.sql_tasks") / "script_fixture"
+        fixture_dir = files("tests.unit.sql_tasks") / "script_fixture"
 
         template_vars = {"template_var": "template_value"}
 
