@@ -1,1 +1,6 @@
 newrelic
+
+importlib_resources
+jinja2
+psycopg2
+tabulate
