@@ -10,12 +10,13 @@ reporting.
 from argparse import ArgumentParser
 
 import importlib_resources
+import sqlalchemy
 from psycopg2.extensions import parse_dsn
 from pyramid.paster import bootstrap
 
-from h.sql_tasks.sql_script import SQLScript
+from report.sql_tasks.sql_script import SQLScript
 
-TASK_ROOT = importlib_resources.files("h.sql_tasks") / "tasks"
+TASK_ROOT = importlib_resources.files("report.sql_tasks") / "tasks"
 
 parser = ArgumentParser(
     description=f"A script for running SQL tasks defined in: {TASK_ROOT}"
@@ -34,7 +35,6 @@ def main():
     args = parser.parse_args()
 
     with bootstrap(args.config_file) as env:
-        request = env["request"]
         dsn = env["registry"].settings["sqlalchemy.url"].strip()
 
         scripts = SQLScript.from_dir(
@@ -42,9 +42,11 @@ def main():
             template_vars={"db_user": parse_dsn(dsn)["user"]},
         )
 
+        engine = sqlalchemy.create_engine(dsn)
+
         # Run the update in a transaction, so we roll back if it goes wrong
-        with request.tm:
-            with request.db.bind.connect() as connection:
+        with engine.connect() as connection:
+            with connection.begin():
                 for script in scripts:
                     print(f"Executing: {script.path}")
 

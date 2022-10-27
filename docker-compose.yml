@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   metabase-postgres:
-    image: postgres:12
+    image: postgres:11.5-alpine
     environment:
       - POSTGRES_USER=metabase
       - POSTGRES_PASSWORD=metabase
@@ -31,7 +31,17 @@ services:
       - metabase-postgres
     networks:
       - report
- 
+
+  postgres:
+    image: postgres:11.5-alpine
+    ports:
+      - 5436:5432
+    healthcheck:
+        test: ["CMD", "pg_isready", "-U", "postgres"]
+        interval: 1s
+    networks:
+      - report
+
 networks:
   report:
     external: false
