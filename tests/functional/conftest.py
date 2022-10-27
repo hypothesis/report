@@ -10,7 +10,7 @@ TEST_ENVIRONMENT = {}
 
 
 TEST_SETTINGS = {
-    "sqlalchemy.url": os.environ.get(
+    "database_url": os.environ.get(
         "TEST_DATABASE_URL", "postgresql://postgres@localhost:5436/report_functests"
     ),
 }
