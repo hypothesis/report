@@ -8,8 +8,6 @@ services:
       - POSTGRES_DB=metabase
     ports:
       - 5435:5432
-    volumes:
-      - ./.volumes/metabase-postgres:/var/lib/postgresql/data
     networks:
       - report
 
@@ -25,10 +23,12 @@ services:
       - MB_DB_USER=metabase
       - MB_DB_PASS=metabase
       - MB_DB_HOST=metabase-postgres
+      - DATABASE_URL=postgresql://postgres@postgres:5432/postgres
     ports:
       - 4000:3000
     depends_on:
       - metabase-postgres
+      - postgres
     networks:
       - report
 
@@ -36,9 +36,6 @@ services:
     image: postgres:11.5-alpine
     ports:
       - 5436:5432
-    healthcheck:
-        test: ["CMD", "pg_isready", "-U", "postgres"]
-        interval: 1s
     networks:
       - report
 
