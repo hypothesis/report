@@ -18,8 +18,6 @@ class TestRunSQLTask:
                 [
                     sys.executable,
                     "bin/run_sql_task.py",
-                    "--config-file",
-                    "conf/development.ini",
                     "--task",
                     task_name,
                 ],
