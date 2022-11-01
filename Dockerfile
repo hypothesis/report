@@ -12,7 +12,7 @@ RUN apk add --virtual build-deps \
   && apk del build-deps
 
 
-FROM metabase/metabase:v0.44.2
+FROM metabase/metabase:v0.44.5
 
 # Copy the python binaries and libraries from the python image
 # The metabase image is based on a newer alpine and the python package there 
