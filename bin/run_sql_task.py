@@ -28,9 +28,33 @@ def main():
 
     dsn = os.environ["DATABASE_URL"].strip()
 
+    # Hardcoded values to test GHA password masking
+    h_us_dsn = os.environ.get(
+        "H_US_DATABASE_URL", "postgresql://postgres:password@h_postgres_1:5432/postgres"
+    )
+    h_ca_dsn = os.environ.get(
+        "H_CA_DATABASE_URL", "postgresql://postgres:password@h_postgres_1:5432/postgres"
+    )
+    lms_us_dsn = os.environ.get(
+        "LMS_US_DATABASE_URL",
+        "postgresql://postgres:password@h_postgres_1:5432/postgres",
+    )
+    lms_ca_dsn = os.environ.get(
+        "LMS_CA_DATABASE_URL",
+        "postgresql://postgres:password@h_postgres_1:5432/postgres",
+    )
+
     scripts = SQLScript.from_dir(
         task_dir=TASK_ROOT / args.task,
-        template_vars={"db_user": parse_dsn(dsn)["user"]},
+        template_vars={
+            "db_user": parse_dsn(dsn)["user"],
+            "fdw": {
+                "h_us": parse_dsn(h_us_dsn),
+                "h_ca": parse_dsn(h_ca_dsn),
+                "lms_us": parse_dsn(lms_us_dsn),
+                "lms_ca": parse_dsn(lms_ca_dsn),
+            },
+        },
     )
 
     engine = sqlalchemy.create_engine(dsn)
