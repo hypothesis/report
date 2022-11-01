@@ -8,6 +8,7 @@ $(call help,make help,print this help message)
 $(call help,make services,start the services that the app needs)
 services: args?=up -d
 services: python
+	@tox -qe dockercompose --run-command 'sh -c "docker network create dbs 2>/dev/null || true"'
 	@tox -qe dockercompose -- $(args)
 
 .PHONY: devdata
