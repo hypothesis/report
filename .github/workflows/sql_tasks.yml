@@ -54,5 +54,5 @@ jobs:
       Env: ${{ inputs.Environment }}
       Timeout: 3600
       Region: ${{ inputs.Region }}
-      Command: 'python bin/run_sql_task.py --config-file conf/production.ini --task ${{ inputs.Task }}'
+      Command: 'python bin/run_sql_task.py --task ${{ inputs.Task }}'
     secrets: inherit
