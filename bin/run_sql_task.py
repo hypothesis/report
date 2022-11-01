@@ -23,26 +23,13 @@ parser = ArgumentParser(
 parser.add_argument("-t", "--task", required=True, help="The SQL task name to run")
 
 
+def _get_dsn(env_var_name):
+    return os.environ[env_var_name].strip()
+
+
 def main():
     args = parser.parse_args()
-
-    dsn = os.environ["DATABASE_URL"].strip()
-
-    # Hardcoded values to test GHA password masking
-    h_us_dsn = os.environ.get(
-        "H_US_DATABASE_URL", "postgresql://postgres:password@h_postgres_1:5432/postgres"
-    )
-    h_ca_dsn = os.environ.get(
-        "H_CA_DATABASE_URL", "postgresql://postgres:password@h_postgres_1:5432/postgres"
-    )
-    lms_us_dsn = os.environ.get(
-        "LMS_US_DATABASE_URL",
-        "postgresql://postgres:password@h_postgres_1:5432/postgres",
-    )
-    lms_ca_dsn = os.environ.get(
-        "LMS_CA_DATABASE_URL",
-        "postgresql://postgres:password@h_postgres_1:5432/postgres",
-    )
+    dsn = _get_dsn("DATABASE_URL")
 
     scripts = SQLScript.from_dir(
         task_dir=TASK_ROOT / args.task,
@@ -50,10 +37,10 @@ def main():
             "db_user": parse_dsn(dsn)["user"],
             "metabase_db_user": os.environ["MB_DB_USER"],
             "fdw": {
-                "h_us": parse_dsn(h_us_dsn),
-                "h_ca": parse_dsn(h_ca_dsn),
-                "lms_us": parse_dsn(lms_us_dsn),
-                "lms_ca": parse_dsn(lms_ca_dsn),
+                "h_us": parse_dsn(_get_dsn("H_US_DATABASE_URL")),
+                "h_ca": parse_dsn(_get_dsn("H_CA_DATABASE_URL")),
+                "lms_us": parse_dsn(_get_dsn("LMS_US_DATABASE_URL")),
+                "lms_ca": parse_dsn(_get_dsn("LMS_CA_DATABASE_URL")),
             },
         },
     )
