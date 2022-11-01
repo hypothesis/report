@@ -10,6 +10,7 @@ on:
         required: true
         options:
           - "hello_world"
+          - "report/refresh"
           - "report/create_from_scratch"
       Environment:
         type: choice
@@ -54,5 +55,5 @@ jobs:
       Env: ${{ inputs.Environment }}
       Timeout: 3600
       Region: ${{ inputs.Region }}
-      Command: 'python bin/run_sql_task.py --task ${{ inputs.Task }}'
+      Command: 'python bin/run_sql_task.py --config-file conf/production.ini --task ${{ inputs.Task }}'
     secrets: inherit
