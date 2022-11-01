@@ -38,7 +38,10 @@ services:
       - 5436:5432
     networks:
       - report
+      - dbs
 
 networks:
   report:
     external: false
+  dbs:
+    external: true
