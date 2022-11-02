@@ -11,32 +11,35 @@ on:
       - main
 
 jobs:
-  create-image:
+  Docker_Hub:
+    name: Docker Hub
     uses: hypothesis/workflows/.github/workflows/dockerhub.yml@main
     with:
       Application: ${{ github.event.repository.name }}
     secrets: inherit
 
-  qa-us-west-1:
-    needs: create-image
-    name: ${{ github.event.repository.name }}
-    uses: hypothesis/workflows/.github/workflows/eb-update.yml@main
+  QA:
+    needs: Docker_Hub
+    uses: hypothesis/workflows/.github/workflows/deploy.yml@main
     with:
-      Application: ${{ github.event.repository.name }}
-      Environment: qa
-      Region: us-west-1
-      Operation: deploy
-      Version: ${{ needs.create-image.outputs.docker_tag }}
+      operation: deploy
+      github_environment_name: QA
+      github_environment_url: https://report-qa.hypothes.is/
+      aws_region: us-west-1
+      elasticbeanstalk_application: report
+      elasticbeanstalk_environment: qa
+      docker_tag: ${{ needs.Docker_Hub.outputs.docker_tag }}
     secrets: inherit
 
-  prod-us-west-1:
-    needs: [create-image, qa-us-west-1]
-    name: ${{ github.event.repository.name }}
-    uses: hypothesis/workflows/.github/workflows/eb-update.yml@main
+  Production:
+    needs: [Docker_Hub, QA]
+    uses: hypothesis/workflows/.github/workflows/deploy.yml@main
     with:
-      Application: ${{ github.event.repository.name }}
-      Environment: prod
-      Region: us-west-1
-      Operation: deploy
-      Version: ${{ needs.create-image.outputs.docker_tag }}
+      operation: deploy
+      github_environment_name: Production
+      github_environment_url: https://report.hypothes.is/
+      aws_region: us-west-1
+      elasticbeanstalk_application: report
+      elasticbeanstalk_environment: prod
+      docker_tag: ${{ needs.Docker_Hub.outputs.docker_tag }}
     secrets: inherit
