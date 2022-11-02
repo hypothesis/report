@@ -11,7 +11,7 @@ CREATE MATERIALIZED VIEW organizations AS (
         enabled
     FROM lms_us.organization
 
-    UNION
+    UNION ALL
 
     SELECT
         'ca' AS region,
