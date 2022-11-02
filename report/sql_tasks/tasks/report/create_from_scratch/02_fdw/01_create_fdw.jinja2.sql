@@ -28,6 +28,15 @@ CREATE USER MAPPING IF NOT EXISTS FOR "{{db_user}}"
         password '{{fdw.h_us.password}}' -- SECRET
     );
 
+DROP USER MAPPING IF EXISTS FOR "{{metabase_db_user}}" SERVER "h_us_server";
+CREATE USER MAPPING IF NOT EXISTS FOR "{{metabase_db_user}}"
+    SERVER "h_us_server"
+    OPTIONS (
+        user '{{fdw.h_us.user}}',
+        password '{{fdw.h_us.password}}' -- SECRET
+    );
+
+
 DROP USER MAPPING IF EXISTS FOR "{{db_user}}" SERVER "h_ca_server";
 CREATE USER MAPPING IF NOT EXISTS FOR "{{db_user}}"
     SERVER "h_ca_server"
@@ -35,6 +44,15 @@ CREATE USER MAPPING IF NOT EXISTS FOR "{{db_user}}"
         user '{{fdw.h_ca.user}}',
         password '{{fdw.h_ca.password}}' -- SECRET
     );
+DROP USER MAPPING IF EXISTS FOR "{{metabase_db_user}}" SERVER "h_ca_server";
+CREATE USER MAPPING IF NOT EXISTS FOR "{{metabase_db_user}}"
+    SERVER "h_ca_server"
+    OPTIONS (
+        user '{{fdw.h_ca.user}}',
+        password '{{fdw.h_ca.password}}' -- SECRET
+    );
+
+
 
 DROP USER MAPPING IF EXISTS FOR "{{db_user}}" SERVER "lms_us_server";
 CREATE USER MAPPING IF NOT EXISTS FOR "{{db_user}}"
@@ -43,9 +61,24 @@ CREATE USER MAPPING IF NOT EXISTS FOR "{{db_user}}"
         user '{{fdw.lms_us.user}}',
         password '{{fdw.lms_us.password}}' -- SECRET
     );
+DROP USER MAPPING IF EXISTS FOR "{{metabase_db_user}}" SERVER "lms_us_server";
+CREATE USER MAPPING IF NOT EXISTS FOR "{{metabase_db_user}}"
+    SERVER "lms_us_server"
+    OPTIONS (
+        user '{{fdw.lms_us.user}}',
+        password '{{fdw.lms_us.password}}' -- SECRET
+    );
+
 
 DROP USER MAPPING IF EXISTS FOR "{{db_user}}" SERVER "lms_ca_server";
 CREATE USER MAPPING IF NOT EXISTS FOR "{{db_user}}"
+    SERVER "lms_ca_server"
+    OPTIONS (
+        user '{{fdw.lms_ca.user}}',
+        password '{{fdw.lms_ca.password}}' -- SECRET
+    );
+DROP USER MAPPING IF EXISTS FOR "{{metabase_db_user}}" SERVER "lms_ca_server";
+CREATE USER MAPPING IF NOT EXISTS FOR "{{metabase_db_user}}"
     SERVER "lms_ca_server"
     OPTIONS (
         user '{{fdw.lms_ca.user}}',

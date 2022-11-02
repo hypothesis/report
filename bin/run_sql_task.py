@@ -53,6 +53,7 @@ def main():
                 "h_ca": parse_dsn(h_ca_dsn),
                 "lms_us": parse_dsn(lms_us_dsn),
                 "lms_ca": parse_dsn(lms_ca_dsn),
+                "metabase_db_user": os.environ.get("MB_DB_USER", "metabase"),
             },
         },
     )
