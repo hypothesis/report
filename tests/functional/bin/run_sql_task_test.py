@@ -12,31 +12,27 @@ from tests.functional.conftest import TEST_ENVIRONMENT
 class TestRunSQLTask:
     # We use "clean DB" here to ensure the schema is created
     @pytest.mark.usefixtures("with_clean_db")
-    @pytest.mark.parametrize(
-        "task_name",
-        [
-            "hello_world",
-            pytest.param(
-                "report/create_from_scratch",
-                marks=pytest.mark.xfail(reason="Dependency on other DBs"),
-            ),
-        ],
-    )
-    def test_reporting_tasks(self, environ, task_name):
-        result = check_output(
-            [
-                sys.executable,
-                "bin/run_sql_task.py",
-                "--task",
-                task_name,
-            ],
-            env=environ,
-        )
+    @pytest.mark.xfail(reason="Requires create_from_scratch in H and LMS")
+    def test_reporting_tasks(self, environ):
+        for task_name in (
+            "report/create_from_scratch",
+            "report/refresh",
+            "report/create_from_scratch",
+        ):
+            result = check_output(
+                [
+                    sys.executable,
+                    "bin/run_sql_task.py",
+                    "--task",
+                    task_name,
+                ],
+                env=environ,
+            )
 
-        assert result
+            assert result
 
-        print(f"Task {task_name} OK!")
-        print(result.decode("utf-8"))
+            print(f"Task {task_name} OK!")
+            print(result.decode("utf-8"))
 
     @fixture
     def environ(self):

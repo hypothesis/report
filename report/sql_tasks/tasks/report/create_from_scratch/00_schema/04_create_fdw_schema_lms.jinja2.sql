@@ -1,9 +1,3 @@
-DROP SCHEMA IF EXISTS lms_us CASCADE;
-DROP SCHEMA IF EXISTS lms_ca CASCADE;
-
-CREATE SCHEMA lms_us AUTHORIZATION "{{db_user}}";
-CREATE SCHEMA lms_ca AUTHORIZATION "{{db_user}}";
-
 -- Create types required for imports
 
 DROP TYPE IF EXISTS report.roles CASCADE;
@@ -23,18 +17,19 @@ CREATE TYPE report.academic_timescale AS ENUM (
 
 -- Import required tables
 
-IMPORT FOREIGN SCHEMA "public" LIMIT TO (
-    organization
-) FROM SERVER "lms_us_server" INTO lms_us;
+{% macro import_lms(server_name, schema_name) %}
+    DROP SCHEMA IF EXISTS {{schema_name}} CASCADE;
 
-IMPORT FOREIGN SCHEMA "public" LIMIT TO (
-    organization
-) FROM SERVER "lms_ca_server" INTO lms_ca;
+    CREATE SCHEMA {{schema_name}} AUTHORIZATION "{{db_user}}";
 
-IMPORT FOREIGN SCHEMA "report" LIMIT TO (
-    organization_activity
-) FROM SERVER "lms_us_server" INTO lms_us;
+    IMPORT FOREIGN SCHEMA "public" LIMIT TO (
+        organization
+    ) FROM SERVER "{{server_name}}" INTO {{schema_name}};
 
-IMPORT FOREIGN SCHEMA "report" LIMIT TO (
-    organization_activity
-) FROM SERVER "lms_ca_server" INTO lms_ca;
+    IMPORT FOREIGN SCHEMA "report" LIMIT TO (
+        organization_activity
+    ) FROM SERVER "{{server_name}}" INTO {{schema_name}};
+{% endmacro %}
+
+{{ import_lms("lms_us_server", "lms_us") }}
+{{ import_lms("lms_ca_server", "lms_ca") }}
