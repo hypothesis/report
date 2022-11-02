@@ -2,10 +2,10 @@ DROP MATERIALIZED VIEW IF EXISTS organizations CASCADE;
 
 CREATE MATERIALIZED VIEW organizations AS (
     SELECT
-        'us' AS region,
-        id,
+        CONCAT('us-', id) AS id,
         CONCAT('us.lms.org.', public_id) AS public_id,
         name,
+        'us' AS region,
         created,
         updated,
         enabled
@@ -14,10 +14,10 @@ CREATE MATERIALIZED VIEW organizations AS (
     UNION ALL
 
     SELECT
-        'ca' AS region,
-        id,
+        CONCAT('ca-', id) AS id,
         CONCAT('ca.lms.org.', public_id) AS public_id,
         name,
+        'ca' AS region,
         created,
         updated,
         enabled
