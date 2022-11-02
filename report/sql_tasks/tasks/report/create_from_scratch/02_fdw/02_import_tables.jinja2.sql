@@ -8,4 +8,7 @@
 IMPORT FOREIGN SCHEMA "{{schema}}" LIMIT TO (
     "{{table_name}}"
 ) FROM SERVER "lms_us_server" INTO lms_us;
+IMPORT FOREIGN SCHEMA "{{schema}}" LIMIT TO (
+    "{{table_name}}"
+) FROM SERVER "lms_ca_server" INTO lms_ca;
 {% endfor %}
