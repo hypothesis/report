@@ -1,6 +1,5 @@
 {% set lms_fdw_tables = [
     ("public", "organization"), 
-    ("report", "organization_activity")
    ]
 %}
 
