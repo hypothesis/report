@@ -18,8 +18,6 @@ CREATE VIEW organization_activity_serial AS (
         annotation_count AS count,
         annotation_count_growth AS growth
     FROM organization_activity
-    -- We don't yet track teacher annotation counts
-    WHERE role = 'user'
 
     UNION ALL
 
