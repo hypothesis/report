@@ -20,6 +20,11 @@ build==0.8.0
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
     #   pip-tools
+certifi==2022.9.24
+    # via
+    #   -r requirements/functests.txt
+    #   -r requirements/tests.txt
+    #   hubspot-api-client
 click==8.1.3
     # via
     #   -r requirements/functests.txt
@@ -55,6 +60,10 @@ h-matchers==1.2.15
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
 httpretty==1.1.4
+    # via
+    #   -r requirements/functests.txt
+    #   -r requirements/tests.txt
+hubspot-api-client==6.1.0
     # via
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
@@ -134,10 +143,12 @@ python-dateutil==2.8.2
     #   -r requirements/tests.txt
     #   faker
     #   freezegun
+    #   hubspot-api-client
 six==1.16.0
     # via
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
+    #   hubspot-api-client
     #   python-dateutil
 snowballstemmer==2.2.0
     # via pydocstyle
@@ -174,6 +185,11 @@ typing-extensions==4.4.0
     # via
     #   astroid
     #   pylint
+urllib3==1.26.12
+    # via
+    #   -r requirements/functests.txt
+    #   -r requirements/tests.txt
+    #   hubspot-api-client
 waitress==2.1.2
     # via
     #   -r requirements/functests.txt

@@ -1,5 +1,6 @@
 newrelic
 
+hubspot-api-client
 importlib_resources
 jinja2
 psycopg2

@@ -10,6 +10,10 @@ beautifulsoup4==4.11.1
     # via webtest
 build==0.8.0
     # via pip-tools
+certifi==2022.9.24
+    # via
+    #   -r requirements/prod.txt
+    #   hubspot-api-client
 click==8.1.3
     # via pip-tools
 exceptiongroup==1.0.0rc9
@@ -26,6 +30,8 @@ h-matchers==1.2.15
     # via -r requirements/functests.in
 httpretty==1.1.4
     # via -r requirements/functests.in
+hubspot-api-client==6.1.0
+    # via -r requirements/prod.txt
 importlib-resources==5.10.0
     # via -r requirements/prod.txt
 iniconfig==1.1.1
@@ -55,9 +61,15 @@ pyparsing==3.0.9
 pytest==7.2.0
     # via -r requirements/functests.in
 python-dateutil==2.8.2
-    # via faker
+    # via
+    #   -r requirements/prod.txt
+    #   faker
+    #   hubspot-api-client
 six==1.16.0
-    # via python-dateutil
+    # via
+    #   -r requirements/prod.txt
+    #   hubspot-api-client
+    #   python-dateutil
 soupsieve==2.3.2.post1
     # via beautifulsoup4
 sqlalchemy==1.4.42
@@ -71,6 +83,10 @@ tomli==2.0.1
     #   build
     #   pep517
     #   pytest
+urllib3==1.26.12
+    # via
+    #   -r requirements/prod.txt
+    #   hubspot-api-client
 waitress==2.1.2
     # via webtest
 webob==1.8.7
