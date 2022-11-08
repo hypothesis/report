@@ -3,6 +3,7 @@ DROP MATERIALIZED VIEW IF EXISTS organization_activity CASCADE;
 CREATE MATERIALIZED VIEW organization_activity AS (
     SELECT
         timescale,
+        calendar_date,
         period,
         role,
         CONCAT('us-', organization_id) AS organization_id,
@@ -15,6 +16,7 @@ CREATE MATERIALIZED VIEW organization_activity AS (
 
     SELECT
         timescale,
+        calendar_date,
         period,
         role,
         CONCAT('ca-', organization_id) AS organization_id,
