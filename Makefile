@@ -8,15 +8,22 @@ $(call help,make help,print this help message)
 $(call help,make services,start the services that the app needs)
 services: args?=up -d
 services: python
-	@tox -qe dockercompose --run-command 'sh -c "docker network create dbs 2>/dev/null || true"'
 	@tox -qe dockercompose -- $(args)
 
 .PHONY: devdata
+$(call help,make devdata,load development data and environment variables)
+devdata: python
+	@tox -qe dev --run-command 'python bin/make_devdata'
 
 .PHONY: dev
 $(call help,make dev,run the whole app \(all workers\))
 dev: python
 	@pyenv exec tox -qe dev
+
+.PHONY: web
+$(call help,make web,run just a web worker)
+web: python
+	@pyenv exec tox -qe dev --run-command 'gunicorn --bind :4000 --workers 1 --reload --timeout 0 --paste conf/development.ini'
 
 .PHONY: shell
 $(call help,make shell,"launch a Python shell in this project's virtualenv")
@@ -117,7 +124,8 @@ docker-run:
 		--add-host host.docker.internal:host-gateway \
 		--net report_default \
 		--env-file .docker.env \
-		-p 4000:3000 \
+		--env-file .devdata.env \
+		-p 4000:4000 \
 		hypothesis/report:$(DOCKER_TAG)
 
 .PHONY: clean
