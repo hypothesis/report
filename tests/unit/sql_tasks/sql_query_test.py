@@ -16,6 +16,13 @@ class TestSQLQuery:
         assert query.columns == ["column"]
         self.assert_query_sets_dates_post_execute(query)
 
+    def test_execute_with_params(self, connection):
+        query = SQLQuery(0, "SELECT :value")
+
+        query.execute(connection, parameters={"value": 12})
+
+        assert query.rows == [(12,)]
+
     def test_execute_with_a_query_returning_no_rows(self, query_no_rows, connection):
         self.assert_query_null_pre_execute(query_no_rows)
 
