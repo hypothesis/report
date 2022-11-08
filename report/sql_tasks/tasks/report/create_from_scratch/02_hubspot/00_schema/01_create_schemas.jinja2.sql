@@ -1,0 +1,3 @@
+DROP SCHEMA IF EXISTS hubspot CASCADE;
+
+CREATE SCHEMA hubspot AUTHORIZATION "{{db_user}}";
