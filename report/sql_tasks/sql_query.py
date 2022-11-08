@@ -31,12 +31,14 @@ class SQLQuery:
     rows: Optional[list] = None
     """Rows of the returned values (if any)."""
 
-    def execute(self, connection: Connection):
+    def execute(self, connection: Connection, parameters=None):
         """Execute this query in the given session."""
 
         self.start_time = datetime.now()
+        if not parameters:
+            parameters = {}
 
-        cursor = connection.execute(sa.text(self.text))
+        cursor = connection.execute(sa.text(self.text), **parameters)
         if cursor.returns_rows:
             self.columns = [col.name for col in cursor.cursor.description]
             self.rows = cursor.fetchall()
