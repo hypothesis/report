@@ -1,0 +1,49 @@
+# Run python scripts to import/sync data from external sources
+
+name: Data imports
+
+on:
+  workflow_dispatch:
+    inputs:
+      Task:
+        type: choice
+        description: "The task to perform"
+        required: true
+        options:
+          - 'hubspot'
+      Environment:
+        type: choice
+        description: "The environment to target"
+        required: true
+        default: 'qa'
+        options:
+          - 'qa'
+          - 'prod'
+      Destructive:
+        description: Check to confirm you are happy to proceed with a destructive operation
+        type: boolean
+        required: false
+        default: false
+
+jobs:
+  check_for_danger:
+    runs-on: ubuntu-latest
+    name: "Check for approval for dangerous actions"
+    steps:
+      - name: "Approval not given!"
+        if: contains(fromJson('["report/create_from_scratch"]'), inputs.Task) && inputs.Destructive == false
+        run: |
+          echo "::error::'${{ inputs.Task }}' needs destructive option"
+          exit 1
+
+  hubspot:
+    needs: check_for_danger
+    name: "Imports hubspot data into the report's DB"
+    uses: hypothesis/workflows/.github/workflows/eb-task.yml@main
+    with:
+      App: ${{ github.event.repository.name }}
+      Env: ${{ inputs.Environment }}
+      Timeout: 3600
+      Region: 'us-west-1'
+      Command: 'python bin/import_hubspot.py'
+    secrets: inherit
