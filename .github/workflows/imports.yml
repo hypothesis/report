@@ -38,7 +38,7 @@ jobs:
 
   hubspot:
     needs: check_for_danger
-    name: "Imports hubspot data into the report's DB"
+    name: "Import Hubspot data into the report's DB"
     uses: hypothesis/workflows/.github/workflows/eb-task.yml@main
     with:
       App: ${{ github.event.repository.name }}
