@@ -14,7 +14,7 @@ CREATE EXTENSION IF NOT EXISTS postgres_fdw;
         );
 
     {% for user in users %}
-        DROP USER MAPPING IF EXISTS FOR "{{user}}" SERVER "h_us_server";
+        DROP USER MAPPING IF EXISTS FOR "{{user}}" SERVER "{{server_name}}";
 
         CREATE USER MAPPING IF NOT EXISTS FOR "{{user}}"
             SERVER "{{server_name}}"
