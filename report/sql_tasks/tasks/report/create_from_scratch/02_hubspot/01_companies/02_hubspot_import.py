@@ -1,9 +1,8 @@
 import os
 
-import sqlalchemy
-
 from report.data_sources.hubspot_client import HubspotClient
 from report.sql_tasks.sql_query import SQLQuery
+from report.sql_tasks.timer import Timer
 
 FIELD_MAPPING = {
     # General
@@ -68,9 +67,7 @@ def _get_companies(api_client):
         yield company
 
 
-def main():
-    dsn = _get_dsn("DATABASE_URL")
-    engine = sqlalchemy.create_engine(dsn)
+def main(connection, **kwargs):
     api_client = HubspotClient(private_app_key=os.environ["HUBSPOT_API_KEY"])
 
     # Do everything about companies before we start, so we don't kill the DB,
@@ -78,19 +75,14 @@ def main():
     print("Getting Hubspot company data...")
     companies = list(_get_companies(api_client))
 
-    with engine.connect() as connection:
-        with connection.begin():
-            query = SQLQuery(0, "TRUNCATE hubspot.companies;")
-            query.execute(connection)
-            print(query.dump(indent="    ") + "\n")
+    query = SQLQuery(0, "TRUNCATE hubspot.companies;")
+    query.execute(connection)
+    print(query.dump(indent="    ") + "\n")
 
-            for count, company in enumerate(companies):
-                query = SQLQuery(count + 1, INSERT_QUERY)
-                query.execute(connection, parameters=company)
-                print(count, query.timing.duration)
+    timer = Timer()
+    with timer.time_it():
+        for company in companies:
+            query = SQLQuery(1, INSERT_QUERY)
+            query.execute(connection, parameters=company)
 
-    print("Done!")
-
-
-if __name__ == "__main__":
-    main()
+    print(f"Companies loaded in: {timer.duration}")
