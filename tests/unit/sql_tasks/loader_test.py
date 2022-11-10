@@ -1,7 +1,9 @@
 import pytest
+from h_matchers import Any
 from importlib_resources import files
 
 from report.sql_tasks.loader import from_dir
+from report.sql_tasks.python_script import PythonScript
 from report.sql_tasks.sql_query import SQLQuery
 from report.sql_tasks.sql_script import SQLScript
 
@@ -33,6 +35,7 @@ class TestTask:
                 template_vars=template_vars,
                 queries=[SQLQuery(index=0, text="SELECT 'template_value';")],
             ),
+            PythonScript(path=str(fixture_dir / "04_file.py"), module=Any()),
         ]
 
     def test_from_dir_raises_for_missing_dir(self):

@@ -1,6 +1,7 @@
 import os
 import os.path
 
+from report.sql_tasks.python_script import PythonScript
 from report.sql_tasks.sql_script import SQLScript
 
 
@@ -8,9 +9,9 @@ def from_dir(task_dir: str, template_vars: dict):
     """
     Generate script objects from files found in a directory.
 
-    This will return a generator of `SQLFile` based on the natural sorting
+    This will return a generator of script objects based on the natural sorting
     order of files found in the directory, and subdirectories. Only files
-    with a `.sql` prefix are considered. Files with `.jinja2.sql` are
+    with a `.sql` or `.py` prefix are considered. Files with `.jinja2.sql` are
     treated as Jinja2 templated SQL and are rendered using the provided
     environment.
 
@@ -30,3 +31,6 @@ def from_dir(task_dir: str, template_vars: dict):
 
         elif full_name.endswith(".sql"):
             yield SQLScript(full_name, template_vars=template_vars)
+
+        elif full_name.endswith(".py"):
+            yield PythonScript(full_name)
