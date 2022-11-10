@@ -13,7 +13,7 @@ import importlib_resources
 import sqlalchemy
 from psycopg2.extensions import parse_dsn
 
-from report.sql_tasks.sql_script import SQLScript
+from report import sql_tasks
 
 TASK_ROOT = importlib_resources.files("report.sql_tasks") / "tasks"
 
@@ -31,7 +31,7 @@ def main():
     args = parser.parse_args()
     dsn = _get_dsn("DATABASE_URL")
 
-    scripts = SQLScript.from_dir(
+    scripts = sql_tasks.from_dir(
         task_dir=TASK_ROOT / args.task,
         template_vars={
             "db_user": parse_dsn(dsn)["user"],
