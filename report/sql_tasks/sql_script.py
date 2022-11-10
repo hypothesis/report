@@ -1,5 +1,3 @@
-import os
-import os.path
 import textwrap
 from dataclasses import dataclass, field
 from typing import List
@@ -51,34 +49,6 @@ class SQLScript:
         return textwrap.indent(
             f"SQL script: '{self.path}'\nDone in: {self.timing.duration}", indent
         )
-
-    @classmethod
-    def from_dir(cls, task_dir: str, template_vars: dict):
-        """
-        Generate `SQLFile` objects from files found in a directory.
-
-        This will return a generator of `SQLFile` based on the natural sorting
-        order of files found in the directory, and subdirectories. Only files
-        with a `.sql` prefix are considered. Files with `.jinja2.sql` are
-        treated as Jinja2 templated SQL and are rendered using the provided
-        environment.
-
-        :param task_dir: The directory to read from
-        :param template_vars: Variables to include in Jinja2 SQL files
-
-        :raises NotADirectoryError: if `task_dir` is not a directory
-        """
-        if not os.path.isdir(task_dir):
-            raise NotADirectoryError(f"Cannot find the task directory: '{task_dir}'")
-
-        for item in sorted(os.listdir(task_dir)):
-            full_name = os.path.join(task_dir, item)
-
-            if os.path.isdir(full_name):
-                yield from cls.from_dir(full_name, template_vars=template_vars)
-
-            elif full_name.endswith(".sql"):
-                yield SQLScript(full_name, template_vars=template_vars)
 
     def _parse(self):
         with open(self.path, encoding="utf-8") as handle:
