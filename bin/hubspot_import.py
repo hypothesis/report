@@ -87,7 +87,7 @@ def main():
             for count, company in enumerate(companies):
                 query = SQLQuery(count + 1, INSERT_QUERY)
                 query.execute(connection, parameters=company)
-                print(count, query.duration)
+                print(count, query.timing.duration)
 
     print("Done!")
 

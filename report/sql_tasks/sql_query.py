@@ -1,12 +1,13 @@
 import re
 import textwrap
-from dataclasses import dataclass
-from datetime import datetime, timedelta
+from dataclasses import dataclass, field
 from typing import Optional
 
 import sqlalchemy as sa
 from sqlalchemy.engine import Connection
 from tabulate import tabulate
+
+from report.sql_tasks.timer import Timer
 
 
 @dataclass
@@ -19,31 +20,26 @@ class SQLQuery:
     text: str
     """Text of the query."""
 
-    start_time: datetime = None
-    """Time execution began."""
-
-    duration: timedelta = None
-    """Duration of query execution."""
-
     columns: Optional[list] = None
     """Columns of the returned values (if any)."""
 
     rows: Optional[list] = None
     """Rows of the returned values (if any)."""
 
+    timing: Timer = field(default_factory=Timer)
+    """Timer for query execution."""
+
     def execute(self, connection: Connection, parameters=None):
         """Execute this query in the given session."""
 
-        self.start_time = datetime.now()
-        if not parameters:
-            parameters = {}
+        with self.timing.time_it():
+            if not parameters:
+                parameters = {}
 
-        cursor = connection.execute(sa.text(self.text), **parameters)
-        if cursor.returns_rows:
-            self.columns = [col.name for col in cursor.cursor.description]
-            self.rows = cursor.fetchall()
-
-        self.duration = datetime.now() - self.start_time
+            cursor = connection.execute(sa.text(self.text), **parameters)
+            if cursor.returns_rows:
+                self.columns = [col.name for col in cursor.cursor.description]
+                self.rows = cursor.fetchall()
 
     def dump(self, indent=""):
         """
@@ -59,7 +55,7 @@ class SQLQuery:
                 headers=self.columns,
                 tablefmt="psql",
             )
-        text += f"\n\nTime: {self.duration}"
+        text += f"\n\nTime: {self.timing.duration}"
         return textwrap.indent(text, indent)
 
     @staticmethod

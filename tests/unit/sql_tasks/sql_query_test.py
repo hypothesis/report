@@ -1,6 +1,3 @@
-from datetime import datetime, timedelta
-
-from h_matchers import Any
 from pytest import fixture
 
 from report.sql_tasks.sql_query import SQLQuery
@@ -14,7 +11,7 @@ class TestSQLQuery:
 
         assert query.rows == [("value",)]
         assert query.columns == ["column"]
-        self.assert_query_sets_dates_post_execute(query)
+        assert query.timing.start_time is not None
 
     def test_execute_with_params(self, connection):
         query = SQLQuery(0, "SELECT :value")
@@ -30,7 +27,7 @@ class TestSQLQuery:
 
         assert query_no_rows.rows is None
         assert query_no_rows.columns is None
-        self.assert_query_sets_dates_post_execute(query_no_rows)
+        assert query_no_rows.timing.start_time is not None
 
     def test_dump(self, query, connection):
         query.execute(connection)
@@ -61,16 +58,7 @@ class TestSQLQuery:
     def assert_query_null_pre_execute(self, query):
         assert query.rows is None
         assert query.columns is None
-        assert query.start_time is None
-        assert query.duration is None
-
-    def assert_query_sets_dates_post_execute(self, query):
-        # These values are just FYI, so we'll take a shallow approach to
-        # checking the values are correct
-        assert query.start_time == Any.instance_of(datetime)
-        assert (query.start_time - datetime.now()) < timedelta(seconds=1)
-        assert query.duration == Any.instance_of(timedelta)
-        assert query.duration <= timedelta(seconds=1)
+        assert query.timing.start_time is None
 
     @fixture
     def connection(self, db_session):
