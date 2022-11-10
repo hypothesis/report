@@ -25,6 +25,7 @@ class TestRunSQLTask:
                     "bin/run_sql_task.py",
                     "--task",
                     task_name,
+                    "--no-python",
                 ],
                 env=environ,
             )

@@ -14,6 +14,7 @@ import sqlalchemy
 from psycopg2.extensions import parse_dsn
 
 from report import sql_tasks
+from report.sql_tasks.python_script import PythonScript
 
 TASK_ROOT = importlib_resources.files("report.sql_tasks") / "tasks"
 
@@ -21,6 +22,13 @@ parser = ArgumentParser(
     description=f"A script for running SQL tasks defined in: {TASK_ROOT}"
 )
 parser.add_argument("-t", "--task", required=True, help="The SQL task name to run")
+parser.add_argument(
+    "--no-python",
+    action="store_const",
+    default=False,
+    const=True,
+    help="Skip Python executables",
+)
 
 
 def _get_dsn(env_var_name):
@@ -51,6 +59,10 @@ def main():
     with engine.connect() as connection:
         with connection.begin():
             for script in scripts:
+                if args.no_python and isinstance(script, PythonScript):
+                    print(f"Skipping: {script}")
+                    continue
+
                 for step in script.execute(connection):
                     print(step.dump(indent="    ") + "\n")
 
