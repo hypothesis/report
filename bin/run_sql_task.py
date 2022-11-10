@@ -51,11 +51,8 @@ def main():
     with engine.connect() as connection:
         with connection.begin():
             for script in scripts:
-                print(f"Executing: {script.path}")
-
-                for query in script.queries:
-                    query.execute(connection)
-                    print(query.dump(indent="    ") + "\n")
+                for step in script.execute(connection):
+                    print(step.dump(indent="    ") + "\n")
 
 
 if __name__ == "__main__":

@@ -1,3 +1,5 @@
+from unittest.mock import create_autospec, sentinel
+
 import pytest
 from importlib_resources import files
 
@@ -39,3 +41,17 @@ class TestSQLScript:
     def test_from_dir_raises_for_missing_dir(self):
         with pytest.raises(NotADirectoryError):
             list(SQLScript.from_dir("/i_do_not_exist", {}))
+
+    def test_dump(self):
+        script = SQLScript(path="/long/path", template_vars={}, queries=[...])
+
+        assert "/long/path" in script.dump()
+
+    def test_execute(self):
+        query = create_autospec(SQLQuery, spec_set=True, instance=True)
+        script = SQLScript(path="/long/path", template_vars={}, queries=[query])
+
+        items = list(script.execute(sentinel.connection))
+
+        assert items == [query, script]
+        query.execute.assert_called_once_with(sentinel.connection)
