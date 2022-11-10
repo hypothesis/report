@@ -1,12 +1,14 @@
 import os
 import os.path
-from dataclasses import dataclass
+import textwrap
+from dataclasses import dataclass, field
 from typing import List
 
 import jinja2
 import sqlparse
 
 from report.sql_tasks.sql_query import SQLQuery
+from report.sql_tasks.timer import Timer
 
 
 @dataclass
@@ -22,11 +24,33 @@ class SQLScript:
     queries: List[SQLQuery] = None
     """Queries contained in this file."""
 
+    timing: Timer = field(default_factory=Timer)
+    """Timer for query execution."""
+
     _jinja_env = jinja2.Environment(undefined=jinja2.StrictUndefined)
 
     def __post_init__(self):
         if not self.queries:
             self.queries = self._parse()
+
+    def execute(self, connection):
+        with self.timing.time_it():
+            for query in self.queries:
+                query.execute(connection)
+                yield query
+
+        yield self
+
+    def dump(self, indent=""):
+        """
+        Get a string representation of this script.
+
+        :param indent: Optional indenting string prepended to each line.
+        """
+
+        return textwrap.indent(
+            f"SQL script: '{self.path}'\nDone in: {self.timing.duration}", indent
+        )
 
     @classmethod
     def from_dir(cls, task_dir: str, template_vars: dict):
