@@ -36,6 +36,11 @@ class TestTask:
                 queries=[SQLQuery(index=0, text="SELECT 'template_value';")],
             ),
             PythonScript(path=str(fixture_dir / "04_file.py"), module=Any()),
+            SQLScript(
+                path=str(fixture_dir / "05_empty.sql"),
+                template_vars=template_vars,
+                queries=[],
+            ),
         ]
 
     def test_from_dir_raises_for_missing_dir(self):

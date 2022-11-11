@@ -19,7 +19,7 @@ class SQLScript:
     template_vars: dict
     """Template vars to pass to templated SQL statements."""
 
-    queries: List[SQLQuery] = None
+    queries: List[SQLQuery] = field(default_factory=list)
     """Queries contained in this file."""
 
     timing: Timer = field(default_factory=Timer)
@@ -45,9 +45,11 @@ class SQLScript:
 
         :param indent: Optional indenting string prepended to each line.
         """
-
         return textwrap.indent(
-            f"SQL script: '{self.path}'\nDone in: {self.timing.duration}", indent
+            f"SQL script: '{self.path}'\n"
+            f"Executed {len(self.queries)} queries\n"
+            f"Done in: {self.timing.duration}",
+            indent,
         )
 
     def _parse(self):
@@ -59,6 +61,10 @@ class SQLScript:
             script_text = self._jinja_env.from_string(script_text).render(
                 self.template_vars
             )
+
+        if not sqlparse.format(script_text, strip_comments=True).strip():
+            # The file is empty or only contains comments
+            return []
 
         return [
             SQLQuery(text=query, index=index)
