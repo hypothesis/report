@@ -21,6 +21,11 @@ On top of the service own environment variables these are the metabase variables
 | `MB_DB_TYPE`                    | `postgres`        | Metabase database type. We use `postgres`. |
 | `MB_DB_USER`                    | `user`        | Metabase database user                                   |
 
+In addition, we are also providing some custom Java options
+
+| Name           | Value                                                | Description           |
+|----------------|------------------------------------------------------|-----------------------|
+| `JAVA_OPTS`    |-Dlog4j.configurationFile=file://conf/report-log4j2.xml| Custom log4j config   |
 
 The full list of supported variables by metabase can be found here:
 
