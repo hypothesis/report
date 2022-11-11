@@ -1,15 +1,27 @@
 import json
 from dataclasses import dataclass
+from unittest.mock import create_autospec
 
 import pytest
+from hubspot.crm.associations import (
+    AssociatedId,
+    BatchResponsePublicAssociationMulti,
+    PublicAssociationMulti,
+)
 from pytest import fixture
 
-from report.data_sources.hubspot_client import DummyHubspotClient, HubspotClient
+from report.data_sources.hubspot_client import Field, HubspotClient
 
 
 @dataclass
-class FakeCompany:
+class FakeApiObject:
     properties: dict
+
+
+class TestField:
+    def test_it(self):
+        field = Field(hs_field="name")
+        assert field.key == "name"
 
 
 class TestHubspotClient:
@@ -18,14 +30,63 @@ class TestHubspotClient:
         assert client.api_client == HubSpot.return_value
         assert client.api_client.access_token == "api_key"
 
-    def test_get_companies(self, client):
-        client.api_client.crm.companies.get_all.return_value = [
-            FakeCompany({"wanted": "value", "unwanted": "bad_value"})
+    @pytest.mark.parametrize(
+        "api_method,method", (("companies", "get_companies"), ("deals", "get_deals"))
+    )
+    def test_object_getters(self, client, api_method, method):
+        getattr(client.api_client.crm, api_method).get_all.return_value = [
+            FakeApiObject(
+                {
+                    "wanted": "value",
+                    "unwanted": "bad_value",
+                    "empty-as-null": "",
+                    "none-not-mapped": None,
+                }
+            )
         ]
 
-        results = client.get_companies(properties=["wanted"])
+        results = getattr(client, method)(
+            fields=[
+                Field(
+                    "wanted", "named-wanted", mapping=lambda string: f"mapped-{string}"
+                ),
+                Field("empty-as-null"),
+                Field("none-not-mapped", mapping=int),
+            ]
+        )
 
-        assert list(results) == [{"wanted": "value"}]
+        assert list(results) == [
+            {
+                "named-wanted": "mapped-value",
+                "empty-as-null": None,
+                "none-not-mapped": None,
+            }
+        ]
+
+    def test_get_associations(self, client, batch_response, BatchInputPublicObjectId):
+        client.api_client.crm.associations.batch_api.read.return_value = batch_response
+
+        ids = list(
+            client.get_associations(
+                from_type=client.AssociationObjectType.COMPANY,
+                to_type=client.AssociationObjectType.DEAL,
+                object_ids=[123, "456"],
+            )
+        )
+
+        BatchInputPublicObjectId.assert_called_once_with(inputs=["123", "456"])
+        client.api_client.crm.associations.batch_api.read.assert_called_once_with(
+            from_object_type=client.AssociationObjectType.COMPANY.value,
+            to_object_type=client.AssociationObjectType.DEAL.value,
+            batch_input_public_object_id=BatchInputPublicObjectId.return_value,
+        )
+
+        result = batch_response.results[0]
+        assert ids == [
+            # pylint: disable=protected-access
+            (result._from.id, result.to[0].id),
+            (result._from.id, result.to[1].id),
+        ]
 
     def test_import_csv_raises_for_missing_files(self, client):
         with pytest.raises(FileNotFoundError):
@@ -108,19 +169,29 @@ class TestHubspotClient:
     def client(self):
         return HubspotClient(private_app_key="api_key")
 
+    @fixture
+    def batch_response(self):
+        return create_autospec(
+            BatchResponsePublicAssociationMulti,
+            spec_set=True,
+            instance=True,
+            results=[
+                create_autospec(
+                    PublicAssociationMulti,
+                    spec_set=True,
+                    instance=True,
+                    to=[
+                        create_autospec(AssociatedId, spec_set=True, instance=True),
+                        create_autospec(AssociatedId, spec_set=True, instance=True),
+                    ],
+                )
+            ],
+        )
+
+    @fixture
+    def BatchInputPublicObjectId(self, patch):
+        return patch("report.data_sources.hubspot_client.BatchInputPublicObjectId")
+
     @fixture(autouse=True)
     def HubSpot(self, patch):
         return patch("report.data_sources.hubspot_client.HubSpot")
-
-
-class TestDummyHubspotClient:
-    # Some basic coverage
-    def test_get_companies(self):
-        companies = [{"company": 1}]
-
-        client = DummyHubspotClient(companies)
-
-        assert client.get_companies() == companies
-
-    def test_import_csv(self):
-        DummyHubspotClient(None).import_csv()
