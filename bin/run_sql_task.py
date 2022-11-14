@@ -14,6 +14,7 @@ import sqlalchemy
 from psycopg2.extensions import parse_dsn
 
 from report import sql_tasks
+from report.sentry import load_sentry
 from report.sql_tasks.python_script import PythonScript
 
 TASK_ROOT = importlib_resources.files("report.sql_tasks") / "tasks"
@@ -36,6 +37,8 @@ def _get_dsn(env_var_name):
 
 
 def main():
+    load_sentry()
+
     args = parser.parse_args()
     dsn = _get_dsn("DATABASE_URL")
 
