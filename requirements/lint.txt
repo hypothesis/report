@@ -11,10 +11,6 @@ attrs==22.1.0
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
     #   pytest
-beautifulsoup4==4.11.1
-    # via
-    #   -r requirements/functests.txt
-    #   webtest
 build==0.8.0
     # via
     #   -r requirements/functests.txt
@@ -152,10 +148,6 @@ six==1.16.0
     #   python-dateutil
 snowballstemmer==2.2.0
     # via pydocstyle
-soupsieve==2.3.2.post1
-    # via
-    #   -r requirements/functests.txt
-    #   beautifulsoup4
 sqlalchemy==1.4.42
     # via
     #   -r requirements/functests.txt
@@ -190,16 +182,6 @@ urllib3==1.26.12
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
     #   hubspot-api-client
-waitress==2.1.2
-    # via
-    #   -r requirements/functests.txt
-    #   webtest
-webob==1.8.7
-    # via
-    #   -r requirements/functests.txt
-    #   webtest
-webtest==3.0.0
-    # via -r requirements/functests.txt
 wheel==0.37.1
     # via
     #   -r requirements/functests.txt

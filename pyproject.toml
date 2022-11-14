@@ -39,6 +39,7 @@ parallel = true
 source = ["report", "tests/unit"]
 omit = [
     "*/report/__main__.py",
+    "*/report/app.py",
 ]
 
 [tool.coverage.paths]

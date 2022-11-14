@@ -4,4 +4,3 @@ httpretty
 pytest
 factory-boy
 h-matchers
-webtest

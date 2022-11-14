@@ -6,8 +6,6 @@
 #
 attrs==22.1.0
     # via pytest
-beautifulsoup4==4.11.1
-    # via webtest
 build==0.8.0
     # via pip-tools
 certifi==2022.9.24
@@ -70,8 +68,6 @@ six==1.16.0
     #   -r requirements/prod.txt
     #   hubspot-api-client
     #   python-dateutil
-soupsieve==2.3.2.post1
-    # via beautifulsoup4
 sqlalchemy==1.4.42
     # via -r requirements/prod.txt
 sqlparse==0.4.3
@@ -87,12 +83,6 @@ urllib3==1.26.12
     # via
     #   -r requirements/prod.txt
     #   hubspot-api-client
-waitress==2.1.2
-    # via webtest
-webob==1.8.7
-    # via webtest
-webtest==3.0.0
-    # via -r requirements/functests.in
 wheel==0.37.1
     # via pip-tools
 zipp==3.10.0
