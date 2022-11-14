@@ -45,5 +45,5 @@ jobs:
       Env: ${{ inputs.Environment }}
       Timeout: 3600
       Region: 'us-west-1'
-      Command: 'python bin/run_sql_task.py --task ${{ inputs.Task }}'
+      Command: 'newrelic-admin run-program python bin/run_sql_task.py --task ${{ inputs.Task }}'
     secrets: inherit
