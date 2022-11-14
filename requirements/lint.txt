@@ -11,7 +11,7 @@ attrs==22.1.0
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
     #   pytest
-build==0.8.0
+build==0.9.0
     # via
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
@@ -21,6 +21,7 @@ certifi==2022.9.24
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
     #   hubspot-api-client
+    #   sentry-sdk
 click==8.1.3
     # via
     #   -r requirements/functests.txt
@@ -30,7 +31,7 @@ coverage[toml]==6.5.0
     # via -r requirements/tests.txt
 dill==0.3.6
     # via pylint
-exceptiongroup==1.0.0rc9
+exceptiongroup==1.0.4
     # via
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
@@ -39,14 +40,14 @@ factory-boy==3.2.1
     # via
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
-faker==15.1.1
+faker==15.3.2
     # via
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
     #   factory-boy
 freezegun==1.2.2
     # via -r requirements/tests.txt
-greenlet==1.1.3.post0
+greenlet==2.0.1
     # via
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
@@ -59,7 +60,7 @@ httpretty==1.1.4
     # via
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
-hubspot-api-client==6.1.0
+hubspot-api-client==7.0.0
     # via
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
@@ -78,7 +79,7 @@ jinja2==3.1.2
     # via
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
-lazy-object-proxy==1.7.1
+lazy-object-proxy==1.8.0
     # via astroid
 markupsafe==2.1.1
     # via
@@ -102,12 +103,12 @@ pep517==0.13.0
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
     #   build
-pip-tools==6.9.0
+pip-tools==6.10.0
     # via
     #   -r requirements/functests.txt
     #   -r requirements/lint.in
     #   -r requirements/tests.txt
-platformdirs==2.5.2
+platformdirs==2.5.4
     # via pylint
 pluggy==1.0.0
     # via
@@ -140,6 +141,10 @@ python-dateutil==2.8.2
     #   faker
     #   freezegun
     #   hubspot-api-client
+sentry-sdk==1.11.0
+    # via
+    #   -r requirements/functests.txt
+    #   -r requirements/tests.txt
 six==1.16.0
     # via
     #   -r requirements/functests.txt
@@ -148,7 +153,7 @@ six==1.16.0
     #   python-dateutil
 snowballstemmer==2.2.0
     # via pydocstyle
-sqlalchemy==1.4.42
+sqlalchemy==1.4.44
     # via
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
@@ -171,7 +176,7 @@ tomli==2.0.1
     #   pep517
     #   pylint
     #   pytest
-tomlkit==0.11.5
+tomlkit==0.11.6
     # via pylint
 typing-extensions==4.4.0
     # via
@@ -182,7 +187,8 @@ urllib3==1.26.12
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
     #   hubspot-api-client
-wheel==0.37.1
+    #   sentry-sdk
+wheel==0.38.4
     # via
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
@@ -196,12 +202,12 @@ zipp==3.10.0
     #   importlib-resources
 
 # The following packages are considered to be unsafe in a requirements file:
-pip==22.3
+pip==22.3.1
     # via
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
     #   pip-tools
-setuptools==65.5.0
+setuptools==65.5.1
     # via
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
