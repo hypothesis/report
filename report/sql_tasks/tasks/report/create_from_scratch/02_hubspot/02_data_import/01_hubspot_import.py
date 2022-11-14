@@ -27,7 +27,7 @@ def _insert_items(connection, table_name, items, fields: Iterable[Field]):
 COMPANY_FIELDS = (
     Field("hs_object_id", "id", mapping=int),
     Field("name"),
-    Field("lms_organization_id"),
+    Field("lms_organization_id", "organization_public_id"),
     # Cohort
     Field("cohort__pilot_first_date", "cohort_pilot_first_date"),
     Field("cohort__subscription_first_date", "cohort_subscription_first_date"),

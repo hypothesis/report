@@ -4,7 +4,7 @@ CREATE TABLE hubspot.companies (
    -- General
     id BIGINT PRIMARY KEY,
     name TEXT,
-    lms_organization_id TEXT,
+    organization_public_id TEXT,
     -- Cohort
     cohort_pilot_first_date DATE,
     cohort_subscription_first_date DATE,
@@ -16,4 +16,4 @@ CREATE TABLE hubspot.companies (
     deals_last_update DATE
 );
 
-CREATE INDEX companies_lms_organization_id_idx ON hubspot.companies (lms_organization_id);
+CREATE INDEX companies_organization_public_id_idx ON hubspot.companies (organization_public_id);

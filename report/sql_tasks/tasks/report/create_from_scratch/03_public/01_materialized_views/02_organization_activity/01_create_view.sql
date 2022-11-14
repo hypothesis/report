@@ -41,7 +41,7 @@ CREATE MATERIALIZED VIEW organization_activity AS (
         JOIN hubspot.companies ON
             companies.id = company_deals.company_id
         JOIN organizations ON
-            organizations.public_id = companies.lms_organization_id
+            organizations.public_id = companies.organization_public_id
         WHERE
             organizations.id = organization_id
             AND deals.services_start <= calendar_date
