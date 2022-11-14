@@ -1,12 +1,44 @@
 <a href="https://github.com/hypothesis/report/actions/workflows/ci.yml?query=branch%3Amain"><img src="https://img.shields.io/github/workflow/status/hypothesis/report/CI/main"></a>
 <a><img src="https://img.shields.io/badge/python-3.8-success"></a>
 <a href="https://github.com/hypothesis/report/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-BSD--2--Clause-success"></a>
-<a href="https://github.com/hypothesis/cookiecutters/tree/main/pyramid-app"><img src="https://img.shields.io/badge/cookiecutter-pyramid--app-success"></a>
+<a href="https://github.com/hypothesis/cookiecutters/tree/main/pyapp"><img src="https://img.shields.io/badge/cookiecutter-pyapp-success"></a>
 <a href="https://black.readthedocs.io/en/stable/"><img src="https://img.shields.io/badge/code%20style-black-000000"></a>
 
 # Report
 
-The internal global reporting product for Hypothesis
+The internal global reporting product for Hypothesis.
+
+Used for internal purposes only.
+
+## Environment variables
+
+
+| Name                              | Example                                | Notes                                           | 
+|-----------------------------------|----------------------------------------|-------------------------------------------------|
+| `DATABASE_URL`                    | `postgresql://user:pw@host/report`        | Postgres DSN for the report DB                                   |
+
+
+On top of the service own environment variables these are the metabase variables that we use:
+
+
+| Name                              | Example                                | Notes                                           | 
+|-----------------------------------|----------------------------------------|-------------------------------------------------|
+| `MB_DB_DBNAME`                    | `metabase`        | Metabase database name                                   |
+| `MB_DB_HOST`                    | `localhost`        | Metabase database host                                   |
+| `MB_DB_PASS`                    | `pass`        | Metabase database password                                   |
+| `MB_DB_PORT`                    | `5432`        | Metabase database port                                   |
+| `MB_DB_TYPE`                    | `postgres`        | Metabase database type. We use `postgres`. |
+| `MB_DB_USER`                    | `user`        | Metabase database user                                   |
+
+In addition, we are also providing some custom Java options
+
+| Name           | Value                                                | Description           |
+|----------------|------------------------------------------------------|-----------------------|
+| `JAVA_OPTS`    |-Dlog4j.configurationFile=file://conf/report-log4j2.xml| Custom log4j config   |
+
+The full list of supported variables by metabase can be found here:
+
+https://www.metabase.com/docs/latest/configuring-metabase/environment-variables.html
 
 ## Setting up Your Report Development Environment
 
@@ -14,15 +46,14 @@ First you'll need to install:
 
 * [Git](https://git-scm.com/).
   On Ubuntu: `sudo apt install git`, on macOS: `brew install git`.
+* [GNU Make](https://www.gnu.org/software/make/).
+  This is probably already installed, run `make --version` to check.
 * [pyenv](https://github.com/pyenv/pyenv).
-  See [pyenv's README](https://github.com/pyenv/pyenv#readme) for install instructions.
-  First you need to [install the Python build dependencies](https://github.com/pyenv/pyenv/wiki#suggested-build-environment)
-  then on macOS use the **Homebrew** installation method,
-  on Ubuntu use the **Basic GitHub Checkout** method.
+  Follow the instructions in pyenv's README to install it.
+  The **Homebrew** method works best on macOS.
+  The **Basic GitHub Checkout** method works best on Ubuntu.
   You _don't_ need to set up pyenv's shell integration ("shims"), you can
   [use pyenv without shims](https://github.com/pyenv/pyenv#using-pyenv-without-shims).
-* [GNU Make](https://www.gnu.org/software/make/).
-  This is probably already installed or will have been installed while installing pyenv, run `make --version` to check.
 * [Docker](https://docs.docker.com/install/).
   Follow the [instructions on the Docker website](https://docs.docker.com/install/)
   to install it.  

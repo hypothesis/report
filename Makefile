@@ -20,15 +20,10 @@ $(call help,make dev,run the whole app \(all workers\))
 dev: python
 	@pyenv exec tox -qe dev
 
-.PHONY: web
-$(call help,make web,run just a web worker)
-web: python
-	@pyenv exec tox -qe dev --run-command 'gunicorn --bind :4000 --workers 1 --reload --timeout 0 --paste conf/development.ini'
-
 .PHONY: shell
 $(call help,make shell,"launch a Python shell in this project's virtualenv")
 shell: python
-	@pyenv exec tox -qe dev --run-command 'pshell conf/development.ini'
+	@pyenv exec tox -qe dev --run-command 'ipython'
 
 .PHONY: lint
 $(call help,make lint,"lint the code and print any warnings")
@@ -125,7 +120,6 @@ docker-run:
 		--net report_default \
 		--env-file .docker.env \
 		--env-file .devdata.env \
-		-p 4000:4000 \
 		hypothesis/report:$(DOCKER_TAG)
 
 .PHONY: clean
