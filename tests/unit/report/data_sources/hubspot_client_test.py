@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from unittest.mock import create_autospec
 
 import pytest
+from h_matchers import Any
 from hubspot.crm.associations import (
     AssociatedId,
     BatchResponsePublicAssociationMulti,
@@ -66,15 +67,15 @@ class TestHubspotClient:
     def test_get_associations(self, client, batch_response, BatchInputPublicObjectId):
         client.api_client.crm.associations.batch_api.read.return_value = batch_response
 
-        ids = list(
-            client.get_associations(
-                from_type=client.AssociationObjectType.COMPANY,
-                to_type=client.AssociationObjectType.DEAL,
-                object_ids=[123, "456"],
-            )
+        ids = client.get_associations(
+            from_type=client.AssociationObjectType.COMPANY,
+            to_type=client.AssociationObjectType.DEAL,
+            object_ids=[123, "123", "456"],
         )
 
-        BatchInputPublicObjectId.assert_called_once_with(inputs=["123", "456"])
+        BatchInputPublicObjectId.assert_called_once_with(
+            inputs=Any.list.containing(["123", "456"]).only()
+        )
         client.api_client.crm.associations.batch_api.read.assert_called_once_with(
             from_object_type=client.AssociationObjectType.COMPANY.value,
             to_object_type=client.AssociationObjectType.DEAL.value,
@@ -82,11 +83,11 @@ class TestHubspotClient:
         )
 
         result = batch_response.results[0]
-        assert ids == [
+        assert ids == {
             # pylint: disable=protected-access
             (result._from.id, result.to[0].id),
             (result._from.id, result.to[1].id),
-        ]
+        }
 
     def test_import_csv_raises_for_missing_files(self, client):
         with pytest.raises(FileNotFoundError):
@@ -171,21 +172,22 @@ class TestHubspotClient:
 
     @fixture
     def batch_response(self):
+        result = create_autospec(
+            PublicAssociationMulti,
+            spec_set=True,
+            instance=True,
+            to=[
+                create_autospec(AssociatedId, spec_set=True, instance=True),
+                create_autospec(AssociatedId, spec_set=True, instance=True),
+            ],
+        )
+
         return create_autospec(
             BatchResponsePublicAssociationMulti,
             spec_set=True,
             instance=True,
-            results=[
-                create_autospec(
-                    PublicAssociationMulti,
-                    spec_set=True,
-                    instance=True,
-                    to=[
-                        create_autospec(AssociatedId, spec_set=True, instance=True),
-                        create_autospec(AssociatedId, spec_set=True, instance=True),
-                    ],
-                )
-            ],
+            # We put in the same result twice to test deduping
+            results=[result, result],
         )
 
     @fixture
