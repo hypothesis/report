@@ -2,7 +2,14 @@
   "template": "https://github.com/hypothesis/cookiecutters",
   "checkout": null,
   "directory": "pyapp",
-  "ignore": ["conf/supervisord*.conf", "report/__main__.py", "report/app.py", "report/core.py", "tests/unit/report/core_test.py"],
+  "ignore": [
+      "bin/logger",
+      "conf/supervisord*.conf",
+      "report/__main__.py",
+      "report/app.py",
+      "report/core.py",
+      "tests/unit/report/core_test.py"
+  ],
   "extra_context": {
     "name": "Report",
     "package_name": "report",
