@@ -10,6 +10,9 @@ from tests.functional.conftest import TEST_ENVIRONMENT
 
 
 class TestRunSQLTask:
+    def test_sanity(self, environ):
+        self.run_task(environ, "hello_world")
+
     # We use "clean DB" here to ensure the schema is created
     @pytest.mark.usefixtures("with_clean_db")
     @pytest.mark.xfail(reason="Requires create_from_scratch in H and LMS")
@@ -19,21 +22,24 @@ class TestRunSQLTask:
             "report/refresh",
             "report/create_from_scratch",
         ):
-            result = check_output(
-                [
-                    sys.executable,
-                    "bin/run_sql_task.py",
-                    "--task",
-                    task_name,
-                    "--no-python",
-                ],
-                env=environ,
-            )
+            self.run_task(environ, task_name)
 
-            assert result
+    def run_task(self, environ, task_name):
+        result = check_output(
+            [
+                sys.executable,
+                "bin/run_sql_task.py",
+                "--task",
+                task_name,
+                "--no-python",
+            ],
+            env=environ,
+        )
 
-            print(f"Task {task_name} OK!")
-            print(result.decode("utf-8"))
+        assert result
+
+        print(f"Task {task_name} OK!")
+        print(result.decode("utf-8"))
 
     @fixture
     def environ(self):
