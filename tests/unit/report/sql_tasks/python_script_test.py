@@ -35,6 +35,6 @@ class TestPythonScript:
 
     @pytest.fixture
     def python_script(self):
-        fixture_dir = files("tests.unit.sql_tasks") / "script_fixture"
+        fixture_dir = files("tests.unit.report.sql_tasks") / "script_fixture"
 
         return PythonScript(path=str(fixture_dir / "04_file.py"))
