@@ -20,6 +20,14 @@ class TestSQLQuery:
 
         assert query.rows == [(12,)]
 
+    def test_execute_with_dry_run(self, connection):
+        query = SQLQuery(0, "THIS IS NOT SQL")
+        self.assert_query_null_pre_execute(query)
+
+        query.execute(connection, dry_run=True)
+
+        assert query.timing.start_time is not None
+
     def test_execute_with_a_query_returning_no_rows(self, query_no_rows, connection):
         self.assert_query_null_pre_execute(query_no_rows)
 

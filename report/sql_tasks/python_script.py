@@ -45,12 +45,13 @@ class PythonScript:
                 f"Expected to find `main()` function in {self.path}"
             )
 
-    def execute(self, connection):
+    def execute(self, connection, dry_run=False):
         """Execute the python script."""
 
         with self.timing.time_it():
             # pylint: disable=no-member
-            self.result = self.module.main(connection=connection)
+            if not dry_run:
+                self.result = self.module.main(connection=connection)
 
         yield self
 

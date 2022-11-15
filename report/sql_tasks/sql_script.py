@@ -31,10 +31,12 @@ class SQLScript:
         if not self.queries:
             self.queries = self._parse()
 
-    def execute(self, connection):
+    def execute(self, connection, dry_run=False):
+        """Execute this script with the given connection."""
+
         with self.timing.time_it():
             for query in self.queries:
-                query.execute(connection)
+                query.execute(connection, dry_run=dry_run)
                 yield query
 
         yield self
