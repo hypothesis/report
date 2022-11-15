@@ -1,3 +1,4 @@
+# From .cookiecutter/includes/tox/setenv:
 MB_DB_USER = {env:MB_DB_USER:postgres}
 # As it's Postgres itself that will be contacting these DBs, this will
 # happen inside docker, so we use docker names here
@@ -5,3 +6,4 @@ H_US_DATABASE_URL = {env:H_US_DATABASE_URL:postgresql://postgres:postgres@h_post
 H_CA_DATABASE_URL = {env:H_CA_DATABASE_URL:postgresql://postgres:postgres@h_postgres_1:5432/postgres}
 LMS_US_DATABASE_URL = {env:LMS_US_DATABASE_URL:postgresql://postgres:postgres@lms_postgres_1:5432/postgres}
 LMS_CA_DATABASE_URL = {env:LMS_CA_DATABASE_URL:postgresql://postgres:postgres@lms_postgres_1:5432/postgres}
+dev: SENTRY_ENVIRONMENT = {env:SENTRY_ENVIRONMENT:dev}

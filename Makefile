@@ -42,15 +42,12 @@ checkformatting: python
 
 .PHONY: test
 $(call help,make test,"run the unit tests in Python 3.8")
-coverage: test
 test: python
 	@pyenv exec tox -qe tests
 
 .PHONY: coverage
 $(call help,make coverage,"run the tests and print the coverage report")
-coverage: python
-	@pyenv exec tox -qe coverage
-
+coverage: python	@pyenv exec tox --parallel -qe 'tests,py{}-tests,coverage'
 .PHONY: functests
 $(call help,make functests,"run the functional tests in Python 3.8")
 functests: python
