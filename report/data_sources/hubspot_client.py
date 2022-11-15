@@ -3,7 +3,7 @@ import json
 import os.path
 from dataclasses import dataclass
 from enum import Enum
-from typing import Callable, Generator, Iterable, List, Optional
+from typing import Callable, Generator, Iterable, List, Optional, Set
 
 from hubspot import HubSpot
 from hubspot.crm.associations import BatchInputPublicObjectId
@@ -78,7 +78,7 @@ class HubspotClient:
         from_type: AssociationObjectType,
         to_type: AssociationObjectType,
         object_ids: List,
-    ) -> Generator:
+    ) -> Set:
         """Get inter object relationships.
 
         :param from_type: Object on the left hand side of the relationship
@@ -89,15 +89,22 @@ class HubspotClient:
             from_object_type=from_type.value,
             to_object_type=to_type.value,
             batch_input_public_object_id=BatchInputPublicObjectId(
-                inputs=[str(object_id) for object_id in object_ids]
+                # Dedupe ids in-case we are provided the same one twice
+                inputs=list(set(str(object_id) for object_id in object_ids))
             ),
         )
+
+        # For reasons unclear, we appear to get duplicate entries in the return
+        # values, so we'll use a set to dedupe them
+        relations = set()
 
         for result in results.results:
             for to_result in result.to:
                 # pylint: disable=protected-access
                 # This just appears to be part of the goofy interface
-                yield result._from.id, to_result.id
+                relations.add((result._from.id, to_result.id))
+
+        return relations
 
     def import_csv(
         self, job_name, csv_files, object_type, primary_key_field="hs_object_id"
