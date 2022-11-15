@@ -14,7 +14,9 @@ class TestSQLScript:
         query = create_autospec(SQLQuery, spec_set=True, instance=True)
         script = SQLScript(path="/long/path", template_vars={}, queries=[query])
 
-        items = list(script.execute(sentinel.connection))
+        items = list(script.execute(sentinel.connection, dry_run=sentinel.dry_run))
 
         assert items == [query, script]
-        query.execute.assert_called_once_with(sentinel.connection)
+        query.execute.assert_called_once_with(
+            sentinel.connection, dry_run=sentinel.dry_run
+        )

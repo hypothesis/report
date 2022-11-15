@@ -29,6 +29,13 @@ parser.add_argument(
     const=True,
     help="Skip Python executables",
 )
+parser.add_argument(
+    "--dry-run",
+    action="store_const",
+    default=False,
+    const=True,
+    help="Run through the task without executing anything for real",
+)
 
 
 def _get_dsn(env_var_name):
@@ -63,7 +70,10 @@ def main():
                     print(f"Skipping: {script}")
                     continue
 
-                for step in script.execute(connection):
+                for step in script.execute(connection, dry_run=args.dry_run):
+                    if args.dry_run:
+                        print("Dry run!")
+
                     print(step.dump(indent="    ") + "\n")
 
 

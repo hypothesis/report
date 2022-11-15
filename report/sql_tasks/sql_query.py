@@ -29,12 +29,15 @@ class SQLQuery:
     timing: Timer = field(default_factory=Timer)
     """Timer for query execution."""
 
-    def execute(self, connection: Connection, parameters=None):
+    def execute(self, connection: Connection, dry_run=False, parameters=None):
         """Execute this query in the given session."""
 
         with self.timing.time_it():
             if not parameters:
                 parameters = {}
+
+            if dry_run:
+                return
 
             cursor = connection.execute(sa.text(self.text), **parameters)
             if cursor.returns_rows:

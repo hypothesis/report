@@ -26,6 +26,12 @@ class TestPythonScript:
         assert items == [python_script]
         assert python_script.result == "script_run"
 
+    def test_execute_with_dry_run(self, python_script):
+        items = list(python_script.execute(sentinel.connection, dry_run=True))
+
+        assert items == [python_script]
+        assert python_script.result is None
+
     @pytest.fixture
     def empty_script(self, tmp_path):
         empty_script = tmp_path / "script.py"
