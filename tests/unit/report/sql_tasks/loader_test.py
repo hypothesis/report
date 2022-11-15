@@ -41,6 +41,11 @@ class TestTask:
                 template_vars=template_vars,
                 queries=[],
             ),
+            SQLScript(
+                path=str(fixture_dir / "06_trailing_comment.sql"),
+                template_vars=template_vars,
+                queries=[SQLQuery(index=0, text="-- Comment\nSELECT 1;")],
+            ),
         ]
 
     def test_from_dir_raises_for_missing_dir(self):

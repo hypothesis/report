@@ -62,11 +62,9 @@ class SQLScript:
                 self.template_vars
             )
 
-        if not sqlparse.format(script_text, strip_comments=True).strip():
-            # The file is empty or only contains comments
-            return []
-
         return [
             SQLQuery(text=query, index=index)
             for index, query in (enumerate(sqlparse.split(script_text)))
+            # Skip any empty queries
+            if sqlparse.format(query, strip_comments=True).strip()
         ]
