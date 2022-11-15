@@ -6,14 +6,13 @@ from sqlalchemy.orm import sessionmaker
 
 from report import db
 
-TEST_ENVIRONMENT = {}
-
-
 TEST_SETTINGS = {
     "database_url": os.environ.get(
         "TEST_DATABASE_URL", "postgresql://postgres@localhost:5436/report_functests"
     ),
 }
+
+TEST_ENVIRONMENT = {"DATABASE_URL": TEST_SETTINGS["database_url"]}
 
 
 @pytest.fixture
