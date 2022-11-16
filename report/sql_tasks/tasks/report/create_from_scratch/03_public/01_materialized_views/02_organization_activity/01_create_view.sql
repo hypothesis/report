@@ -29,8 +29,18 @@ CREATE MATERIALIZED VIEW organization_activity AS (
         )
 
     SELECT
-        raw_organization_activity.*,
-        COALESCE(paying, FALSE) AS paying
+        -- Time based elements
+        raw_organization_activity.timescale,
+        raw_organization_activity.calendar_date,
+        raw_organization_activity.period,
+        -- Facets
+        raw_organization_activity.role,
+        COALESCE(paying, FALSE)::BOOLEAN AS paying,
+        raw_organization_activity.organization_id,
+        -- Metrics
+        raw_organization_activity.annotation_count,
+        raw_organization_activity.active,
+        raw_organization_activity.billable
     FROM raw_organization_activity
     LEFT OUTER JOIN LATERAL (
         SELECT
