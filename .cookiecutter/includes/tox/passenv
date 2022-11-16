@@ -1,4 +1,3 @@
 # From .cookiecutter/includes/tox/passenv:
 HUBSPOT_API_KEY
-SENTRY_DSN
 TEST_DATABASE_URL
