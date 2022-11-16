@@ -47,7 +47,9 @@ test: python
 
 .PHONY: coverage
 $(call help,make coverage,"run the tests and print the coverage report")
-coverage: python	@pyenv exec tox --parallel -qe 'tests,py{}-tests,coverage'
+coverage: python
+	@pyenv exec tox -qe 'tests,coverage'
+
 .PHONY: functests
 $(call help,make functests,"run the functional tests in Python 3.8")
 functests: python

@@ -6,4 +6,6 @@ H_US_DATABASE_URL = {env:H_US_DATABASE_URL:postgresql://postgres:postgres@h_post
 H_CA_DATABASE_URL = {env:H_CA_DATABASE_URL:postgresql://postgres:postgres@h_postgres_1:5432/postgres}
 LMS_US_DATABASE_URL = {env:LMS_US_DATABASE_URL:postgresql://postgres:postgres@lms_postgres_1:5432/postgres}
 LMS_CA_DATABASE_URL = {env:LMS_CA_DATABASE_URL:postgresql://postgres:postgres@lms_postgres_1:5432/postgres}
+# Used when testing tasks via `tox`:
+dev: DATABASE_URL = {env:DATABASE_URL:postgresql://postgres@localhost:5436/postgres}
 dev: SENTRY_ENVIRONMENT = {env:SENTRY_ENVIRONMENT:dev}
