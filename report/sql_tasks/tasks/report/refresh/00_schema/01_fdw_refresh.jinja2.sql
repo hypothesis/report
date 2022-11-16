@@ -1,7 +1,7 @@
 {% macro refresh_fdw_server(server_name, credentials, users) %}
     ALTER SERVER "{{server_name}}" OPTIONS(
         SET host '{{credentials.host}}', -- SECRET
-        SET port '{{credentials.port}}', 
+        SET port '{{credentials.port}}',
         SET dbname '{{credentials.dbname}}'
     );
 
