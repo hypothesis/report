@@ -38,10 +38,14 @@ COMPANY_FIELDS = (
     Field("current_deal__users_contracted", "current_deal_users_contracted"),
 )
 
+# The API docs link you here, but it doesn't show the API keys for properties
+# https://knowledge.hubspot.com/crm-deals/hubspots-default-deal-properties
 DEAL_FIELDS = (
     Field("hs_object_id", "id", mapping=int),
+    Field("dealname", "name"),
     Field("services_start"),
     Field("services_end"),
+    # We really should have currency, but I can't work out the name for it
     Field("amount", mapping=float),
 )
 
