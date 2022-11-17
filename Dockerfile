@@ -15,7 +15,7 @@ RUN apk add --virtual build-deps \
 FROM metabase/metabase:v0.44.5
 
 # Copy the python binaries and libraries from the python image
-# The metabase image is based on a newer alpine and the python package there 
+# The metabase image is based on a newer alpine and the python package there
 # won't point to the exact version we need.
 COPY --from=python /usr/local/bin/python3 /usr/local/bin/python3
 COPY --from=python /usr/local/bin/python3.8 /usr/local/bin/python3.8
@@ -25,6 +25,8 @@ COPY --from=python /usr/local/lib/python3.8 /usr/local/lib/python3.8
 COPY --from=python /usr/local/lib/libpython3.8.so.1.0 /usr/local/lib/libpython3.8.so.1.0
 COPY --from=python /usr/local/lib/libpython3.so /usr/local/lib/libpython3.so
 
+# Make sure various scripts we use from Python packages are available
+COPY --from=python /usr/local/bin/newrelic-admin /usr/local/bin/newrelic-admin
 
 # We need to install some package that are not present in the metabase image
 RUN apk add libpq
