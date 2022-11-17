@@ -9,7 +9,7 @@ services:
     ports:
       - 5435:5432
     networks:
-      - report
+      - default
 
   metabase:
     build:
@@ -30,18 +30,18 @@ services:
       - metabase-postgres
       - postgres
     networks:
-      - report
+      - default
 
   postgres:
     image: postgres:11.5-alpine
     ports:
       - 5436:5432
     networks:
-      - report
+      - default
       - dbs
 
 networks:
-  report:
+  default:
     external: false
   dbs:
     external: true
