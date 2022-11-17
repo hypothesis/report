@@ -5,7 +5,8 @@ CREATE MATERIALIZED VIEW organization_activity AS (
         raw_organization_activity AS (
             SELECT
                 timescale,
-                calendar_date,
+                start_date,
+                end_date,
                 period,
                 role,
                 CONCAT('us-', organization_id) AS organization_id,
@@ -18,7 +19,8 @@ CREATE MATERIALIZED VIEW organization_activity AS (
 
             SELECT
                 timescale,
-                calendar_date,
+                start_date,
+                end_date,
                 period,
                 role,
                 CONCAT('ca-', organization_id) AS organization_id,
@@ -31,7 +33,8 @@ CREATE MATERIALIZED VIEW organization_activity AS (
     SELECT
         -- Time based elements
         raw_organization_activity.timescale,
-        raw_organization_activity.calendar_date,
+        raw_organization_activity.start_date,
+        raw_organization_activity.end_date,
         raw_organization_activity.period,
         -- Facets
         raw_organization_activity.role,
@@ -54,8 +57,8 @@ CREATE MATERIALIZED VIEW organization_activity AS (
             organizations.public_id = companies.lms_organization_id
         WHERE
             organizations.id = organization_id
-            AND deals.services_start <= calendar_date
-            AND deals.services_end >= calendar_date
+            -- Check for overlapping date ranges
+            AND DATERANGE(deals.services_start, deals.services_end, '[)') && DATERANGE(start_date, end_date, '[)')
             AND deals.amount > 0
         LIMIT 1
     ) AS paying ON TRUE
