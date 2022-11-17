@@ -29,7 +29,7 @@ CREATE MATERIALIZED VIEW organizations AS (
         hubspot_names AS (
             SELECT
                 lms_organization_id,
-                STRING_AGG(' / ', name) as hubspot_name
+                STRING_AGG(DISTINCT(name), ' / ') as hubspot_name
             FROM hubspot.companies
             WHERE lms_organization_id IS NOT NULL
             GROUP BY lms_organization_id
