@@ -39,6 +39,6 @@ CREATE MATERIALIZED VIEW organizations AS (
         raw_organizations.*,
         hubspot_names.hubspot_name
     FROM raw_organizations
-    JOIN hubspot_names ON
+    LEFT OUTER JOIN hubspot_names ON
         raw_organizations.public_id = hubspot_names.lms_organization_id
 ) WITH NO DATA;
