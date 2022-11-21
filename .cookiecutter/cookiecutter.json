@@ -4,7 +4,7 @@
   "directory": "pyapp",
   "ignore": [
       "bin/logger",
-      "conf/supervisord*.conf",
+      "conf/supervisord.conf",
       "report/__main__.py",
       "report/app.py",
       "report/core.py",
