@@ -12,7 +12,8 @@ CREATE MATERIALIZED VIEW organization_activity AS (
                 CONCAT('us-', organization_id) AS organization_id,
                 annotation_count,
                 active,
-                billable
+                billable,
+                launch_count
             FROM lms_us.organization_activity
 
             UNION ALL
@@ -26,7 +27,8 @@ CREATE MATERIALIZED VIEW organization_activity AS (
                 CONCAT('ca-', organization_id) AS organization_id,
                 annotation_count,
                 active,
-                billable
+                billable,
+                launch_count
             FROM lms_ca.organization_activity
         )
 
@@ -43,7 +45,8 @@ CREATE MATERIALIZED VIEW organization_activity AS (
         -- Metrics
         raw_organization_activity.annotation_count,
         raw_organization_activity.active,
-        raw_organization_activity.billable
+        raw_organization_activity.billable,
+        raw_organization_activity.launch_count
     FROM raw_organization_activity
     LEFT OUTER JOIN LATERAL (
         SELECT
