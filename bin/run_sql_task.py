@@ -9,13 +9,13 @@ reporting.
 import os
 from argparse import ArgumentParser
 
+import data_tasks
 import importlib_resources
 import sqlalchemy
+from data_tasks.python_script import PythonScript
 from psycopg2.extensions import parse_dsn
 
-from report import sql_tasks
 from report.sentry import load_sentry
-from report.sql_tasks.python_script import PythonScript
 
 TASK_ROOT = importlib_resources.files("report.sql_tasks") / "tasks"
 
@@ -49,7 +49,7 @@ def main():
     args = parser.parse_args()
     dsn = _get_dsn("DATABASE_URL")
 
-    scripts = sql_tasks.from_dir(
+    scripts = data_tasks.from_dir(
         task_dir=TASK_ROOT / args.task,
         template_vars={
             "db_user": parse_dsn(dsn)["user"],

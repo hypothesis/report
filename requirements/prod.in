@@ -1,11 +1,9 @@
 # From .cookiecutter/includes/requirements/prod.in:
 newrelic
 
+data-tasks
 hubspot-api-client
 importlib_resources
-jinja2
 psycopg2
 sentry-sdk
 SQLAlchemy
-sqlparse
-tabulate
