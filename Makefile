@@ -25,6 +25,11 @@ $(call help,make shell,"launch a Python shell in this project's virtualenv")
 shell: python
 	@pyenv exec tox -qe dev --run-command 'ipython'
 
+.PHONY: sql
+$(call help,make sql,"Connect to the dev database with a psql shell")
+sql: python
+	@tox -qe dockercompose -- exec postgres psql --pset expanded=auto -U postgres
+
 .PHONY: lint
 $(call help,make lint,"lint the code and print any warnings")
 lint: python
