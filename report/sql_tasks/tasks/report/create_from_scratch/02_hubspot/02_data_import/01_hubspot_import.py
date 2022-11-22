@@ -1,9 +1,10 @@
 import os
 from typing import Iterable
 
+from data_tasks.sql_query import SQLQuery
+from data_tasks.timer import Timer
+
 from report.data_sources.hubspot_client import Field, HubspotClient
-from report.sql_tasks.sql_query import SQLQuery
-from report.sql_tasks.timer import Timer
 
 
 def _insert_items(connection, table_name, items, fields: Iterable[Field]):
