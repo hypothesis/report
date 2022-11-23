@@ -1,19 +1,7 @@
-DROP MATERIALIZED VIEW IF EXISTS authority_activity CASCADE;
+DROP MATERIALIZED VIEW IF EXISTS authorities CASCADE;
 
-CREATE MATERIALIZED VIEW authority_activity AS (
-    SELECT
-        timescale, start_date, end_date, period,
-        'us' AS region,
-        authority_id,
-        annotating_users, registering_users, total_users
-    FROM h_us.authority_activity
-
-    UNION ALL
-
-    SELECT
-        timescale, start_date, end_date, period,
-        'ca' AS region,
-        authority_id,
-        annotating_users, registering_users, total_users
-    FROM h_ca.authority_activity
+CREATE MATERIALIZED VIEW authorities AS (
+    -- This looks foolish, but if we create this directly from H (US) in
+    -- Metabase won't let us do a join...
+    SELECT * FROM h_us.authorities
 ) WITH NO DATA;
