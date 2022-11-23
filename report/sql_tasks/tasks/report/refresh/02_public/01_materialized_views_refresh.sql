@@ -6,3 +6,6 @@ ANALYSE organization_activity;
 
 REFRESH MATERIALIZED VIEW CONCURRENTLY authority_activity;
 ANALYSE authority_activity;
+
+REFRESH MATERIALIZED VIEW CONCURRENTLY lms_events;
+ANALYSE lms_events;
