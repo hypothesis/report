@@ -7,7 +7,7 @@ CREATE TYPE report.roles AS ENUM (
 
 DROP TYPE IF EXISTS report.event_type CASCADE;
 CREATE TYPE report.event_type AS ENUM (
-    'configured_launch', 'deep_linking'
+    'configured_launch', 'deep_linking', 'audit'
 );
 
 DROP TYPE IF EXISTS report.academic_timescale CASCADE;
@@ -27,7 +27,8 @@ CREATE TYPE report.academic_timescale AS ENUM (
     ) FROM SERVER "{{server_name}}" INTO {{schema_name}};
 
     IMPORT FOREIGN SCHEMA "report" LIMIT TO (
-        organization_activity
+        organization_activity,
+        events
     ) FROM SERVER "{{server_name}}" INTO {{schema_name}};
 {% endmacro %}
 
