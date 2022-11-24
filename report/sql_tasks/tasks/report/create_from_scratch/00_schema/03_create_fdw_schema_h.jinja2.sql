@@ -12,6 +12,7 @@ CREATE TYPE report.timescale AS ENUM (
     CREATE SCHEMA {{schema_name}} AUTHORIZATION "{{db_user}}";
 
     IMPORT FOREIGN SCHEMA "report" LIMIT TO (
+        authorities,
         authority_activity
     ) FROM SERVER "{{server_name}}" INTO {{schema_name}};
 {% endmacro %}
