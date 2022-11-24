@@ -8,9 +8,15 @@ CREATE MATERIALIZED VIEW lms_events AS (
     SELECT
         timestamp_week,
         'us' AS region,
-        CONCAT('us-', organization_id) AS organization_id,
+        CASE
+            WHEN organization_id IS NULL THEN NULL
+            ELSE CONCAT('us-', organization_id)
+        END AS organization_id,
         event_type,
-        CONCAT('us-', user_id) AS user_id,
+        CASE
+            WHEN user_id IS NULL THEN NULL
+            ELSE CONCAT('us-', user_id)
+        END AS user_id,
         event_count
     FROM lms_us.events
 
@@ -19,9 +25,15 @@ CREATE MATERIALIZED VIEW lms_events AS (
     SELECT
         timestamp_week,
         'ca' AS region,
-        CONCAT('ca-', organization_id) AS organization_id,
+        CASE
+            WHEN organization_id IS NULL THEN NULL
+            ELSE CONCAT('ca-', organization_id)
+        END AS organization_id,
         event_type,
-        CONCAT('ca-', user_id) AS user_id,
+        CASE
+            WHEN user_id IS NULL THEN NULL
+            ELSE CONCAT('ca-', user_id)
+        END AS user_id,
         event_count
     FROM lms_ca.events
 ) WITH NO DATA;
