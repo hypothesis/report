@@ -17,12 +17,12 @@ from psycopg2.extensions import parse_dsn
 
 from report.sentry import load_sentry
 
-TASK_ROOT = importlib_resources.files("report.sql_tasks") / "tasks"
+TASK_ROOT = importlib_resources.files("report.data_tasks")
 
 parser = ArgumentParser(
-    description=f"A script for running SQL tasks defined in: {TASK_ROOT}"
+    description=f"A script for running tasks defined in: {TASK_ROOT}"
 )
-parser.add_argument("-t", "--task", required=True, help="The SQL task name to run")
+parser.add_argument("-t", "--task", required=True, help="The task name to run")
 parser.add_argument(
     "--no-python",
     action="store_const",

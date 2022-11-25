@@ -28,7 +28,7 @@ class TestRunSQLTask:
         result = check_output(
             [
                 sys.executable,
-                "bin/run_sql_task.py",
+                "bin/run_data_task.py",
                 "--task",
                 task_name,
                 "--no-python",
