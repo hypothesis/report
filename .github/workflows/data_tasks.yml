@@ -1,12 +1,12 @@
-# Run various SQL defined tasks, usually related to the report aggregations
+# Run various tasks related to the report aggregations
 
-name: SQL tasks
+name: Data tasks
 on:
   workflow_dispatch:
     inputs:
       Task:
         type: choice
-        description: "The SQL task to perform"
+        description: "The data task to perform"
         required: true
         options:
           - "report/refresh"
@@ -38,12 +38,12 @@ jobs:
 
   run_task:
     needs: check_for_danger
-    name: "Run '${{ inputs.Task }}' SQL task in ${{ inputs.Environment }} / ${{ inputs.Region }}"
+    name: "Run '${{ inputs.Task }}' Data task in ${{ inputs.Environment }} / ${{ inputs.Region }}"
     uses: hypothesis/workflows/.github/workflows/eb-task.yml@main
     with:
       App: ${{ github.event.repository.name }}
       Env: ${{ inputs.Environment }}
       Timeout: 3600
       Region: 'us-west-1'
-      Command: 'newrelic-admin run-program python bin/run_sql_task.py --task ${{ inputs.Task }}'
+      Command: 'newrelic-admin run-program python bin/run_data_task.py --task ${{ inputs.Task }}'
     secrets: inherit
