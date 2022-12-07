@@ -1,0 +1,5 @@
+REFRESH MATERIALIZED VIEW CONCURRENTLY authorities;
+ANALYSE authorities;
+
+REFRESH MATERIALIZED VIEW CONCURRENTLY authority_activity;
+ANALYSE authority_activity;
