@@ -4,11 +4,5 @@ ANALYSE organizations;
 REFRESH MATERIALIZED VIEW CONCURRENTLY organization_activity;
 ANALYSE organization_activity;
 
-REFRESH MATERIALIZED VIEW CONCURRENTLY authorities;
-ANALYSE authorities;
-
-REFRESH MATERIALIZED VIEW CONCURRENTLY authority_activity;
-ANALYSE authority_activity;
-
 REFRESH MATERIALIZED VIEW CONCURRENTLY lms_events;
 ANALYSE lms_events;
