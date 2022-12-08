@@ -34,7 +34,7 @@ CREATE VIEW hubspot.company_property_update AS (
             -- Get the correct time period to join on to
             LEFT JOIN LATERAL (
                 SELECT DISTINCT(period)
-                FROM organization_activity
+                FROM lms.organization_activity
                 WHERE timescale::text = metric_definitions.timescale
                 ORDER BY period DESC
                 LIMIT 1
@@ -50,7 +50,7 @@ CREATE VIEW hubspot.company_property_update AS (
                 metrics.metric_name,
                 organization_activity.billable as count
             FROM metrics
-            LEFT OUTER JOIN organization_activity ON
+            LEFT OUTER JOIN lms.organization_activity ON
                 organization_activity.timescale::text = metrics.timescale
                 AND organization_activity.role::text = metrics.role
                 AND organization_activity.period = metrics.period
@@ -70,7 +70,7 @@ CREATE VIEW hubspot.company_property_update AS (
         COALESCE(MAX(count) FILTER (WHERE metric_name='lms_users_this_semester'), 0) AS lms_users_this_semester,
         COALESCE(MAX(count) FILTER (WHERE metric_name='lms_users_all_time'), 0) AS lms_users_all_time
     FROM values_in_rows
-    JOIN organizations ON
+    JOIN lms.organizations ON
         organization_id = organizations.id
     JOIN hubspot.companies ON
         companies.lms_organization_id = organizations.public_id

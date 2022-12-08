@@ -1,6 +1,6 @@
-DROP MATERIALIZED VIEW IF EXISTS organizations CASCADE;
+DROP MATERIALIZED VIEW IF EXISTS lms.organizations CASCADE;
 
-CREATE MATERIALIZED VIEW organizations AS (
+CREATE MATERIALIZED VIEW lms.organizations AS (
     WITH
         raw_organizations AS (
             SELECT

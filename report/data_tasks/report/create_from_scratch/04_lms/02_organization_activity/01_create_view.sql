@@ -1,6 +1,6 @@
-DROP MATERIALIZED VIEW IF EXISTS organization_activity CASCADE;
+DROP MATERIALIZED VIEW IF EXISTS lms.organization_activity CASCADE;
 
-CREATE MATERIALIZED VIEW organization_activity AS (
+CREATE MATERIALIZED VIEW lms.organization_activity AS (
     WITH
         raw_organization_activity AS (
             SELECT
@@ -56,7 +56,7 @@ CREATE MATERIALIZED VIEW organization_activity AS (
             company_deals.deal_id = deals.id
         JOIN hubspot.companies ON
             companies.id = company_deals.company_id
-        JOIN organizations ON
+        JOIN lms.organizations ON
             organizations.public_id = companies.lms_organization_id
         WHERE
             organizations.id = organization_id
