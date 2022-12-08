@@ -1,6 +1,6 @@
-DROP MATERIALIZED VIEW IF EXISTS lms_events CASCADE;
+DROP MATERIALIZED VIEW IF EXISTS lms.events CASCADE;
 
-CREATE MATERIALIZED VIEW lms_events AS (
+CREATE MATERIALIZED VIEW lms.events AS (
     -- These rows have a lot of elements with missing users and organizations
     -- We could merge these together, but by adding a region we can use a
     -- simpler UNION ALL without having to combine these rows. This also

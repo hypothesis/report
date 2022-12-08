@@ -1,8 +1,8 @@
-DROP INDEX IF EXISTS authorities_id_idx;
+DROP INDEX IF EXISTS h.authorities_id_idx;
 
-REFRESH MATERIALIZED VIEW authorities;
+REFRESH MATERIALIZED VIEW h.authorities;
 
-ANALYSE authorities;
+ANALYSE h.authorities;
 
 -- A unique index is mandatory for concurrent updates used in the refresh
-CREATE UNIQUE INDEX authorities_id_idx ON authorities (id);
+CREATE UNIQUE INDEX authorities_id_idx ON h.authorities (id);

@@ -1,6 +1,6 @@
-DROP MATERIALIZED VIEW IF EXISTS authority_activity CASCADE;
+DROP MATERIALIZED VIEW IF EXISTS h.authority_activity CASCADE;
 
-CREATE MATERIALIZED VIEW authority_activity AS (
+CREATE MATERIALIZED VIEW h.authority_activity AS (
     SELECT
         timescale, start_date, end_date, period,
         'us' AS region,
