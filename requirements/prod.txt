@@ -4,41 +4,41 @@
 #
 #    pip-compile --allow-unsafe requirements/prod.in
 #
-certifi==2022.9.24
+certifi==2022.12.7
     # via
     #   hubspot-api-client
     #   sentry-sdk
 data-tasks==0.0.2
-    # via -r requirements/prod.in
+    # via -r prod.in
 greenlet==2.0.1
     # via sqlalchemy
 hubspot-api-client==7.0.0
-    # via -r requirements/prod.in
+    # via -r prod.in
 importlib-metadata==5.0.0
     # via data-tasks
 importlib-resources==5.10.0
     # via
-    #   -r requirements/prod.in
+    #   -r prod.in
     #   data-tasks
 jinja2==3.1.2
     # via data-tasks
 markupsafe==2.1.1
     # via jinja2
 newrelic==8.4.0
-    # via -r requirements/prod.in
+    # via -r prod.in
 psycopg2==2.9.5
-    # via -r requirements/prod.in
+    # via -r prod.in
 python-dateutil==2.8.2
     # via hubspot-api-client
 sentry-sdk==1.11.1
-    # via -r requirements/prod.in
+    # via -r prod.in
 six==1.16.0
     # via
     #   hubspot-api-client
     #   python-dateutil
 sqlalchemy==1.4.44
     # via
-    #   -r requirements/prod.in
+    #   -r prod.in
     #   data-tasks
 sqlparse==0.4.3
     # via data-tasks
