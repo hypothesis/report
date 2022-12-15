@@ -6,3 +6,12 @@ ANALYSE lms.organization_activity;
 
 REFRESH MATERIALIZED VIEW CONCURRENTLY lms.events;
 ANALYSE lms.events;
+
+REFRESH MATERIALIZED VIEW CONCURRENTLY lms.groups;
+ANALYSE lms.groups;
+
+REFRESH MATERIALIZED VIEW CONCURRENTLY lms.group_map;
+ANALYSE lms.group_map;
+
+REFRESH MATERIALIZED VIEW CONCURRENTLY lms.group_bubbled_activity;
+ANALYSE lms.group_bubbled_activity;
