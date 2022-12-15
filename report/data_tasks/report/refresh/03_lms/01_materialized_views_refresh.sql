@@ -1,8 +1,8 @@
-REFRESH MATERIALIZED VIEW CONCURRENTLY organizations;
-ANALYSE organizations;
+REFRESH MATERIALIZED VIEW CONCURRENTLY lms.organizations;
+ANALYSE lms.organizations;
 
-REFRESH MATERIALIZED VIEW CONCURRENTLY organization_activity;
-ANALYSE organization_activity;
+REFRESH MATERIALIZED VIEW CONCURRENTLY lms.organization_activity;
+ANALYSE lms.organization_activity;
 
-REFRESH MATERIALIZED VIEW CONCURRENTLY lms_events;
-ANALYSE lms_events;
+REFRESH MATERIALIZED VIEW CONCURRENTLY lms.events;
+ANALYSE lms.events;
