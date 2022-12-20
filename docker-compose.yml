@@ -24,6 +24,11 @@ services:
       - MB_DB_PASS=metabase
       - MB_DB_HOST=metabase-postgres
       - DATABASE_URL=postgresql://postgres@postgres:5432/postgres
+      - H_US_DATABASE_URL=postgresql://report-fdw:password@h_postgres_1:5432/postgres
+      - H_CA_DATABASE_URL=postgresql://report-fdw:password@h_postgres_1:5432/postgres
+      - LMS_US_DATABASE_URL=postgresql://report-fdw:password@lms_postgres_1:5432/postgres
+      - LMS_CA_DATABASE_URL=postgresql://report-fdw:password@lms_postgres_1:5432/postgres
+
     ports:
       - 4000:3000
     depends_on:
