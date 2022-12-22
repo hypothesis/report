@@ -5,10 +5,6 @@ help = help::; @echo $$$$(tput bold)$(strip $(1)):$$$$(tput sgr0) $(strip $(2))
 $(call help,make help,print this help message)
 
 .PHONY: services
-$(call help,make services,start the services that the app needs)
-services: args?=up -d
-services: python
-	@tox -qe dockercompose -- $(args)
 
 .PHONY: devdata
 $(call help,make devdata,load development data and environment variables)
@@ -24,11 +20,6 @@ dev: python
 $(call help,make shell,"launch a Python shell in this project's virtualenv")
 shell: python
 	@pyenv exec tox -qe dev --run-command 'ipython'
-
-.PHONY: sql
-$(call help,make sql,"Connect to the dev database with a psql shell")
-sql: python
-	@tox -qe dockercompose -- exec postgres psql --pset expanded=auto -U postgres
 
 .PHONY: lint
 $(call help,make lint,"lint the code and print any warnings")
@@ -121,7 +112,6 @@ $(call help,make docker-run,"run the app's docker image")
 docker-run:
 	@docker run \
 		--add-host host.docker.internal:host-gateway \
-		--net report_default \
 		--env-file .docker.env \
 		--env-file .devdata.env \
 		hypothesis/report:$(DOCKER_TAG)
