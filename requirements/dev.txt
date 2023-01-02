@@ -94,7 +94,7 @@ six==1.16.0
     #   asttokens
     #   hubspot-api-client
     #   python-dateutil
-sqlalchemy==1.4.44
+sqlalchemy==1.4.45
     # via
     #   -r requirements/prod.txt
     #   data-tasks
