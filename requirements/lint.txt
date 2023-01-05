@@ -99,7 +99,7 @@ markupsafe==2.1.1
     #   jinja2
 mccabe==0.7.0
     # via pylint
-newrelic==8.4.0
+newrelic==8.5.0
     # via
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
