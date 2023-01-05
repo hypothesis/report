@@ -49,4 +49,6 @@ urllib3==1.26.12
     #   hubspot-api-client
     #   sentry-sdk
 zipp==3.10.0
-    # via importlib-metadata
+    # via
+    #   importlib-metadata
+    #   importlib-resources

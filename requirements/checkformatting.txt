@@ -28,6 +28,13 @@ platformdirs==2.5.4
     # via black
 pyparsing==3.0.9
     # via packaging
+tomli==2.0.1
+    # via
+    #   black
+    #   build
+    #   pep517
+typing-extensions==4.4.0
+    # via black
 wheel==0.38.4
     # via pip-tools
 
