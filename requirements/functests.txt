@@ -81,7 +81,7 @@ six==1.16.0
     #   -r requirements/prod.txt
     #   hubspot-api-client
     #   python-dateutil
-sqlalchemy==1.4.44
+sqlalchemy==1.4.46
     # via
     #   -r requirements/prod.txt
     #   data-tasks
