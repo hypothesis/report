@@ -27,12 +27,15 @@ CREATE TYPE report.academic_timescale AS ENUM (
     ) FROM SERVER "{{server_name}}" INTO {{schema_name}};
 
     IMPORT FOREIGN SCHEMA "report" LIMIT TO (
-        organization_activity,
         events,
         groups,
-        group_map,
+        group_bubbled_activity,
         group_bubbled_counts,
-        group_bubbled_activity
+        group_map,
+        group_roles,
+        organization_activity,
+        organization_roles,
+        users_sensitive
     ) FROM SERVER "{{server_name}}" INTO {{schema_name}};
 {% endmacro %}
 
