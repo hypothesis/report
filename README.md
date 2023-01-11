@@ -1,4 +1,4 @@
-<a href="https://github.com/hypothesis/report/actions/workflows/ci.yml?query=branch%3Amain"><img src="https://img.shields.io/github/workflow/status/hypothesis/report/CI/main"></a>
+<a href="https://github.com/hypothesis/report/actions/workflows/ci.yml?query=branch%3Amain"><img src="https://img.shields.io/github/actions/workflow/status/hypothesis/report/ci.yml?branch=main"></a>
 <a><img src="https://img.shields.io/badge/python-3.8-success"></a>
 <a href="https://github.com/hypothesis/report/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-BSD--2--Clause-success"></a>
 <a href="https://github.com/hypothesis/cookiecutters/tree/main/pyapp"><img src="https://img.shields.io/badge/cookiecutter-pyapp-success"></a>
@@ -62,13 +62,9 @@ First you'll need to install:
   The **Basic GitHub Checkout** method works best on Ubuntu.
   You _don't_ need to set up pyenv's shell integration ("shims"), you can
   [use pyenv without shims](https://github.com/pyenv/pyenv#using-pyenv-without-shims).
-* [Docker](https://docs.docker.com/install/).
-  Follow the [instructions on the Docker website](https://docs.docker.com/install/)
-  to install it.  
-  You **don't** need to install Docker Compose, the development environment
-  will install it automatically for you in tox.  
-  You **do** need to set up the `docker` command to work without `sudo`,
-  on Linux this means following Docker's [Post-installation steps for Linux](https://docs.docker.com/engine/install/linux-postinstall/).
+* [Docker Desktop](https://www.docker.com/products/docker-desktop/).
+  On Ubuntu follow [Install on Ubuntu](https://docs.docker.com/desktop/install/ubuntu/).
+  On macOS follow [Install on Mac](https://docs.docker.com/desktop/install/mac-install/).
 
 Then to set up your development environment:
 

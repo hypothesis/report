@@ -24,12 +24,13 @@
     "dependabot_docker_interval": "monthly",
     "devdata": "yes",
     "services": "yes",
-    "db": "yes",
+    "postgres": "yes",
     "docker": "yes",
     "__docker_namespace": "hypothesis",
     "__docker_network": "report_default",
     "__github_url": "https://github.com/hypothesis/report",
     "__hdev_project_type": "application",
-    "__copyright_year": "2022"
+    "__copyright_year": "2022",
+    "__postgres_port": "5436"
   }
 }
