@@ -1,0 +1,5 @@
+networks:
+  default:
+    external: false
+  dbs:
+    external: true

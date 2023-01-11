@@ -8,7 +8,7 @@ $(call help,make help,print this help message)
 $(call help,make services,start the services that the app needs)
 services: args?=up -d
 services: python
-	@tox -qe dockercompose -- $(args)
+	@docker compose $(args)
 
 .PHONY: devdata
 $(call help,make devdata,load development data and environment variables)
@@ -28,7 +28,7 @@ shell: python
 .PHONY: sql
 $(call help,make sql,"Connect to the dev database with a psql shell")
 sql: python
-	@tox -qe dockercompose -- exec postgres psql --pset expanded=auto -U postgres
+	@docker compose exec postgres psql --pset expanded=auto -U postgres
 
 .PHONY: lint
 $(call help,make lint,"lint the code and print any warnings")

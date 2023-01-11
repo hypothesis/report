@@ -7,7 +7,6 @@ H_CA_DATABASE_URL = {env:H_CA_DATABASE_URL:postgresql://report-fdw:password@h_po
 LMS_US_DATABASE_URL = {env:LMS_US_DATABASE_URL:postgresql://report-fdw:password@lms_postgres_1:5432/postgres}
 LMS_CA_DATABASE_URL = {env:LMS_CA_DATABASE_URL:postgresql://report-fdw:password@lms_postgres_1:5432/postgres}
 # Used when testing tasks via `tox`:
-dev: DATABASE_URL = {env:DATABASE_URL:postgresql://postgres@localhost:5436/postgres}
 dev: NEW_RELIC_APP_NAME = {env: NEW_RELIC_APP_NAME:report}
 dev: NEW_RELIC_ENVIRONMENT = {env:NEW_RELIC_ENVIRONMENT:dev}
 dev: SENTRY_ENVIRONMENT = {env:SENTRY_ENVIRONMENT:dev}
