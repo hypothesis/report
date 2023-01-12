@@ -1,9 +1,9 @@
+sqlalchemy
+psycopg2
 # From .cookiecutter/includes/requirements/prod.in:
 newrelic
 
 data-tasks
 hubspot-api-client
 importlib_resources
-psycopg2
 sentry-sdk
-SQLAlchemy

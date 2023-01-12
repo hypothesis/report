@@ -1,5 +1,14 @@
-version: "3.9"
 services:
+  postgres:
+    image: postgres:11.5-alpine
+    ports:
+      - "127.0.0.1:5436:5432"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 1s
+    networks:
+      - default
+      - dbs
   metabase-postgres:
     image: postgres:11.5-alpine
     environment:
@@ -10,12 +19,10 @@ services:
       - 5435:5432
     networks:
       - default
-
   metabase:
     build:
       context: .
       dockerfile: Dockerfile
-
     environment:
       - MB_DB_TYPE=postgres
       - MB_DB_DBNAME=metabase
@@ -28,7 +35,6 @@ services:
       - H_CA_DATABASE_URL=postgresql://report-fdw:password@h_postgres_1:5432/postgres
       - LMS_US_DATABASE_URL=postgresql://report-fdw:password@lms_postgres_1:5432/postgres
       - LMS_CA_DATABASE_URL=postgresql://report-fdw:password@lms_postgres_1:5432/postgres
-
     ports:
       - 4000:3000
     depends_on:
@@ -36,15 +42,6 @@ services:
       - postgres
     networks:
       - default
-
-  postgres:
-    image: postgres:11.5-alpine
-    ports:
-      - 5436:5432
-    networks:
-      - default
-      - dbs
-
 networks:
   default:
     external: false
