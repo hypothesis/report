@@ -15,9 +15,3 @@ ANALYSE lms.group_bubbled_activity;
 
 REFRESH MATERIALIZED VIEW CONCURRENTLY lms.organization_group;
 ANALYSE lms.organization_group;
-
-REFRESH MATERIALIZED VIEW CONCURRENTLY lms.organization_roles;
-ANALYSE lms.organization_roles;
-
-REFRESH MATERIALIZED VIEW CONCURRENTLY lms.group_roles;
-ANALYSE lms.group_roles;
