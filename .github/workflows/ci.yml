@@ -9,8 +9,6 @@ on:
       - 'bin/logger'
       - 'bin/make_python'
       - 'bin/make_template'
-      - 'conf/development.ini'
-      - 'conf/production.ini'
       - 'conf/supervisord*.conf'
       - 'docs/*'
       - 'requirements/*.in'
