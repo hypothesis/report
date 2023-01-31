@@ -12,7 +12,7 @@ CREATE TYPE report.event_type AS ENUM (
 
 DROP TYPE IF EXISTS report.academic_timescale CASCADE;
 CREATE TYPE report.academic_timescale AS ENUM (
-    'week', 'month', 'semester', 'academic_year', 'all_time'
+    'week', 'month', 'semester', 'academic_year', 'trailing_year', 'all_time'
 );
 
 -- Import required tables
