@@ -114,7 +114,12 @@ pep517==0.13.0
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
     #   build
-pip-tools==6.10.0
+pip==22.3.1
+    # via
+    #   -r requirements/functests.txt
+    #   -r requirements/tests.txt
+    #   pip-tools
+pip-tools==6.12.2
     # via
     #   -r requirements/functests.txt
     #   -r requirements/lint.in
@@ -156,6 +161,11 @@ sentry-sdk==1.12.1
     # via
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
+setuptools==65.5.1
+    # via
+    #   -r requirements/functests.txt
+    #   -r requirements/tests.txt
+    #   pip-tools
 six==1.16.0
     # via
     #   -r requirements/functests.txt
@@ -215,15 +225,3 @@ zipp==3.10.0
     #   -r requirements/tests.txt
     #   importlib-metadata
     #   importlib-resources
-
-# The following packages are considered to be unsafe in a requirements file:
-pip==22.3.1
-    # via
-    #   -r requirements/functests.txt
-    #   -r requirements/tests.txt
-    #   pip-tools
-setuptools==65.5.1
-    # via
-    #   -r requirements/functests.txt
-    #   -r requirements/tests.txt
-    #   pip-tools

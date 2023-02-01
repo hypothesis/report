@@ -22,12 +22,16 @@ pathspec==0.10.2
     # via black
 pep517==0.13.0
     # via build
-pip-tools==6.10.0
+pip==22.3.1
+    # via pip-tools
+pip-tools==6.12.2
     # via -r requirements/format.in
 platformdirs==2.5.4
     # via black
 pyparsing==3.0.9
     # via packaging
+setuptools==65.5.1
+    # via pip-tools
 tomli==2.0.1
     # via
     #   black
@@ -36,10 +40,4 @@ tomli==2.0.1
 typing-extensions==4.4.0
     # via black
 wheel==0.38.4
-    # via pip-tools
-
-# The following packages are considered to be unsafe in a requirements file:
-pip==22.3.1
-    # via pip-tools
-setuptools==65.5.1
     # via pip-tools
