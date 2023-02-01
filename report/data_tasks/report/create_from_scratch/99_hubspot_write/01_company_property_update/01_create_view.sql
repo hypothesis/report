@@ -20,7 +20,9 @@ CREATE VIEW hubspot.company_property_update AS (
                     ('lms_users_this_academic_year', 'user', 'academic_year', 0),
                     ('lms_users_last_semester', 'user', 'semester', 1),
                     ('lms_users_this_semester', 'user', 'semester', 0),
-                    ('lms_users_all_time', 'user', 'all_time', 0)
+                    ('lms_users_all_time', 'user', 'all_time', 0),
+                    ('lms_users_last_24_12_months', 'user', 'trailing_year', 1),
+                    ('lms_users_last_12_0_months', 'user', 'trailing_year', 0)
             ) AS data
         ),
 
@@ -68,7 +70,9 @@ CREATE VIEW hubspot.company_property_update AS (
         COALESCE(MAX(count) FILTER (WHERE metric_name='lms_users_this_academic_year'), 0) AS lms_users_this_academic_year,
         COALESCE(MAX(count) FILTER (WHERE metric_name='lms_users_last_semester'), 0) AS lms_users_last_semester,
         COALESCE(MAX(count) FILTER (WHERE metric_name='lms_users_this_semester'), 0) AS lms_users_this_semester,
-        COALESCE(MAX(count) FILTER (WHERE metric_name='lms_users_all_time'), 0) AS lms_users_all_time
+        COALESCE(MAX(count) FILTER (WHERE metric_name='lms_users_all_time'), 0) AS lms_users_all_time,
+        COALESCE(MAX(count) FILTER (WHERE metric_name='lms_users_last_24_12_months'), 0) AS lms_users_last_24_12_months,
+        COALESCE(MAX(count) FILTER (WHERE metric_name='lms_users_last_12_0_months'), 0) AS lms_users_last_12_0_months
     FROM values_in_rows
     JOIN lms.organizations ON
         organization_id = organizations.id
