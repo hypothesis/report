@@ -31,7 +31,7 @@ greenlet==2.0.1
     # via
     #   -r requirements/prod.txt
     #   sqlalchemy
-hubspot-api-client==7.0.0
+hubspot-api-client==7.3.0
     # via -r requirements/prod.txt
 importlib-metadata==5.0.0
     # via
@@ -67,8 +67,6 @@ pexpect==4.8.0
     # via ipython
 pickleshare==0.7.5
     # via ipython
-pip==22.3.1
-    # via pip-tools
 pip-tools==6.12.2
     # via -r requirements/dev.in
 prompt-toolkit==3.0.32
@@ -90,10 +88,6 @@ python-dateutil==2.8.2
     #   hubspot-api-client
 sentry-sdk==1.12.1
     # via -r requirements/prod.txt
-setuptools==65.5.1
-    # via
-    #   pip-tools
-    #   supervisor
 six==1.16.0
     # via
     #   -r requirements/prod.txt
