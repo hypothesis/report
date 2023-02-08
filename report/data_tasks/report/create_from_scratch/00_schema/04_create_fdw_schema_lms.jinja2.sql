@@ -29,9 +29,10 @@ CREATE TYPE report.academic_timescale AS ENUM (
     IMPORT FOREIGN SCHEMA "report" LIMIT TO (
         events,
         groups,
-        group_map,
-        group_bubbled_counts,
         group_bubbled_activity,
+        group_bubbled_counts,
+        group_map,
+        group_roles,
         organization,
         organization_activity,
         organization_roles,
