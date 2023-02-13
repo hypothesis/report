@@ -31,7 +31,7 @@ h-matchers==1.2.15
     # via -r requirements/functests.in
 httpretty==1.1.4
     # via -r requirements/functests.in
-hubspot-api-client==7.0.0
+hubspot-api-client==7.3.1
     # via -r requirements/prod.txt
 importlib-metadata==5.0.0
     # via
@@ -59,8 +59,6 @@ packaging==21.3
     #   pytest
 pep517==0.13.0
     # via build
-pip==22.3.1
-    # via pip-tools
 pip-tools==6.12.2
     # via -r requirements/functests.in
 pluggy==1.0.0
@@ -78,8 +76,6 @@ python-dateutil==2.8.2
     #   hubspot-api-client
 sentry-sdk==1.12.1
     # via -r requirements/prod.txt
-setuptools==65.5.1
-    # via pip-tools
 six==1.16.0
     # via
     #   -r requirements/prod.txt
