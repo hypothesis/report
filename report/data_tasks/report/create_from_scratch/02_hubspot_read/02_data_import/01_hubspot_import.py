@@ -69,6 +69,7 @@ def main(connection, **kwargs):
 
     print("\tDeals...")
     deals = list(api_client.get_deals(DEAL_FIELDS))
+    _sort_deal_dates(deals)
 
     print("\tCompany deal associations...")
     company_deals = [
@@ -102,3 +103,17 @@ def main(connection, **kwargs):
         items=company_deals,
         fields=COMPANY_DEAL_FIELDS,
     )
+
+
+def _sort_deal_dates(deals):
+    """Ensure the start of a deal comes before the end.
+
+    This should be true, but as these values are entered by people there's
+    nothing really stopping them from being put in backwards, which will cause
+    Postgres conniptions
+    """
+    for deal in deals:
+        services_start, services_end = deal["services_start"], deal["services_end"]
+        if services_start and services_end:
+            deal["services_start"] = min(services_start, services_end)
+            deal["services_end"] = max(services_start, services_end)
