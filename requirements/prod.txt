@@ -24,7 +24,7 @@ jinja2==3.1.2
     # via data-tasks
 markupsafe==2.1.1
     # via jinja2
-newrelic==8.5.0
+newrelic==8.7.0
     # via -r requirements/prod.in
 psycopg2==2.9.5
     # via
