@@ -41,7 +41,7 @@ importlib-resources==5.10.2
     # via
     #   -r requirements/prod.txt
     #   data-tasks
-ipython==8.10.0
+ipython==8.11.0
     # via -r requirements/dev.in
 jedi==0.18.1
     # via ipython
