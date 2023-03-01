@@ -55,7 +55,7 @@ markupsafe==2.1.1
     #   jinja2
 matplotlib-inline==0.1.6
     # via ipython
-newrelic==8.5.0
+newrelic==8.7.0
     # via -r requirements/prod.txt
 packaging==21.3
     # via build
