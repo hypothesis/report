@@ -8,7 +8,7 @@ certifi==2022.12.7
     # via
     #   hubspot-api-client
     #   sentry-sdk
-data-tasks==0.0.2
+data-tasks==0.0.3
     # via -r requirements/prod.in
 greenlet==2.0.1
     # via sqlalchemy
@@ -27,7 +27,9 @@ markupsafe==2.1.1
 newrelic==8.5.0
     # via -r requirements/prod.in
 psycopg2==2.9.5
-    # via -r requirements/prod.in
+    # via
+    #   -r requirements/prod.in
+    #   data-tasks
 python-dateutil==2.8.2
     # via hubspot-api-client
 sentry-sdk==1.12.1

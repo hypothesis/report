@@ -17,7 +17,7 @@ certifi==2022.12.7
     #   sentry-sdk
 click==8.1.3
     # via pip-tools
-data-tasks==0.0.2
+data-tasks==0.0.3
     # via -r requirements/prod.txt
 decorator==5.1.1
     # via ipython
@@ -72,7 +72,9 @@ pip-tools==6.12.2
 prompt-toolkit==3.0.32
     # via ipython
 psycopg2==2.9.5
-    # via -r requirements/prod.txt
+    # via
+    #   -r requirements/prod.txt
+    #   data-tasks
 ptyprocess==0.7.0
     # via pexpect
 pure-eval==0.2.2
