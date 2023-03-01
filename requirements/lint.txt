@@ -29,7 +29,7 @@ click==8.1.3
     #   pip-tools
 coverage[toml]==6.5.0
     # via -r requirements/tests.txt
-data-tasks==0.0.2
+data-tasks==0.0.3
     # via
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
@@ -130,6 +130,7 @@ psycopg2==2.9.5
     # via
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
+    #   data-tasks
 pycodestyle==2.10.0
     # via -r requirements/lint.in
 pydocstyle==6.3.0
