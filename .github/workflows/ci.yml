@@ -22,6 +22,8 @@ on:
       - 'docker-compose.yml'
   workflow_dispatch:
   workflow_call:
+  schedule:
+  - cron: '0 1 * * *'
 jobs:
   Format:
     runs-on: ubuntu-latest
