@@ -1,4 +1,5 @@
 import os
+from operator import itemgetter
 from typing import Iterable
 
 from data_tasks.sql_query import SQLQuery
@@ -25,10 +26,16 @@ def _insert_items(connection, table_name, items, fields: Iterable[Field]):
     print(f"{len(items)} {table_name} loaded in: {timer.duration}")
 
 
+# The API docs link you here, but it doesn't show the API keys for properties
+# https://knowledge.hubspot.com/companies/hubspot-crm-default-company-properties
+# Use `api_client.get_properties(api_client.ObjectType.COMPANY)` to get details
 COMPANY_FIELDS = (
     Field("hs_object_id", "id", mapping=int),
     Field("name"),
     Field("lms_organization_id"),
+    # Owners
+    Field("hubspot_owner_id", "company_owner_id", mapping=int),
+    Field("owner__success", "success_owner_id", mapping=int),
     # Cohort
     Field("cohort__pilot_first_date", "cohort_pilot_first_date"),
     Field("cohort__subscription_first_date", "cohort_subscription_first_date"),
@@ -41,6 +48,7 @@ COMPANY_FIELDS = (
 
 # The API docs link you here, but it doesn't show the API keys for properties
 # https://knowledge.hubspot.com/crm-deals/hubspots-default-deal-properties
+# Use `api_client.get_properties(api_client.ObjectType.DEAL)` to get details
 DEAL_FIELDS = (
     Field("hs_object_id", "id", mapping=int),
     Field("dealname", "name"),
@@ -56,6 +64,54 @@ COMPANY_DEAL_FIELDS = (
 )
 
 
+def filter_owner(owner):
+    """Convert the values that come from Hubspot into the shape we want."""
+
+    first_name = owner["first_name"]
+    last_name = owner["last_name"]
+    email = owner["email"]
+
+    # Try and cobble together a representative name
+    if first_name and last_name:
+        name = f"{first_name} {last_name}"
+    elif first_name or last_name:
+        name = first_name or last_name
+    elif email:
+        name = email.split("@")[0].title()
+    else:
+        name = None
+
+    return {
+        "id": owner["id"],
+        "first_name": first_name or None,
+        "last_name": last_name or None,
+        "name": name,
+        "email": email or None,
+        "archived": bool(owner["archived"]),
+    }
+
+
+OWNERS_FIELDS = (
+    Field("id"),
+    Field("first_name"),
+    Field("last_name"),
+    Field("name"),
+    Field("email"),
+    Field("archived"),
+)
+
+
+def filter_team(team):
+    """Convert the values that come from Hubspot into the shape we want."""
+
+    return {"id": int(team["id"]), "name": team["name"]}
+
+
+TEAMS_FIELDS = (Field("id"), Field("name"))
+
+OWNER_TEAMS_FIELDS = (Field("owner_id"), Field("team_id"))
+
+
 def main(connection, **kwargs):
     api_client = HubspotClient(private_app_key=os.environ["HUBSPOT_API_KEY"])
 
@@ -63,6 +119,15 @@ def main(connection, **kwargs):
     # DB, then have a long pause before we put things back in. This might eat
     # some memory. So we could stream to disk if required or something.
     print("Getting Hubspot data...")
+
+    print("\tGetting owners and teams...")
+
+    owners = list(api_client.get_owners())
+    owner_teams, teams = api_client.parse_teams_from_owners(owners)
+    owners = [filter_owner(owner) for owner in owners]
+    owners = list(sorted(owners, key=itemgetter("id")))
+    teams = [filter_team(teams) for teams in teams]
+    teams = list(sorted(teams, key=itemgetter("id")))
 
     print("\tCompanies...")
     companies = list(api_client.get_companies(COMPANY_FIELDS))
@@ -82,6 +147,24 @@ def main(connection, **kwargs):
     ]
 
     print("Inserting Hubspot company data...")
+
+    print("\tOwners...")
+    _insert_items(
+        connection, table_name="hubspot.owners", items=owners, fields=OWNERS_FIELDS
+    )
+
+    print("\tTeams...")
+    _insert_items(
+        connection, table_name="hubspot.teams", items=teams, fields=TEAMS_FIELDS
+    )
+
+    print("\tOwner teams...")
+    _insert_items(
+        connection,
+        table_name="hubspot.owner_teams",
+        items=owner_teams,
+        fields=OWNER_TEAMS_FIELDS,
+    )
 
     print("\tCompanies...")
     _insert_items(
