@@ -57,22 +57,6 @@ class HubspotClient:
         self.api_client = HubSpot()
         self.api_client.access_token = self.private_app_key
 
-    def get_companies(self, fields: Iterable[Field]) -> Generator:
-        """Get companies from Hubspot.
-
-        :param fields: A list of fields to get from Hubspot
-        """
-
-        yield from self._get_objects(self.api_client.crm.companies, fields)
-
-    def get_deals(self, fields: Iterable[Field]) -> Generator:
-        """Get deals from Hubspot.
-
-        :param fields: A list of fields to get from Hubspot
-        """
-
-        yield from self._get_objects(self.api_client.crm.deals, fields)
-
     def get_associations(
         self,
         from_type: AssociationObjectType,
@@ -105,6 +89,42 @@ class HubspotClient:
                 relations.add((result._from.id, to_result.id))
 
         return relations
+
+    def get_companies(self, fields: Iterable[Field]) -> Generator:
+        """Get companies from Hubspot.
+
+        :param fields: A list of fields to get from Hubspot
+        """
+
+        yield from self._get_objects(self.api_client.crm.companies, fields)
+
+    def get_deals(self, fields: Iterable[Field]) -> Generator:
+        """Get deals from Hubspot.
+
+        :param fields: A list of fields to get from Hubspot
+        """
+
+        yield from self._get_objects(self.api_client.crm.deals, fields)
+
+    def get_owners(self):
+        """Get a list of the owners."""
+
+        return (owner.to_dict() for owner in self.api_client.crm.owners.get_all())
+
+    def get_properties(self, object_type):
+        """
+        Get the properties for a given object type.
+
+        This is useful for trying to work out what a property you want is
+        called by Hubspot internally.
+        """
+
+        return (
+            prop.to_dict()
+            for prop in self.api_client.crm.properties.core_api.get_all(
+                object_type
+            ).results
+        )
 
     def import_csv(
         self, job_name, csv_files, object_type, primary_key_field="hs_object_id"
@@ -141,6 +161,30 @@ class HubspotClient:
             files=csv_files,
             async_req=False,
         )
+
+    @classmethod
+    def parse_teams_from_owners(cls, owners):
+        """Parse owner team relations and teams from owners."""
+
+        teams_by_id = {}
+        owner_team = []
+
+        for owner in owners:
+            if not owner["teams"]:
+                continue
+
+            for team in owner["teams"]:
+                teams_by_id[team["id"]] = team
+                owner_team.append(
+                    {"owner_id": int(owner["id"]), "team_id": int(team["id"])}
+                )
+
+        # Sort and convert ids to ints
+        teams = list(teams_by_id.values())
+        for team in teams:
+            team["id"] = int(team["id"])
+
+        return owner_team, teams
 
     @classmethod
     def _csv_import_request(cls, job_name, csv_files, object_type, primary_key_field):
