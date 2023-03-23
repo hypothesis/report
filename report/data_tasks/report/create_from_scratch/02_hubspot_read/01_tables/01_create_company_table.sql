@@ -5,6 +5,9 @@ CREATE TABLE hubspot.companies (
     id BIGINT PRIMARY KEY,
     name TEXT,
     lms_organization_id TEXT,
+    -- Owners
+    company_owner_id INT,
+    success_owner_id INT,
     -- Cohort
     cohort_pilot_first_date DATE,
     cohort_subscription_first_date DATE,
