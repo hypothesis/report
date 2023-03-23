@@ -1,6 +1,6 @@
 import json
 from dataclasses import dataclass
-from unittest.mock import create_autospec
+from unittest.mock import MagicMock, create_autospec, sentinel
 
 import pytest
 from h_matchers import Any
@@ -89,6 +89,28 @@ class TestHubspotClient:
             (result._from.id, result.to[1].id),
         }
 
+    def test_get_owners(self, client):
+        owner = MagicMock()
+        client.api_client.crm.owners.get_all.return_value = (owner,)
+
+        response = list(client.get_owners())
+
+        client.api_client.crm.owners.get_all.assert_called_once_with()
+        owner.to_dict.assert_called_once_with()
+        assert response == [owner.to_dict.return_value]
+
+    def test_get_properties(self, client):
+        prop = MagicMock()
+        client.api_client.crm.properties.core_api.get_all.return_value.results = (prop,)
+
+        response = list(client.get_properties(sentinel.object_type))
+
+        client.api_client.crm.properties.core_api.get_all.assert_called_once_with(
+            sentinel.object_type
+        )
+        prop.to_dict.assert_called_once_with()
+        assert response == [prop.to_dict.return_value]
+
     def test_import_csv_raises_for_missing_files(self, client):
         with pytest.raises(FileNotFoundError):
             client.import_csv("job_name", ["/not/a/real/file.csv"], "object_type")
@@ -158,6 +180,21 @@ class TestHubspotClient:
         )
 
         assert result == create.return_value
+
+    def test_parse_teams_from_owners(self, client):
+        owners = [
+            {"id": "123", "teams": [{"id": "321", "key": "value"}]},
+            {"id": 456, "teams": [{"id": "321", "key": "value"}]},
+            {"id": 789, "teams": []},
+        ]
+
+        owner_team, teams = client.parse_teams_from_owners(owners)
+
+        assert owner_team == [
+            {"owner_id": 123, "team_id": 321},
+            {"owner_id": 456, "team_id": 321},
+        ]
+        assert teams == [{"id": 321, "key": "value"}]
 
     @fixture
     def csv_file(self, tmp_path):
