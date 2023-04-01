@@ -69,7 +69,7 @@ psycopg2==2.9.5
     #   data-tasks
 pyparsing==3.0.9
     # via packaging
-pytest==7.2.1
+pytest==7.2.2
     # via -r requirements/functests.in
 python-dateutil==2.8.2
     # via
