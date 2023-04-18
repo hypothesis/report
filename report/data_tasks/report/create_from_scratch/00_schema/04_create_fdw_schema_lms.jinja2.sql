@@ -36,6 +36,7 @@ CREATE TYPE report.academic_timescale AS ENUM (
         organization,
         organization_activity,
         organization_roles,
+        users,
         users_sensitive
     ) FROM SERVER "{{server_name}}" INTO {{schema_name}};
 {% endmacro %}
