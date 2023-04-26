@@ -1,6 +1,6 @@
 import json
 from dataclasses import dataclass
-from unittest.mock import MagicMock, create_autospec, sentinel
+from unittest.mock import MagicMock, call, create_autospec, sentinel
 
 import pytest
 from h_matchers import Any
@@ -88,6 +88,21 @@ class TestHubspotClient:
             (result._from.id, result.to[0].id),
             (result._from.id, result.to[1].id),
         }
+
+    def test_get_associations_batches_calls(self, client, BatchInputPublicObjectId):
+        client.get_associations(
+            from_type=client.AssociationObjectType.COMPANY,
+            to_type=client.AssociationObjectType.DEAL,
+            object_ids=list(range(client.ASSOCIATIONS_BATCH_SIZE + 10)),
+        )
+        BatchInputPublicObjectId.assert_has_calls(
+            [
+                call(inputs=Any.list.of_size(client.ASSOCIATIONS_BATCH_SIZE)),
+                call(inputs=Any.list.of_size(10)),
+            ]
+        )
+
+        assert client.api_client.crm.associations.batch_api.read.call_count == 2
 
     def test_get_owners(self, client):
         owner = MagicMock()
