@@ -3,6 +3,7 @@ import json
 import os.path
 from dataclasses import dataclass
 from enum import Enum
+from itertools import islice
 from typing import Callable, Generator, Iterable, List, Optional, Set
 
 from hubspot import HubSpot
@@ -20,6 +21,21 @@ class Field:
     def __post_init__(self):
         if not self.key:
             self.key = self.hs_field
+
+
+def chunk(items: Iterable, chunk_size: int):
+    """Return items in multiple chunks of a maximum size.
+
+    :param items: Items to break into chunks
+    :param chunk_size: The maximum size of a chunk (last may be shorter)
+    """
+
+    # Create an iterable we can consume from
+    iter_items = iter(items)
+    # Use the two-argument form of iter to specify when to stop. This will
+    # cause iter to call the lambda until it returns an empty tuple, which
+    # should consume the iterable above.
+    return iter(lambda: tuple(islice(iter_items, chunk_size)), ())
 
 
 @dataclass
@@ -57,6 +73,8 @@ class HubspotClient:
         self.api_client = HubSpot()
         self.api_client.access_token = self.private_app_key
 
+    ASSOCIATIONS_BATCH_SIZE = 11000
+
     def get_associations(
         self,
         from_type: AssociationObjectType,
@@ -69,24 +87,27 @@ class HubspotClient:
         :param to_type: Object on the right hand side of the relationship
         :param object_ids: Object ids of the left hand side objects
         """
-        results = self.api_client.crm.associations.batch_api.read(
-            from_object_type=from_type.value,
-            to_object_type=to_type.value,
-            batch_input_public_object_id=BatchInputPublicObjectId(
-                # Dedupe ids in-case we are provided the same one twice
-                inputs=list(set(str(object_id) for object_id in object_ids))
-            ),
-        )
 
         # For reasons unclear, we appear to get duplicate entries in the return
         # values, so we'll use a set to dedupe them
         relations = set()
 
-        for result in results.results:
-            for to_result in result.to:
-                # pylint: disable=protected-access
-                # This just appears to be part of the goofy interface
-                relations.add((result._from.id, to_result.id))
+        # 11k is the maximum we can ask for at once from Hubspot
+        for id_chunk in chunk(object_ids, chunk_size=self.ASSOCIATIONS_BATCH_SIZE):
+            results = self.api_client.crm.associations.batch_api.read(
+                from_object_type=from_type.value,
+                to_object_type=to_type.value,
+                batch_input_public_object_id=BatchInputPublicObjectId(
+                    # Dedupe ids in-case we are provided the same one twice
+                    inputs=list(set(str(object_id) for object_id in id_chunk))
+                ),
+            )
+
+            for result in results.results:
+                for to_result in result.to:
+                    # pylint: disable=protected-access
+                    # This just appears to be part of the goofy interface
+                    relations.add((result._from.id, to_result.id))
 
         return relations
 
