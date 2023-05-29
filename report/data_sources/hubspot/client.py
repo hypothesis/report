@@ -119,6 +119,14 @@ class HubspotClient:
 
         yield from self._get_objects(self.api_client.crm.companies, fields)
 
+    def get_contacts(self, fields: Iterable[Field]) -> Generator:
+        """Get contacts from Hubspot.
+
+        :param fields: A list of fields to get from Hubspot
+        """
+
+        yield from self._get_objects(self.api_client.crm.contacts, fields)
+
     def get_deals(self, fields: Iterable[Field]) -> Generator:
         """Get deals from Hubspot.
 
