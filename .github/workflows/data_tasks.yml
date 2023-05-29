@@ -10,6 +10,7 @@ on:
         required: true
         options:
           - "report/refresh"
+          - "report/refresh_contacts"
           - "report/create_from_scratch"
       Environment:
         type: choice
