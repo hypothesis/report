@@ -3,8 +3,8 @@ from unittest.mock import Mock, call, create_autospec, sentinel
 import pytest
 from h_matchers import Any
 
-from report.data_sources.hubspot_client import Field, HubspotClient
-from report.data_sources.hubspot_sql import export_from_table, import_to_table
+from report.data_sources.hubspot.client import Field, HubspotClient
+from report.data_sources.hubspot.sql import export_from_table, import_to_table
 
 
 class TestSQLMethods:
@@ -85,4 +85,4 @@ class TestSQLMethods:
 
     @pytest.fixture(autouse=True)
     def SQLQuery(self, patch):
-        return patch("report.data_sources.hubspot_sql.SQLQuery")
+        return patch("report.data_sources.hubspot.sql.SQLQuery")

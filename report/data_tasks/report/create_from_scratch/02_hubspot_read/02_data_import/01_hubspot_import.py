@@ -1,8 +1,8 @@
 import os
 from operator import itemgetter
 
-from report.data_sources.hubspot_client import Field, HubspotClient
-from report.data_sources.hubspot_sql import import_to_table
+from report.data_sources.hubspot.client import Field, HubspotClient
+from report.data_sources.hubspot.sql import import_to_table
 
 # The API docs link you here, but it doesn't show the API keys for properties
 # https://knowledge.hubspot.com/companies/hubspot-crm-default-company-properties
