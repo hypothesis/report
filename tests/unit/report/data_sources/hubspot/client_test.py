@@ -11,7 +11,7 @@ from hubspot.crm.associations import (
 )
 from pytest import fixture
 
-from report.data_sources.hubspot_client import Field, HubspotClient
+from report.data_sources.hubspot.client import Field, HubspotClient
 
 
 @dataclass
@@ -244,8 +244,8 @@ class TestHubspotClient:
 
     @fixture
     def BatchInputPublicObjectId(self, patch):
-        return patch("report.data_sources.hubspot_client.BatchInputPublicObjectId")
+        return patch("report.data_sources.hubspot.client.BatchInputPublicObjectId")
 
     @fixture(autouse=True)
     def HubSpot(self, patch):
-        return patch("report.data_sources.hubspot_client.HubSpot")
+        return patch("report.data_sources.hubspot.client.HubSpot")

@@ -1,7 +1,7 @@
 import os
 
-from report.data_sources.hubspot_client import HubspotClient
-from report.data_sources.hubspot_sql import export_from_table
+from report.data_sources.hubspot.client import HubspotClient
+from report.data_sources.hubspot.sql import export_from_table
 
 
 def main(connection, **kwargs):

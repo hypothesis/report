@@ -6,7 +6,7 @@ from typing import Iterable, List
 from data_tasks.sql_query import SQLQuery
 from data_tasks.timer import Timer
 
-from report.data_sources.hubspot_client import Field, HubspotClient
+from report.data_sources.hubspot.client import Field, HubspotClient
 
 
 def import_to_table(connection, table_name, items: List[dict], fields: Iterable[Field]):
