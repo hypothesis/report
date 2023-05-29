@@ -1,30 +1,8 @@
 import os
 from operator import itemgetter
-from typing import Iterable
-
-from data_tasks.sql_query import SQLQuery
-from data_tasks.timer import Timer
 
 from report.data_sources.hubspot_client import Field, HubspotClient
-
-
-def _insert_items(connection, table_name, items, fields: Iterable[Field]):
-    query = SQLQuery(0, f"TRUNCATE {table_name}")
-    query.execute(connection)
-    print(query.dump(indent="    ") + "\n")
-
-    columns = ", ".join([field.key for field in fields])
-    params = ", ".join([f":{field.key}" for field in fields])
-    insert_query = f"INSERT INTO {table_name} ({columns}) VALUES ({params})"
-
-    timer = Timer()
-    with timer.time_it():
-        for item in items:
-            query = SQLQuery(1, insert_query)
-            query.execute(connection, parameters=item)
-
-    print(f"{len(items)} {table_name} loaded in: {timer.duration}")
-
+from report.data_sources.hubspot_sql import import_to_table
 
 # The API docs link you here, but it doesn't show the API keys for properties
 # https://knowledge.hubspot.com/companies/hubspot-crm-default-company-properties
@@ -149,39 +127,48 @@ def main(connection, **kwargs):
     print("Inserting Hubspot company data...")
 
     print("\tOwners...")
-    _insert_items(
-        connection, table_name="hubspot.owners", items=owners, fields=OWNERS_FIELDS
+    import_to_table(
+        connection=connection,
+        table_name="hubspot.owners",
+        items=owners,
+        fields=OWNERS_FIELDS,
     )
 
     print("\tTeams...")
-    _insert_items(
-        connection, table_name="hubspot.teams", items=teams, fields=TEAMS_FIELDS
+    import_to_table(
+        connection=connection,
+        table_name="hubspot.teams",
+        items=teams,
+        fields=TEAMS_FIELDS,
     )
 
     print("\tOwner teams...")
-    _insert_items(
-        connection,
+    import_to_table(
+        connection=connection,
         table_name="hubspot.owner_teams",
         items=owner_teams,
         fields=OWNER_TEAMS_FIELDS,
     )
 
     print("\tCompanies...")
-    _insert_items(
-        connection,
+    import_to_table(
+        connection=connection,
         table_name="hubspot.companies",
         items=companies,
         fields=COMPANY_FIELDS,
     )
 
     print("\tDeals...")
-    _insert_items(
-        connection, table_name="hubspot.deals", items=deals, fields=DEAL_FIELDS
+    import_to_table(
+        connection=connection,
+        table_name="hubspot.deals",
+        items=deals,
+        fields=DEAL_FIELDS,
     )
 
     print("\tCompany deal associations...")
-    _insert_items(
-        connection,
+    import_to_table(
+        connection=connection,
         table_name="hubspot.company_deals",
         items=company_deals,
         fields=COMPANY_DEAL_FIELDS,
