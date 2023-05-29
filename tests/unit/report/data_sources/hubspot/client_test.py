@@ -32,7 +32,12 @@ class TestHubspotClient:
         assert client.api_client.access_token == "api_key"
 
     @pytest.mark.parametrize(
-        "api_method,method", (("companies", "get_companies"), ("deals", "get_deals"))
+        "api_method,method",
+        (
+            ("companies", "get_companies"),
+            ("contacts", "get_contacts"),
+            ("deals", "get_deals"),
+        ),
     )
     def test_object_getters(self, client, api_method, method):
         getattr(client.api_client.crm, api_method).get_all.return_value = [
