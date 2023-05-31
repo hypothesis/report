@@ -3,7 +3,11 @@ import os
 from report.data_sources.hubspot.client import Field, HubspotClient
 from report.data_sources.hubspot.sql import import_to_table
 
-CONTACT_FIELDS = (Field("hs_object_id", "id", mapping=int), Field("email"))
+CONTACT_FIELDS = (
+    Field("hs_object_id", "id", mapping=int),
+    # Lower case the email as we store it to simplify comparisons
+    Field("email", mapping=lambda email: email.lower()),
+)
 
 
 def main(connection, **kwargs):
