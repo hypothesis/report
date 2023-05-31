@@ -10,7 +10,8 @@ CREATE VIEW hubspot.contact_property_update AS (
     -- we will never remove the `Teacher` status from a contact. The upside is
     -- we will update far fewer records, which should happen quicker.
     JOIN lms.users ON
-        contacts.email = users.email
+        -- Emails in the contacts table are already stored as lower case
+        contacts.email = LOWER(users.email)
         -- We definitely want to NOT join onto student information to keep that
         -- out of Hubspot
         AND users.is_teacher = True
