@@ -1,14 +1,18 @@
 import csv
 import json
 import os.path
+import time
 from dataclasses import dataclass
 from enum import Enum
+from http import HTTPStatus
 from typing import Callable, Generator, Iterable, List, Optional, Set
 
 from hubspot import HubSpot
 from hubspot.crm.associations import BatchInputPublicObjectId
+from hubspot.crm.contacts import Filter, FilterGroup, PublicObjectSearchRequest
+from hubspot.crm.objects.exceptions import ApiException
 
-from report.data_sources.chunk import chunk
+from report.data_sources.chunk import chunk, chunk_with_max_len
 
 
 @dataclass
@@ -112,6 +116,55 @@ class HubspotClient:
         """
 
         yield from self._get_objects(self.api_client.crm.contacts, fields)
+
+    def get_contacts_by_email(self, emails, fields: Iterable[Field]):
+        # We can't have more than 100 items in an IN query, we also can't have
+        # more than 3000 chars in our total request.
+        for email_batch in chunk_with_max_len(emails, chunk_size=100, max_chars=2000):
+            yield from self._get_contacts_by_email(
+                email_batch=email_batch, fields=fields, limit=100
+            )
+
+    def _get_contacts_by_email(
+        self, email_batch, fields: Iterable[Field], limit, max_retries=5
+    ):
+        # Pick the largest size we are allowed
+        limit = max(limit, 100)
+
+        # Example of searching here:
+        # https://github.com/HubSpot/sample-apps-search-results-iterating/blob/main/python/cli.py
+        # That demonstrates pagination, which we are hoping we can get away
+        # without because we ask for 100 emails max.
+
+        filter_ = Filter(property_name="email", operator="IN", values=list(email_batch))
+        request = PublicObjectSearchRequest(
+            limit=limit,
+            properties=[field.hs_field for field in fields],
+            filter_groups=[FilterGroup(filters=[filter_])],
+        )
+
+        # Example of the retry mechanism here:
+        # https://github.com/HubSpot/sample-apps-rate-limit/blob/master/python/cli.py
+        # Which has been updated to not end-up with unassigned response object
+        retries = 0
+        while True:
+            try:
+                response = self.api_client.crm.contacts.search_api.do_search(request)
+                break
+            except ApiException as err:
+                if (
+                    retries < max_retries
+                ) and err.status == HTTPStatus.TOO_MANY_REQUESTS:
+                    print("Rate limit exceeded, retrying in 2 seconds...")
+                    time.sleep(2)
+                    retries += 1
+                else:
+                    raise  # Reraise the exception if it's not a rate limit error
+
+        if len(response.results) == limit:
+            print("Potential pagination error! We got the same size as our batch size")
+
+        return [self._map_item(item, fields) for item in response.results]
 
     def get_deals(self, fields: Iterable[Field]) -> Generator:
         """Get deals from Hubspot.
@@ -270,15 +323,18 @@ class HubspotClient:
             )
 
     @classmethod
-    def _get_objects(cls, accessor, fields):
+    def _get_objects(cls, accessor, fields: Iterable[Field]):
         for item in accessor.get_all(properties=[field.hs_field for field in fields]):
-            # Filter and map the requested fields
-            result = {}
-            for field in fields:
-                value = item.properties[field.hs_field] or None
-                if value and field.mapping:
-                    value = field.mapping(value)
+            yield cls._map_item(item, fields)
 
-                result[field.key] = value
+    @classmethod
+    def _map_item(cls, item, fields: Iterable[Field]):
+        result = {}
+        for field in fields:
+            value = item.properties[field.hs_field] or None
+            if value and field.mapping:
+                value = field.mapping(value)
 
-            yield result
+            result[field.key] = value
+
+        return result

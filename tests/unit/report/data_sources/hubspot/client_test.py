@@ -1,5 +1,6 @@
 import json
 from dataclasses import dataclass
+from http import HTTPStatus
 from unittest.mock import MagicMock, call, create_autospec, sentinel
 
 import pytest
@@ -9,6 +10,8 @@ from hubspot.crm.associations import (
     BatchResponsePublicAssociationMulti,
     PublicAssociationMulti,
 )
+from hubspot.crm.contacts import Filter, FilterGroup, PublicObjectSearchRequest
+from hubspot.crm.objects.exceptions import ApiException
 from pytest import fixture
 
 from report.data_sources.hubspot.client import Field, HubspotClient
@@ -108,6 +111,82 @@ class TestHubspotClient:
         )
 
         assert client.api_client.crm.associations.batch_api.read.call_count == 2
+
+    def test_get_contacts_by_email(self, client):
+        result_item = MagicMock(properties={"hs_object_id": 1234})
+        client.api_client.crm.contacts.search_api.do_search.return_value = MagicMock(
+            results=[result_item]
+        )
+
+        result = list(
+            client.get_contacts_by_email(
+                emails=["email@example.com"], fields=[Field("hs_object_id", "id")]
+            )
+        )
+
+        filter_ = Filter(
+            property_name="email", operator="IN", values=["email@example.com"]
+        )
+        client.api_client.crm.contacts.search_api.do_search.assert_called_once_with(
+            PublicObjectSearchRequest(
+                limit=100,
+                properties=["hs_object_id"],
+                filter_groups=[FilterGroup(filters=[filter_])],
+            )
+        )
+        assert result == [{"id": 1234}]
+
+    def test_get_contact_raises_retries_rate_limiting(self, client, time):
+        retry_exception = ApiException(status=HTTPStatus.TOO_MANY_REQUESTS)
+        client.api_client.crm.contacts.search_api.do_search.side_effect = [
+            retry_exception
+        ] * 5 + [MagicMock(results=[MagicMock(properties={"id": 1234})])]
+
+        result = list(
+            client.get_contacts_by_email(
+                emails=["email@example.com"], fields=[Field("id")]
+            )
+        )
+
+        assert client.api_client.crm.contacts.search_api.do_search.call_count == 6
+        time.sleep.assert_has_calls([call(2)] * 5)
+        assert result == [{"id": 1234}]
+
+    @pytest.mark.usefixtures("time")
+    def test_get_contact_raises_with_infinite_rate_limiting(self, client):
+        client.api_client.crm.contacts.search_api.do_search.side_effect = ApiException(
+            status=HTTPStatus.TOO_MANY_REQUESTS
+        )
+
+        with pytest.raises(ApiException):
+            list(
+                client.get_contacts_by_email(
+                    emails=["email@example.com"], fields=[Field("id")]
+                )
+            )
+
+    def test_get_contact_with_100_results(self, client):
+        # This is mostly to hit some coverage, we don't actually make any
+        # assertions about the result
+        client.api_client.crm.contacts.search_api.do_search.return_value = MagicMock(
+            results=[MagicMock(properties={"id": 1234})] * 100
+        )
+
+        list(
+            client.get_contacts_by_email(
+                emails=["email@example.com"], fields=[Field("id")]
+            )
+        )
+
+    def test_get_contact_raises_random_exceptions(self, client):
+        client.api_client.crm.contacts.search_api.do_search.side_effect = ValueError
+
+        with pytest.raises(ValueError):
+            list(
+                client.get_contacts_by_email(
+                    emails=["email@example.com"], fields=[Field("id")]
+                )
+            )
 
     def test_get_owners(self, client):
         owner = MagicMock()
@@ -215,6 +294,10 @@ class TestHubspotClient:
             {"owner_id": 456, "team_id": 321},
         ]
         assert teams == [{"id": 321, "key": "value"}]
+
+    @pytest.fixture
+    def time(self, patch):
+        return patch("report.data_sources.hubspot.client.time")
 
     @fixture
     def csv_file(self, tmp_path):
