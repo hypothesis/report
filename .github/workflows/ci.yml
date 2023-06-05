@@ -80,7 +80,7 @@ jobs:
           restore-keys: |
             tests-${{ runner.os }}-tox-
       - name: Create test database
-        run: psql -U postgres -h localhost -p 5436 -c 'CREATE DATABASE report_test'
+        run: psql -U postgres -h localhost -p 5436 -c 'CREATE DATABASE report_tests'
       - run: python -m pip install 'tox<4'
       - run: tox -e tests
       - name: Upload coverage file
@@ -131,6 +131,6 @@ jobs:
           restore-keys: |
             functests-${{ runner.os }}-tox-
       - name: Create test database
-        run: psql -U postgres -h localhost -p 5436 -c 'CREATE DATABASE report_test'
+        run: psql -U postgres -h localhost -p 5436 -c 'CREATE DATABASE report_functests'
       - run: python -m pip install 'tox<4'
       - run: tox -e functests
