@@ -24,3 +24,12 @@ ANALYSE lms.group_roles;
 
 REFRESH MATERIALIZED VIEW CONCURRENTLY lms.organization_roles;
 ANALYSE lms.organization_roles;
+
+REFRESH MATERIALIZED VIEW CONCURRENTLY lms.assignments;
+ANALYSE lms.assignments;
+
+REFRESH MATERIALIZED VIEW CONCURRENTLY lms.organization_assignments;
+ANALYSE lms.organization_assignments;
+
+REFRESH MATERIALIZED VIEW CONCURRENTLY lms.organization_assignment_types;
+ANALYSE lms.organization_assignment_types;

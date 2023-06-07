@@ -27,6 +27,7 @@ CREATE TYPE report.academic_timescale AS ENUM (
     ) FROM SERVER "{{server_name}}" INTO {{schema_name}};
 
     IMPORT FOREIGN SCHEMA "report" LIMIT TO (
+        assignments,
         events,
         groups,
         group_bubbled_activity,
@@ -35,6 +36,7 @@ CREATE TYPE report.academic_timescale AS ENUM (
         group_roles,
         organization,
         organization_activity,
+        organization_assignments,
         organization_roles,
         users,
         users_sensitive
