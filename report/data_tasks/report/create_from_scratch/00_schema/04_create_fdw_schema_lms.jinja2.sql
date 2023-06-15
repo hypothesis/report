@@ -15,6 +15,11 @@ CREATE TYPE report.academic_timescale AS ENUM (
     'week', 'month', 'semester', 'academic_year', 'trailing_year', 'all_time'
 );
 
+DROP TYPE IF EXISTS report.annotation_sub_type CASCADE;
+CREATE TYPE report.annotation_sub_type AS ENUM (
+    'annotation', 'reply', 'highlight', 'page_note'
+);
+
 -- Import required tables
 
 {% macro import_lms(server_name, schema_name) %}
@@ -32,11 +37,13 @@ CREATE TYPE report.academic_timescale AS ENUM (
         groups,
         group_bubbled_activity,
         group_bubbled_counts,
+        group_bubbled_type_counts,
         group_map,
         group_roles,
         organization,
         organization_activity,
         organization_assignments,
+        organization_annotation_types,
         organization_roles,
         users,
         users_sensitive
