@@ -9,7 +9,8 @@ CREATE MATERIALIZED VIEW lms.users AS (
             email,
             username,
             is_teacher,
-            registered_date
+            first_active_date,
+            last_active_date
         FROM lms_us.users
 
         UNION ALL
@@ -20,7 +21,8 @@ CREATE MATERIALIZED VIEW lms.users AS (
             email,
             username,
             is_teacher,
-            registered_date
+            first_active_date,
+            last_active_date
         FROM lms_ca.users
     ) AS data
     ORDER BY id
