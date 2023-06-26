@@ -265,8 +265,6 @@ class HubspotClient:
             {
                 "fileName": os.path.basename(csv_file),
                 "fileFormat": "CSV",
-                # We don't have any dates, but if we do, use ISO ordering
-                "dateFormat": "YEAR_MONTH_DAY",
                 "fileImportPage": {
                     "hasHeader": True,
                     # All the column mappings should be the same, but just in
@@ -284,7 +282,12 @@ class HubspotClient:
             for csv_file in csv_files
         ]
 
-        return {"name": job_name, "files": files}
+        return {
+            "name": job_name,
+            "files": files,
+            # We don't have any dates, but if we do, use ISO ordering
+            "dateFormat": "YEAR_MONTH_DAY",
+        }
 
     @classmethod
     def _column_mapping_from_csv(cls, csv_file, object_type, primary_key_field):

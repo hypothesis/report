@@ -246,7 +246,6 @@ class TestHubspotClient:
                         {
                             "fileName": "file.csv",
                             "fileFormat": "CSV",
-                            "dateFormat": "YEAR_MONTH_DAY",
                             "fileImportPage": {
                                 "hasHeader": True,
                                 "columnMappings": [
@@ -272,6 +271,7 @@ class TestHubspotClient:
                             },
                         }
                     ],
+                    "dateFormat": "YEAR_MONTH_DAY",
                 }
             ),
             files=[csv_file],
