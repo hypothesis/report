@@ -35,6 +35,8 @@ CREATE TYPE report.annotation_sub_type AS ENUM (
         assignments,
         events,
         groups,
+        group_annotation_counts,
+        group_bubbled_annotation_counts,
         group_bubbled_activity,
         group_bubbled_counts,
         group_bubbled_type_counts,
@@ -45,6 +47,7 @@ CREATE TYPE report.annotation_sub_type AS ENUM (
         organization_assignments,
         organization_annotation_types,
         organization_roles,
+        user_annotation_counts,
         users,
         users_sensitive
     ) FROM SERVER "{{server_name}}" INTO {{schema_name}};

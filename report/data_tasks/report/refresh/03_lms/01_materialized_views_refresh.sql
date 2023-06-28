@@ -22,6 +22,9 @@ ANALYSE lms.organization_group;
 REFRESH MATERIALIZED VIEW CONCURRENTLY lms.group_bubbled_type_counts;
 ANALYSE lms.group_bubbled_type_counts;
 
+REFRESH MATERIALIZED VIEW CONCURRENTLY lms.group_bubbled_annotation_counts;
+ANALYSE lms.group_bubbled_annotation_counts;
+
 REFRESH MATERIALIZED VIEW CONCURRENTLY lms.users;
 ANALYSE lms.users;
 
@@ -30,6 +33,9 @@ ANALYSE lms.group_roles;
 
 REFRESH MATERIALIZED VIEW CONCURRENTLY lms.organization_roles;
 ANALYSE lms.organization_roles;
+
+REFRESH MATERIALIZED VIEW CONCURRENTLY lms.user_annotation_counts;
+ANALYSE lms.user_annotation_counts;
 
 REFRESH MATERIALIZED VIEW CONCURRENTLY lms.assignments;
 ANALYSE lms.assignments;
