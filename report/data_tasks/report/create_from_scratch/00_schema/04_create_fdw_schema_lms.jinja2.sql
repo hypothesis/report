@@ -7,7 +7,11 @@ CREATE TYPE report.roles AS ENUM (
 
 DROP TYPE IF EXISTS report.event_type CASCADE;
 CREATE TYPE report.event_type AS ENUM (
-    'configured_launch', 'deep_linking', 'audit', 'edited_assignment'
+    'configured_launch',
+    'deep_linking',
+    'audit',
+    'edited_assignment',
+    'submission'
 );
 
 DROP TYPE IF EXISTS report.academic_timescale CASCADE;
