@@ -39,7 +39,6 @@ CREATE TYPE report.annotation_sub_type AS ENUM (
         group_bubbled_annotation_counts,
         group_bubbled_activity,
         group_bubbled_counts,
-        group_bubbled_type_counts,
         group_map,
         group_roles,
         organization,
