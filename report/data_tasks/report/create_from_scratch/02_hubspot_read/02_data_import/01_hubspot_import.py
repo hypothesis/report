@@ -9,8 +9,8 @@ from report.data_sources.hubspot.sql import import_to_table
 # Use `api_client.get_properties(api_client.ObjectType.COMPANY)` to get details
 COMPANY_FIELDS = (
     Field("hs_object_id", "id", mapping=int),
-    Field("name"),
-    Field("lms_organization_id"),
+    Field("name", mapping=str),
+    Field("lms_organization_id", mapping=str),
     # Owners
     Field("hubspot_owner_id", "company_owner_id", mapping=int),
     Field("owner__success", "success_owner_id", mapping=int),
@@ -21,7 +21,9 @@ COMPANY_FIELDS = (
     Field("current_deal__services_start", "current_deal_services_start"),
     Field("current_deal__services_end", "current_deal_services_end"),
     Field("current_deal__amount", "current_deal_amount", mapping=float),
-    Field("current_deal__users_contracted", "current_deal_users_contracted"),
+    Field(
+        "current_deal__users_contracted", "current_deal_users_contracted", mapping=int
+    ),
 )
 
 # The API docs link you here, but it doesn't show the API keys for properties
@@ -29,7 +31,7 @@ COMPANY_FIELDS = (
 # Use `api_client.get_properties(api_client.ObjectType.DEAL)` to get details
 DEAL_FIELDS = (
     Field("hs_object_id", "id", mapping=int),
-    Field("dealname", "name"),
+    Field("dealname", "name", mapping=str),
     Field("services_start"),
     Field("services_end"),
     # We really should have currency, but I can't work out the name for it
@@ -71,11 +73,11 @@ def filter_owner(owner):
 
 OWNERS_FIELDS = (
     Field("id"),
-    Field("first_name"),
-    Field("last_name"),
-    Field("name"),
-    Field("email"),
-    Field("archived"),
+    Field("first_name", mapping=str),
+    Field("last_name", mapping=str),
+    Field("name", mapping=str),
+    Field("email", mapping=str),
+    Field("archived", mapping=bool),
 )
 
 
