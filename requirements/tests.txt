@@ -6,8 +6,6 @@
 #
 alembic==1.11.1
     # via -r requirements/prod.txt
-attrs==22.1.0
-    # via pytest
 build==0.9.0
     # via pip-tools
 certifi==2022.12.7
@@ -87,7 +85,7 @@ psycopg2==2.9.5
     #   data-tasks
 pyparsing==3.0.9
     # via packaging
-pytest==7.2.2
+pytest==7.4.0
     # via -r requirements/tests.in
 python-dateutil==2.8.2
     # via

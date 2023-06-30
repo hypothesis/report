@@ -10,11 +10,6 @@ alembic==1.11.1
     #   -r requirements/tests.txt
 astroid==2.13.5
     # via pylint
-attrs==22.1.0
-    # via
-    #   -r requirements/functests.txt
-    #   -r requirements/tests.txt
-    #   pytest
 build==0.9.0
     # via
     #   -r requirements/functests.txt
@@ -161,7 +156,7 @@ pyparsing==3.0.9
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
     #   packaging
-pytest==7.2.2
+pytest==7.4.0
     # via
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
