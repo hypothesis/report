@@ -46,7 +46,7 @@ importlib-resources==5.12.0
     #   -r requirements/prod.txt
     #   alembic
     #   data-tasks
-ipython==8.12.0
+ipython==8.12.2
     # via -r requirements/dev.in
 jedi==0.18.1
     # via ipython
