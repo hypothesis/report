@@ -31,7 +31,7 @@ h-matchers==1.2.15
     # via -r requirements/functests.in
 httpretty==1.1.4
     # via -r requirements/functests.in
-hubspot-api-client==7.3.1
+hubspot-api-client==8.0.0
     # via -r requirements/prod.txt
 importlib-metadata==5.0.0
     # via
