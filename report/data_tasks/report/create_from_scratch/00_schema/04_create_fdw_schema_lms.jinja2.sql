@@ -48,6 +48,7 @@ CREATE TYPE report.annotation_sub_type AS ENUM (
         organization,
         organization_activity,
         organization_assignments,
+        organization_annotation_counts,
         organization_annotation_types,
         organization_roles,
         user_annotation_counts,
