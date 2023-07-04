@@ -42,3 +42,6 @@ ANALYSE lms.organization_assignments;
 
 REFRESH MATERIALIZED VIEW CONCURRENTLY lms.organization_assignment_types;
 ANALYSE lms.organization_assignment_types;
+
+REFRESH MATERIALIZED VIEW CONCURRENTLY lms.organization_assignment_counts;
+ANALYSE lms.organization_assignment_counts;
