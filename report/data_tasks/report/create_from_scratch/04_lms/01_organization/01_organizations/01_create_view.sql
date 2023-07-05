@@ -11,7 +11,7 @@ CREATE MATERIALIZED VIEW lms.organizations AS (
                 created,
                 updated,
                 enabled
-            FROM lms_us.organization
+            FROM lms_us.organizations
 
             UNION ALL
 
@@ -23,7 +23,7 @@ CREATE MATERIALIZED VIEW lms.organizations AS (
                 created,
                 updated,
                 enabled
-            FROM lms_ca.organization
+            FROM lms_ca.organizations
         ),
 
         hubspot_names AS (
