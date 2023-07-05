@@ -1,5 +1,3 @@
--- Once this has run once, it can be removed
-DROP TABLE IF EXISTS hubspot.companies CASCADE;
 DROP TABLE IF EXISTS hubspot.companies_raw CASCADE;
 
 CREATE TABLE hubspot.companies_raw (
