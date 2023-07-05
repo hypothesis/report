@@ -4,8 +4,8 @@ ANALYSE lms.organizations;
 REFRESH MATERIALIZED VIEW CONCURRENTLY lms.organization_activity;
 ANALYSE lms.organization_activity;
 
-REFRESH MATERIALIZED VIEW CONCURRENTLY lms.organization_annotation_types;
-ANALYSE lms.organization_annotation_types;
+REFRESH MATERIALIZED VIEW CONCURRENTLY lms.organization_annotation_counts;
+ANALYSE lms.organization_annotation_counts;
 
 REFRESH MATERIALIZED VIEW CONCURRENTLY lms.events;
 ANALYSE lms.events;
@@ -40,5 +40,5 @@ ANALYSE lms.assignments;
 REFRESH MATERIALIZED VIEW CONCURRENTLY lms.organization_assignments;
 ANALYSE lms.organization_assignments;
 
-REFRESH MATERIALIZED VIEW CONCURRENTLY lms.organization_annotation_counts;
-ANALYSE lms.organization_annotation_counts;
+REFRESH MATERIALIZED VIEW CONCURRENTLY lms.organization_assignment_types;
+ANALYSE lms.organization_assignment_types;
