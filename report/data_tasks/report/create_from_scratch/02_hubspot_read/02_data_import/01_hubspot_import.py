@@ -11,6 +11,7 @@ COMPANY_FIELDS = (
     Field("hs_object_id", "id", mapping=int),
     Field("name", mapping=str),
     Field("lms_organization_id", mapping=str),
+    Field("lifecyclestage", "life_cycle_stage", mapping=str),
     # Owners
     Field("hubspot_owner_id", "company_owner_id", mapping=int),
     Field("owner__success", "success_owner_id", mapping=int),
@@ -155,7 +156,7 @@ def main(connection, **kwargs):
     print("\tCompanies...")
     import_to_table(
         connection=connection,
-        table_name="hubspot.companies",
+        table_name="hubspot.companies_raw",
         items=companies,
         fields=COMPANY_FIELDS,
     )
