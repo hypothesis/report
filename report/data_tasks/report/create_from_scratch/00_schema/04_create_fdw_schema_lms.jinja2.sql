@@ -31,10 +31,6 @@ CREATE TYPE report.annotation_sub_type AS ENUM (
 
     CREATE SCHEMA {{schema_name}} AUTHORIZATION "{{db_user}}";
 
-    IMPORT FOREIGN SCHEMA "public" LIMIT TO (
-        organization
-    ) FROM SERVER "{{server_name}}" INTO {{schema_name}};
-
     IMPORT FOREIGN SCHEMA "report" LIMIT TO (
         assignments,
         events,
@@ -45,7 +41,7 @@ CREATE TYPE report.annotation_sub_type AS ENUM (
         group_bubbled_counts,
         group_map,
         group_roles,
-        organization,
+        organizations,
         organization_activity,
         organization_assignments,
         organization_annotation_counts,
