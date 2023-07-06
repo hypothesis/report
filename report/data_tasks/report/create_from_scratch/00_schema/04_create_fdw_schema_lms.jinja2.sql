@@ -11,7 +11,8 @@ CREATE TYPE report.event_type AS ENUM (
     'deep_linking',
     'audit',
     'edited_assignment',
-    'submission'
+    'submission',
+    'grade',
 );
 
 DROP TYPE IF EXISTS report.academic_timescale CASCADE;
