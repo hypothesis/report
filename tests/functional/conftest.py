@@ -6,7 +6,7 @@ from sqlalchemy.orm import sessionmaker
 
 from report import db
 
-TEST_SETTINGS = {"database_url": os.environ["TEST_DATABASE_URL"]}
+TEST_SETTINGS = {"database_url": os.environ["DATABASE_URL"]}
 
 TEST_ENVIRONMENT = {"DATABASE_URL": TEST_SETTINGS["database_url"]}
 
