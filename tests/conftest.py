@@ -6,7 +6,7 @@ import pytest
 
 from report import db
 
-TEST_SETTINGS = {"database_url": os.environ["TEST_DATABASE_URL"]}
+TEST_SETTINGS = {"database_url": os.environ["DATABASE_URL"]}
 
 
 def _autopatcher(request, target, **kwargs):
