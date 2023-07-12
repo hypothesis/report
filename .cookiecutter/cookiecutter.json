@@ -8,6 +8,7 @@
     "report/__main__.py",
     "report/app.py",
     "report/core.py",
+    "tests/factories/*",
     "tests/unit/report/core_test.py"
   ],
   "extra_context": {
