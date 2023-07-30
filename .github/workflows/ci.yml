@@ -66,6 +66,8 @@ jobs:
         image: postgres:11.5-alpine
         ports:
         - 5436:5432
+        env:
+          POSTGRES_HOST_AUTH_METHOD: trust
     steps:
       - uses: actions/checkout@v3
       - name: Install Python
@@ -117,6 +119,8 @@ jobs:
         image: postgres:11.5-alpine
         ports:
         - 5436:5432
+        env:
+          POSTGRES_HOST_AUTH_METHOD: trust
     steps:
       - uses: actions/checkout@v3
       - name: Install Python
