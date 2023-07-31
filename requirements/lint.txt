@@ -39,10 +39,11 @@ exceptiongroup==1.1.0
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
     #   pytest
-factory-boy==3.2.1
+factory-boy==3.3.0
     # via
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
+    #   pytest-factoryboy
 faker==15.3.2
     # via
     #   -r requirements/functests.txt
@@ -80,6 +81,11 @@ importlib-resources==5.12.0
     #   -r requirements/tests.txt
     #   alembic
     #   data-tasks
+inflection==0.5.1
+    # via
+    #   -r requirements/functests.txt
+    #   -r requirements/tests.txt
+    #   pytest-factoryboy
 iniconfig==1.1.1
     # via
     #   -r requirements/functests.txt
@@ -160,6 +166,11 @@ pytest==7.4.0
     # via
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
+    #   pytest-factoryboy
+pytest-factoryboy==2.5.1
+    # via
+    #   -r requirements/functests.txt
+    #   -r requirements/tests.txt
 python-dateutil==2.8.2
     # via
     #   -r requirements/functests.txt
@@ -215,6 +226,7 @@ typing-extensions==4.6.3
     #   alembic
     #   astroid
     #   pylint
+    #   pytest-factoryboy
 urllib3==1.26.12
     # via
     #   -r requirements/functests.txt

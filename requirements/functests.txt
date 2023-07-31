@@ -19,8 +19,10 @@ data-tasks==0.0.3
     # via -r requirements/prod.txt
 exceptiongroup==1.1.0
     # via pytest
-factory-boy==3.2.1
-    # via -r requirements/functests.in
+factory-boy==3.3.0
+    # via
+    #   -r requirements/functests.in
+    #   pytest-factoryboy
 faker==15.3.2
     # via factory-boy
 greenlet==2.0.1
@@ -44,6 +46,8 @@ importlib-resources==5.12.0
     #   -r requirements/prod.txt
     #   alembic
     #   data-tasks
+inflection==0.5.1
+    # via pytest-factoryboy
 iniconfig==1.1.1
     # via pytest
 jinja2==3.1.2
@@ -82,6 +86,10 @@ psycopg2==2.9.5
 pyparsing==3.0.9
     # via packaging
 pytest==7.4.0
+    # via
+    #   -r requirements/functests.in
+    #   pytest-factoryboy
+pytest-factoryboy==2.5.1
     # via -r requirements/functests.in
 python-dateutil==2.8.2
     # via
@@ -117,6 +125,7 @@ typing-extensions==4.6.3
     # via
     #   -r requirements/prod.txt
     #   alembic
+    #   pytest-factoryboy
 urllib3==1.26.12
     # via
     #   -r requirements/prod.txt
