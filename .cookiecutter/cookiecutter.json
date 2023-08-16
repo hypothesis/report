@@ -4,10 +4,12 @@
   "directory": "pyapp",
   "ignore": [
     "bin/logger",
+    "conf/alembic.ini",
     "conf/supervisord.conf",
     "report/__main__.py",
     "report/app.py",
     "report/core.py",
+    "report/migrations/*",
     "tests/unit/report/core_test.py"
   ],
   "extra_context": {
