@@ -41,7 +41,7 @@ importlib-metadata==5.0.0
     #   alembic
     #   data-tasks
     #   pip-sync-faster
-importlib-resources==5.12.0
+importlib-resources==6.0.1
     # via
     #   -r requirements/prod.txt
     #   alembic
