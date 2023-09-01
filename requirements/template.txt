@@ -40,7 +40,7 @@ pep517==0.13.0
     # via build
 pip-sync-faster==0.0.3
     # via -r requirements/template.in
-pip-tools==6.13.0
+pip-tools==7.3.0
     # via
     #   -r requirements/template.in
     #   pip-sync-faster
@@ -66,6 +66,7 @@ tomli==2.0.1
     # via
     #   build
     #   pep517
+    #   pip-tools
 typing-extensions==4.7.1
     # via rich
 urllib3==1.26.12
