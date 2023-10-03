@@ -8,7 +8,7 @@ alembic==1.12.0
     # via
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
-astroid==2.13.5
+astroid==3.0.0
     # via pylint
 build==0.9.0
     # via
@@ -26,8 +26,10 @@ click==8.1.3
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
     #   pip-tools
-coverage[toml]==7.3.0
-    # via -r requirements/tests.txt
+coverage[toml]==7.3.1
+    # via
+    #   -r requirements/tests.txt
+    #   pytest-cov
 data-tasks==0.0.3
     # via
     #   -r requirements/functests.txt
@@ -98,8 +100,6 @@ jinja2==3.1.2
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
     #   data-tasks
-lazy-object-proxy==1.8.0
-    # via astroid
 mako==1.2.4
     # via
     #   -r requirements/functests.txt
@@ -155,7 +155,7 @@ pycodestyle==2.10.0
     # via -r requirements/lint.in
 pydocstyle==6.3.0
     # via -r requirements/lint.in
-pylint==2.15.10
+pylint==3.0.0
     # via -r requirements/lint.in
 pyparsing==3.0.9
     # via
@@ -166,7 +166,18 @@ pytest==7.4.2
     # via
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
+    #   pytest-cov
     #   pytest-factoryboy
+pytest-cov==4.1.0
+    # via
+    #   -r requirements/tests.txt
+    #   pytest-cover
+pytest-cover==3.0.0
+    # via
+    #   -r requirements/tests.txt
+    #   pytest-coverage
+pytest-coverage==0.0
+    # via -r requirements/tests.txt
 pytest-factoryboy==2.5.1
     # via
     #   -r requirements/functests.txt
@@ -240,8 +251,6 @@ wheel==0.38.4
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
     #   pip-tools
-wrapt==1.14.1
-    # via astroid
 zipp==3.10.0
     # via
     #   -r requirements/functests.txt
