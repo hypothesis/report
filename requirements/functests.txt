@@ -128,7 +128,7 @@ typing-extensions==4.6.3
     #   alembic
     #   pytest-factoryboy
     #   sqlalchemy
-urllib3==1.26.17
+urllib3==1.26.18
     # via
     #   -r prod.txt
     #   hubspot-api-client

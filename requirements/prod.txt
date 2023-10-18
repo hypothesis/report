@@ -60,7 +60,7 @@ typing-extensions==4.6.3
     # via
     #   alembic
     #   sqlalchemy
-urllib3==1.26.17
+urllib3==1.26.18
     # via
     #   hubspot-api-client
     #   sentry-sdk
