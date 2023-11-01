@@ -85,7 +85,7 @@ pip-tools==7.3.0
     #   pip-sync-faster
 prompt-toolkit==3.0.32
     # via ipython
-psycopg2==2.9.5
+psycopg2==2.9.9
     # via
     #   -r prod.txt
     #   data-tasks
