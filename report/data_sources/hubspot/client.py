@@ -14,6 +14,8 @@ from hubspot.crm.objects.exceptions import ApiException
 
 from report.data_sources.chunk import chunk, chunk_with_max_len
 
+RATE_LIMIT_SECONDS = 2
+
 
 @dataclass
 class Field:
@@ -155,8 +157,10 @@ class HubspotClient:
                 if (
                     retries < max_retries
                 ) and err.status == HTTPStatus.TOO_MANY_REQUESTS:
-                    print("Rate limit exceeded, retrying in 2 seconds...")
-                    time.sleep(2)
+                    print(
+                        f"Rate limit exceeded, retrying in {RATE_LIMIT_SECONDS} seconds..."
+                    )
+                    time.sleep(RATE_LIMIT_SECONDS)
                     retries += 1
                 else:
                     raise  # Reraise the exception if it's not a rate limit error
