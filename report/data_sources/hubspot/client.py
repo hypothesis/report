@@ -14,7 +14,7 @@ from hubspot.crm.objects.exceptions import ApiException
 
 from report.data_sources.chunk import chunk, chunk_with_max_len
 
-RATE_LIMIT_SECONDS = 2
+RATE_LIMIT_SECONDS = 5
 
 
 @dataclass

@@ -14,7 +14,7 @@ from hubspot.crm.contacts import Filter, FilterGroup, PublicObjectSearchRequest
 from hubspot.crm.objects.exceptions import ApiException
 from pytest import fixture
 
-from report.data_sources.hubspot.client import Field, HubspotClient
+from report.data_sources.hubspot.client import RATE_LIMIT_SECONDS, Field, HubspotClient
 
 
 @dataclass
@@ -149,7 +149,7 @@ class TestHubspotClient:
         )
 
         assert client.api_client.crm.contacts.search_api.do_search.call_count == 6
-        time.sleep.assert_has_calls([call(2)] * 5)
+        time.sleep.assert_has_calls([call(RATE_LIMIT_SECONDS)] * 5)
         assert result == [{"id": 1234}]
 
     @pytest.mark.usefixtures("time")
