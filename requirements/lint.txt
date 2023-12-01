@@ -78,7 +78,7 @@ importlib-metadata==5.0.0
     #   alembic
     #   data-tasks
     #   pip-sync-faster
-importlib-resources==6.1.0
+importlib-resources==6.1.1
     # via
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
