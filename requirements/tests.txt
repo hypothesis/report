@@ -91,7 +91,7 @@ psycopg2==2.9.9
     #   data-tasks
 pyparsing==3.0.9
     # via packaging
-pytest==7.4.2
+pytest==7.4.3
     # via
     #   -r requirements/tests.in
     #   pytest-cov
