@@ -69,7 +69,7 @@ markupsafe==2.1.1
     #   -r requirements/prod.txt
     #   jinja2
     #   mako
-newrelic==8.8.1
+newrelic==9.2.0
     # via -r requirements/prod.txt
 packaging==21.3
     # via
