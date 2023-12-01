@@ -114,7 +114,7 @@ markupsafe==2.1.1
     #   mako
 mccabe==0.7.0
     # via pylint
-newrelic==8.8.1
+newrelic==9.2.0
     # via
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
