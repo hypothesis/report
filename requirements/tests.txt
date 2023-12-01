@@ -4,7 +4,7 @@
 #
 #    pip-compile --allow-unsafe requirements/tests.in
 #
-alembic==1.12.0
+alembic==1.12.1
     # via -r requirements/prod.txt
 build==0.9.0
     # via pip-tools
