@@ -338,7 +338,7 @@ class HubspotClient:
     def _map_item(cls, item, fields: Iterable[Field]):
         result = {}
         for field in fields:
-            value = item.properties[field.hs_field] or None
+            value = item.properties.get(field.hs_field) or None
             if value and field.mapping:
                 value = field.mapping(value)
 
