@@ -67,7 +67,7 @@ httpretty==1.1.4
     # via
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
-hubspot-api-client==8.1.1
+hubspot-api-client==8.2.0
     # via
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
