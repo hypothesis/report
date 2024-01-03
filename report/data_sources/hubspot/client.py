@@ -3,6 +3,7 @@ import json
 import os.path
 import time
 from dataclasses import dataclass
+from datetime import datetime
 from enum import Enum
 from http import HTTPStatus
 from typing import Callable, Generator, Iterable, List, Optional, Set
@@ -15,6 +16,20 @@ from hubspot.crm.objects.exceptions import ApiException
 from report.data_sources.chunk import chunk, chunk_with_max_len
 
 RATE_LIMIT_SECONDS = 5
+
+
+def date_or_timestamp(value):
+    """
+    Format either timestamp or already formatted dates as YYYY-MM-DD.
+
+    We seem to be getting different formats for the same fields,
+    coerce them to always be string formated dates.
+    """
+    try:
+        return datetime.fromtimestamp(int(value) / 1000).strftime("%Y-%m-%d")
+    except ValueError:
+        # Date is already formatted, return it verbatim
+        return value
 
 
 @dataclass
