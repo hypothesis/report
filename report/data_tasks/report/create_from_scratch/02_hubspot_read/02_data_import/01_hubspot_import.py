@@ -1,7 +1,7 @@
 import os
 from operator import itemgetter
 
-from report.data_sources.hubspot.client import Field, HubspotClient
+from report.data_sources.hubspot.client import Field, HubspotClient, date_or_timestamp
 from report.data_sources.hubspot.sql import import_to_table
 
 # The API docs link you here, but it doesn't show the API keys for properties
@@ -16,8 +16,14 @@ COMPANY_FIELDS = (
     Field("hubspot_owner_id", "company_owner_id", mapping=int),
     Field("owner__success", "success_owner_id", mapping=int),
     # Cohort
-    Field("cohort__pilot_first_date", "cohort_pilot_first_date"),
-    Field("cohort__subscription_first_date", "cohort_subscription_first_date"),
+    Field(
+        "cohort__pilot_first_date", "cohort_pilot_first_date", mapping=date_or_timestamp
+    ),
+    Field(
+        "cohort__subscription_first_date",
+        "cohort_subscription_first_date",
+        mapping=date_or_timestamp,
+    ),
     # Deals
     Field("current_deal__services_start", "current_deal_services_start"),
     Field("current_deal__services_end", "current_deal_services_end"),

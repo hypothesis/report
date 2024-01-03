@@ -14,12 +14,24 @@ from hubspot.crm.contacts import Filter, FilterGroup, PublicObjectSearchRequest
 from hubspot.crm.objects.exceptions import ApiException
 from pytest import fixture
 
-from report.data_sources.hubspot.client import RATE_LIMIT_SECONDS, Field, HubspotClient
+from report.data_sources.hubspot.client import (
+    RATE_LIMIT_SECONDS,
+    Field,
+    HubspotClient,
+    date_or_timestamp,
+)
 
 
 @dataclass
 class FakeApiObject:
     properties: dict
+
+
+@pytest.mark.parametrize(
+    "value,expected", [("2019-03-01", "2019-03-01"), ("1551398400000", "2019-03-01")]
+)
+def test_date_or_timestamp(value, expected):
+    assert date_or_timestamp(value) == expected
 
 
 class TestField:
