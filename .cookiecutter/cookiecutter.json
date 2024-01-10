@@ -17,7 +17,7 @@
     "package_name": "report",
     "slug": "report",
     "short_description": "The internal global reporting product for Hypothesis.",
-    "python_version": "3.8.16",
+    "python_version": "3.11.7",
     "github_owner": "hypothesis",
     "visibility": "public",
     "copyright_holder": "Hypothesis",

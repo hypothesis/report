@@ -1,6 +1,6 @@
 # We need to match the version inside the metabase image in order for the
 # libraries which Python is built against to exist
-FROM python:3.8.18-alpine3.17 as python
+FROM python:3.11.7-alpine3.19 as python
 
 # We'll build/install all python dependencies in the python image
 COPY requirements/prod.txt ./
@@ -20,11 +20,11 @@ FROM metabase/metabase:v0.45.4.3
 # The metabase image is based on a newer alpine and the python package there
 # won't point to the exact version we need.
 COPY --from=python /usr/local/bin/python3 /usr/local/bin/python3
-COPY --from=python /usr/local/bin/python3.8 /usr/local/bin/python3.8
+COPY --from=python /usr/local/bin/python3.11 /usr/local/bin/python3.11
 COPY --from=python /usr/local/bin/python /usr/local/bin/python
 
-COPY --from=python /usr/local/lib/python3.8 /usr/local/lib/python3.8
-COPY --from=python /usr/local/lib/libpython3.8.so.1.0 /usr/local/lib/libpython3.8.so.1.0
+COPY --from=python /usr/local/lib/python3.11 /usr/local/lib/python3.11
+COPY --from=python /usr/local/lib/libpython3.11.so.1.0 /usr/local/lib/libpython3.11.so.1.0
 COPY --from=python /usr/local/lib/libpython3.so /usr/local/lib/libpython3.so
 
 # Make sure various scripts we use from Python packages are available
