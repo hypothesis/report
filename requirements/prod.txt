@@ -30,7 +30,7 @@ markupsafe==2.1.3
     # via
     #   jinja2
     #   mako
-newrelic==9.4.0
+newrelic==9.6.0
     # via -r requirements/prod.in
 psycopg2==2.9.9
     # via
