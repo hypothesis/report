@@ -61,7 +61,7 @@ markupsafe==2.1.3
     #   mako
 matplotlib-inline==0.1.6
     # via ipython
-newrelic==9.6.0
+newrelic==9.7.0
     # via -r requirements/prod.txt
 packaging==23.2
     # via build
