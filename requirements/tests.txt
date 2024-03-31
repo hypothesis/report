@@ -90,7 +90,7 @@ pytest==8.0.0
     #   -r requirements/tests.in
     #   pytest-cov
     #   pytest-factoryboy
-pytest-cov==4.1.0
+pytest-cov==5.0.0
     # via -r requirements/tests.in
 pytest-factoryboy==2.6.0
     # via -r requirements/tests.in
