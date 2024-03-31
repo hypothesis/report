@@ -29,7 +29,6 @@ click==8.1.7
 coverage[toml]==7.4.0
     # via
     #   -r requirements/tests.txt
-    #   coverage
     #   pytest-cov
 data-tasks==0.0.3
     # via
@@ -134,7 +133,7 @@ pip-tools==7.3.0
     #   pip-sync-faster
 platformdirs==4.1.0
     # via pylint
-pluggy==1.3.0
+pluggy==1.4.0
     # via
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
@@ -155,7 +154,7 @@ pyproject-hooks==1.0.0
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
     #   build
-pytest==8.0.0
+pytest==8.1.1
     # via
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
