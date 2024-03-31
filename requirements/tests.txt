@@ -16,9 +16,7 @@ certifi==2023.11.17
 click==8.1.7
     # via pip-tools
 coverage[toml]==7.4.0
-    # via
-    #   coverage
-    #   pytest-cov
+    # via pytest-cov
 data-tasks==0.0.3
     # via -r requirements/prod.txt
 factory-boy==3.3.0
@@ -92,7 +90,7 @@ pytest==8.0.0
     #   -r requirements/tests.in
     #   pytest-cov
     #   pytest-factoryboy
-pytest-cov==4.1.0
+pytest-cov==5.0.0
     # via -r requirements/tests.in
 pytest-factoryboy==2.6.0
     # via -r requirements/tests.in
