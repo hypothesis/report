@@ -22,7 +22,7 @@ click==8.1.7
     #   pip-tools
 cookiecutter==2.5.0
     # via -r template.in
-idna==3.6
+idna==3.7
     # via requests
 importlib-metadata==7.0.1
     # via pip-sync-faster
