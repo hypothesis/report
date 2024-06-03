@@ -104,7 +104,7 @@ six==1.16.0
     #   asttokens
     #   hubspot-api-client
     #   python-dateutil
-sqlalchemy==2.0.29
+sqlalchemy==2.0.30
     # via
     #   -r requirements/prod.txt
     #   alembic
