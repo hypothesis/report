@@ -5,7 +5,7 @@ CREATE MATERIALIZED VIEW lms.organizations AS (
         raw_organizations AS (
             SELECT
                 CONCAT('us-', id) AS id,
-                CONCAT('us.lms.org.', public_id) AS public_id,
+                public_id,
                 name,
                 'us' AS region,
                 created,
@@ -17,7 +17,7 @@ CREATE MATERIALIZED VIEW lms.organizations AS (
 
             SELECT
                 CONCAT('ca-', id) AS id,
-                CONCAT('ca.lms.org.', public_id) AS public_id,
+                public_id,
                 name,
                 'ca' AS region,
                 created,
