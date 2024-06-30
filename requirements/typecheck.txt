@@ -4,7 +4,7 @@
 #
 #    pip-compile --allow-unsafe requirements/typecheck.in
 #
-mypy==1.10.0
+mypy==1.10.1
     # via -r requirements/typecheck.in
 mypy-extensions==1.0.0
     # via mypy
