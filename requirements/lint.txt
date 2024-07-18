@@ -175,7 +175,7 @@ python-dateutil==2.8.2
     #   faker
     #   freezegun
     #   hubspot-api-client
-sentry-sdk==2.4.0
+sentry-sdk==2.8.0
     # via
     #   -r functests.txt
     #   -r tests.txt
