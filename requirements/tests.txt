@@ -17,7 +17,7 @@ click==8.1.7
     # via pip-tools
 coverage[toml]==7.4.0
     # via pytest-cov
-data-tasks==0.0.3
+data-tasks==0.0.4
     # via -r requirements/prod.txt
 factory-boy==3.3.0
     # via
@@ -40,10 +40,7 @@ httpretty==1.1.4
 hubspot-api-client==9.0.0
     # via -r requirements/prod.txt
 importlib-metadata==7.0.1
-    # via
-    #   -r requirements/prod.txt
-    #   data-tasks
-    #   pip-sync-faster
+    # via pip-sync-faster
 importlib-resources==6.1.1
     # via
     #   -r requirements/prod.txt
@@ -137,9 +134,7 @@ urllib3==2.2.2
 wheel==0.42.0
     # via pip-tools
 zipp==3.19.1
-    # via
-    #   -r requirements/prod.txt
-    #   importlib-metadata
+    # via importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:
 pip==23.3.2
