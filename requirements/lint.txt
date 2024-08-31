@@ -36,7 +36,7 @@ data-tasks==0.0.4
     #   -r requirements/tests.txt
 dill==0.3.7
     # via pylint
-factory-boy==3.3.0
+factory-boy==3.3.1
     # via
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
