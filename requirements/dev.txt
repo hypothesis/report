@@ -39,7 +39,7 @@ importlib-resources==6.1.1
     # via
     #   -r requirements/prod.txt
     #   data-tasks
-ipython==8.26.0
+ipython==8.27.0
     # via -r requirements/dev.in
 jedi==0.19.1
     # via ipython
