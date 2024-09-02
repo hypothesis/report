@@ -92,7 +92,7 @@ class TestHubspotClient:
             to_type=client.AssociationObjectType.DEAL,
             object_ids=[123, "123", "456"],
         )
-
+        # pylint:disable=no-value-for-parameter
         BatchInputPublicObjectId.assert_called_once_with(
             inputs=Any.list.containing(["123", "456"]).only()
         )
