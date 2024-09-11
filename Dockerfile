@@ -1,6 +1,6 @@
 # We need to match the version inside the metabase image in order for the
 # libraries which Python is built against to exist
-FROM python:3.11.9-alpine3.19 as python
+FROM python:3.11.9-alpine3.19 AS python
 
 # We'll build/install all python dependencies in the python image
 COPY requirements/prod.txt ./
@@ -31,7 +31,7 @@ COPY --from=python /usr/local/lib/libpython3.so /usr/local/lib/libpython3.so
 COPY --from=python /usr/local/bin/newrelic-admin /usr/local/bin/newrelic-admin
 
 # We need to install some package that are not present in the metabase image
-RUN apk add libpq libexpat=2.6.2-r0
+RUN apk add libpq 
 
 # Create the report user, group, home directory and package directory.
 RUN addgroup -S report \
@@ -42,4 +42,4 @@ WORKDIR /var/lib/report
 # Copy the rest of the python application files.
 COPY . .
 
-ENV PYTHONPATH /var/lib/report:$PYTHONPATH
+ENV PYTHONPATH=/var/lib/report:$PYTHONPATH
