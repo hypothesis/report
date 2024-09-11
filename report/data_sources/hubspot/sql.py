@@ -22,7 +22,7 @@ def import_to_table(connection, table_name, items: List[dict], fields: Iterable[
     query = SQLQuery(0, f"TRUNCATE {table_name}")
     query.execute(connection)
 
-    columns = ", ".join([field.key for field in fields])
+    columns = ", ".join([field.key for field in fields if field.key])
     params = ", ".join([f":{field.key}" for field in fields])
     insert_query = f"INSERT INTO {table_name} ({columns}) VALUES ({params})"
 

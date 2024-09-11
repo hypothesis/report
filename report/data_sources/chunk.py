@@ -36,7 +36,7 @@ def chunk_with_max_len(items: Iterable[str], chunk_size: int, max_chars: int):
     if max_chars < 1:
         raise ValueError(f"Invalid max chars: {max_chars}")
 
-    batch, batch_chars = [], 0
+    batch, batch_chars = [], 0  # type: ignore
 
     for item in items:
         batch_chars += len(item)
