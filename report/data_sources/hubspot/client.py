@@ -37,7 +37,7 @@ class Field:
     """Define a mapping from a remote field to a chosen key."""
 
     hs_field: str
-    key: str = None
+    key: str | None = None
     mapping: Optional[Callable] = None
 
     def __post_init__(self):
