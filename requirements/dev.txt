@@ -35,7 +35,7 @@ hubspot-api-client==9.0.0
     # via -r requirements/prod.txt
 importlib-metadata==7.0.1
     # via pip-sync-faster
-importlib-resources==6.1.1
+importlib-resources==6.4.5
     # via
     #   -r requirements/prod.txt
     #   data-tasks
