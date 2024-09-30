@@ -4,7 +4,7 @@
 #
 #    pip-compile --allow-unsafe requirements/typecheck.in
 #
-alembic==1.13.2
+alembic==1.13.3
     # via -r requirements/prod.txt
 build==1.2.2
     # via pip-tools
