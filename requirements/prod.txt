@@ -42,7 +42,7 @@ six==1.16.0
     # via
     #   hubspot-api-client
     #   python-dateutil
-sqlalchemy==2.0.30
+sqlalchemy==2.0.35
     # via
     #   -r requirements/prod.in
     #   alembic
