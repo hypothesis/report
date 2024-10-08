@@ -147,11 +147,6 @@ disable_error_code = [
     "import-untyped",
 ]
 
-exclude = [
-  # The actual "data_task" run on a schedule are a nightmare for mypy
-  "report/data_tasks/report"
-]
-
 [[tool.mypy.overrides]]
 module= [
   # Don't try to typecheck the tests for now
