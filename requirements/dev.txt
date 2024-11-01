@@ -31,7 +31,7 @@ greenlet==3.0.3
     # via
     #   -r requirements/prod.txt
     #   sqlalchemy
-hubspot-api-client==9.0.0
+hubspot-api-client==10.0.0
     # via -r requirements/prod.txt
 importlib-metadata==7.0.1
     # via pip-sync-faster
