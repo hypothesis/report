@@ -56,7 +56,7 @@ pip-tools==7.4.1
     # via
     #   -r requirements/typecheck.in
     #   pip-sync-faster
-psycopg2==2.9.9
+psycopg2==2.9.10
     # via
     #   -r requirements/prod.txt
     #   data-tasks
