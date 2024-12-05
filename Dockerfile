@@ -31,7 +31,7 @@ COPY --from=python /usr/local/lib/libpython3.so /usr/local/lib/libpython3.so
 COPY --from=python /usr/local/bin/newrelic-admin /usr/local/bin/newrelic-admin
 
 # We need to install some package that are not present in the metabase image
-RUN apk add libpq libexpat=2.6.3-r0
+RUN apk add libpq
 
 # Create the report user, group, home directory and package directory.
 RUN addgroup -S report \
