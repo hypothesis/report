@@ -1,6 +1,6 @@
 # We need to match the version inside the metabase image in order for the
 # libraries which Python is built against to exist
-FROM python:3.11.10-alpine3.19 AS python
+FROM python:3.11.11-alpine3.19 AS python
 
 # We'll build/install all python dependencies in the python image
 COPY requirements/prod.txt ./
