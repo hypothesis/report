@@ -202,7 +202,7 @@ six==1.16.0
     #   python-dateutil
 snowballstemmer==2.2.0
     # via pydocstyle
-sqlalchemy==2.0.35
+sqlalchemy==2.0.36
     # via
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
