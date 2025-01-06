@@ -5,70 +5,70 @@
 #    pip-compile --allow-unsafe requirements/dev.in
 #
 alembic==1.14.0
-    # via -r prod.txt
+    # via -r requirements/prod.txt
 asttokens==2.4.1
     # via stack-data
 build==1.0.3
     # via pip-tools
 certifi==2024.7.4
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   hubspot-api-client
     #   requests
     #   sentry-sdk
 charset-normalizer==3.4.0
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   requests
 click==8.1.7
     # via pip-tools
 data-tasks==0.0.4
-    # via -r prod.txt
+    # via -r requirements/prod.txt
 decorator==5.1.1
     # via ipython
 executing==2.0.1
     # via stack-data
 factory-boy==3.3.1
-    # via -r dev.in
+    # via -r requirements/dev.in
 faker==22.1.0
     # via factory-boy
 greenlet==3.0.3
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   sqlalchemy
 hubspot-api-client==11.0.0
-    # via -r prod.txt
+    # via -r requirements/prod.txt
 idna==3.10
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   requests
 importlib-metadata==7.0.1
     # via pip-sync-faster
 importlib-resources==6.4.5
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   data-tasks
 ipython==8.30.0
-    # via -r dev.in
+    # via -r requirements/dev.in
 jedi==0.19.1
     # via ipython
 jinja2==3.1.5
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   data-tasks
 mako==1.3.0
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   alembic
 markupsafe==2.1.3
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   jinja2
     #   mako
 matplotlib-inline==0.1.6
     # via ipython
 newrelic==10.3.1
-    # via -r prod.txt
+    # via -r requirements/prod.txt
 packaging==23.2
     # via build
 parso==0.8.3
@@ -76,16 +76,16 @@ parso==0.8.3
 pexpect==4.9.0
     # via ipython
 pip-sync-faster==0.0.4
-    # via -r dev.in
+    # via -r requirements/dev.in
 pip-tools==7.4.1
     # via
-    #   -r dev.in
+    #   -r requirements/dev.in
     #   pip-sync-faster
 prompt-toolkit==3.0.43
     # via ipython
 psycopg2==2.9.10
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   data-tasks
 ptyprocess==0.7.0
     # via pexpect
@@ -99,37 +99,37 @@ pyproject-hooks==1.0.0
     #   pip-tools
 python-dateutil==2.8.2
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   faker
     #   hubspot-api-client
 requests==2.32.3
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   hubspot-api-client
 sentry-sdk==2.8.0
-    # via -r prod.txt
+    # via -r requirements/prod.txt
 six==1.16.0
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   asttokens
     #   hubspot-api-client
     #   python-dateutil
-sqlalchemy==2.0.35
+sqlalchemy==2.0.36
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   alembic
     #   data-tasks
 sqlparse==0.5.0
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   data-tasks
 stack-data==0.6.3
     # via ipython
 supervisor==4.2.5
-    # via -r dev.in
+    # via -r requirements/dev.in
 tabulate==0.9.0
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   data-tasks
 traitlets==5.14.1
     # via
@@ -137,13 +137,13 @@ traitlets==5.14.1
     #   matplotlib-inline
 typing-extensions==4.9.0
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   alembic
     #   ipython
     #   sqlalchemy
 urllib3==1.26.20
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   hubspot-api-client
     #   requests
     #   sentry-sdk
