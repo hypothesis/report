@@ -1,0 +1,2 @@
+# The actual "data_task" run on a schedule are a nightmare for mypy
+"report/data_tasks/report"
