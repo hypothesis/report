@@ -38,7 +38,7 @@ h-testkit==1.0.1
     # via -r requirements/functests.in
 httpretty==1.1.4
     # via -r requirements/functests.in
-hubspot-api-client==11.0.0
+hubspot-api-client==11.1.0
     # via -r requirements/prod.txt
 idna==3.10
     # via

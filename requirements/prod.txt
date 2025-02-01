@@ -17,7 +17,7 @@ data-tasks==0.0.5
     # via -r requirements/prod.in
 greenlet==3.0.3
     # via sqlalchemy
-hubspot-api-client==11.0.0
+hubspot-api-client==11.1.0
     # via -r requirements/prod.in
 idna==3.10
     # via requests
