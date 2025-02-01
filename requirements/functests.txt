@@ -20,7 +20,7 @@ charset-normalizer==3.4.0
     #   requests
 click==8.1.7
     # via pip-tools
-data-tasks==0.0.4
+data-tasks==0.0.5
     # via -r requirements/prod.txt
 factory-boy==3.3.1
     # via
