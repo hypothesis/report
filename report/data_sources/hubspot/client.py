@@ -80,7 +80,8 @@ class HubspotClient:
         self.api_client = HubSpot()
         self.api_client.access_token = self.private_app_key
 
-    ASSOCIATIONS_BATCH_SIZE = 11000
+    # 1k is the maximum we can ask for at once from Hubspot
+    ASSOCIATIONS_BATCH_SIZE = 1_000
 
     def get_associations(
         self,
@@ -99,7 +100,6 @@ class HubspotClient:
         # values, so we'll use a set to dedupe them
         relations = set()
 
-        # 11k is the maximum we can ask for at once from Hubspot
         for id_chunk in chunk(object_ids, chunk_size=self.ASSOCIATIONS_BATCH_SIZE):
             results = self.api_client.crm.associations.batch_api.read(
                 from_object_type=from_type.value,
