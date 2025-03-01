@@ -46,7 +46,7 @@ idna==3.10
     #   requests
 importlib-metadata==7.0.1
     # via pip-sync-faster
-importlib-resources==6.4.5
+importlib-resources==6.5.2
     # via
     #   -r requirements/prod.txt
     #   data-tasks
