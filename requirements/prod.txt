@@ -21,7 +21,7 @@ hubspot-api-client==11.1.0
     # via -r requirements/prod.in
 idna==3.10
     # via requests
-importlib-resources==6.4.5
+importlib-resources==6.5.2
     # via
     #   -r requirements/prod.in
     #   data-tasks
