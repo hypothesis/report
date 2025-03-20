@@ -26,7 +26,7 @@ CREATE VIEW hubspot.contact_property_update AS (
     SELECT
         contact_users.hs_object_id,
         contact_users.h_user_id,
-        'Teacher' AS lms_role,
+        case when contact_users.lms_last_active >= now() - '12 months'::interval then 'Active Teacher' else 'Inactive Teacher' end as lms_role,
         contact_users.lms_last_active,
         COALESCE(course_activity.lms_annotations_this_semester, 0) AS lms_annotations_this_semester,
         CURRENT_DATE AS reporting_last_update
