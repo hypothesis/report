@@ -81,7 +81,7 @@ requests==2.32.3
     # via
     #   -r requirements/prod.txt
     #   hubspot-api-client
-sentry-sdk==2.8.0
+sentry-sdk==2.25.0
     # via -r requirements/prod.txt
 six==1.16.0
     # via
