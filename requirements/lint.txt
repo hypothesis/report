@@ -190,7 +190,7 @@ requests==2.32.3
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
     #   hubspot-api-client
-sentry-sdk==2.8.0
+sentry-sdk==2.25.0
     # via
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
