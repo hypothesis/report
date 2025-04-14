@@ -5,90 +5,90 @@
 #    pip-compile --allow-unsafe requirements/tests.in
 #
 alembic==1.14.1
-    # via -r requirements/prod.txt
+    # via -r prod.txt
 build==1.0.3
     # via pip-tools
 certifi==2024.7.4
     # via
-    #   -r requirements/prod.txt
+    #   -r prod.txt
     #   hubspot-api-client
     #   requests
     #   sentry-sdk
 charset-normalizer==3.4.0
     # via
-    #   -r requirements/prod.txt
+    #   -r prod.txt
     #   requests
 click==8.1.7
     # via pip-tools
 coverage[toml]==7.6.10
     # via pytest-cov
 data-tasks==0.0.5
-    # via -r requirements/prod.txt
+    # via -r prod.txt
 factory-boy==3.3.1
     # via
-    #   -r requirements/tests.in
+    #   -r tests.in
     #   pytest-factoryboy
 faker==22.1.0
     # via factory-boy
 freezegun==1.5.1
-    # via -r requirements/tests.in
+    # via -r tests.in
 greenlet==3.0.3
     # via
-    #   -r requirements/prod.txt
+    #   -r prod.txt
     #   sqlalchemy
 h-matchers==1.2.16
-    # via -r requirements/tests.in
+    # via -r tests.in
 h-testkit==1.0.1
-    # via -r requirements/tests.in
+    # via -r tests.in
 httpretty==1.1.4
-    # via -r requirements/tests.in
+    # via -r tests.in
 hubspot-api-client==11.1.0
-    # via -r requirements/prod.txt
+    # via -r prod.txt
 idna==3.10
     # via
-    #   -r requirements/prod.txt
+    #   -r prod.txt
     #   requests
 importlib-metadata==7.0.1
     # via pip-sync-faster
 importlib-resources==6.5.2
     # via
-    #   -r requirements/prod.txt
+    #   -r prod.txt
     #   data-tasks
 inflection==0.5.1
     # via pytest-factoryboy
 iniconfig==2.0.0
     # via pytest
-jinja2==3.1.5
+jinja2==3.1.6
     # via
-    #   -r requirements/prod.txt
+    #   -r prod.txt
     #   data-tasks
 mako==1.3.0
     # via
-    #   -r requirements/prod.txt
+    #   -r prod.txt
     #   alembic
 markupsafe==2.1.3
     # via
-    #   -r requirements/prod.txt
+    #   -r prod.txt
     #   jinja2
     #   mako
 newrelic==10.6.0
-    # via -r requirements/prod.txt
+    # via -r prod.txt
 packaging==23.2
     # via
     #   build
     #   pytest
     #   pytest-factoryboy
 pip-sync-faster==0.0.5
-    # via -r requirements/tests.in
+    # via -r tests.in
 pip-tools==7.4.1
     # via
-    #   -r requirements/tests.in
+    #   -r tests.in
     #   pip-sync-faster
 pluggy==1.5.0
     # via pytest
 psycopg2==2.9.10
     # via
-    #   -r requirements/prod.txt
+    #   -r prod.txt
     #   data-tasks
 pyproject-hooks==1.0.0
     # via
@@ -96,52 +96,52 @@ pyproject-hooks==1.0.0
     #   pip-tools
 pytest==8.3.4
     # via
-    #   -r requirements/tests.in
+    #   -r tests.in
     #   pytest-cov
     #   pytest-factoryboy
 pytest-cov==6.0.0
-    # via -r requirements/tests.in
+    # via -r tests.in
 pytest-factoryboy==2.7.0
-    # via -r requirements/tests.in
+    # via -r tests.in
 python-dateutil==2.8.2
     # via
-    #   -r requirements/prod.txt
+    #   -r prod.txt
     #   faker
     #   freezegun
     #   hubspot-api-client
 requests==2.32.3
     # via
-    #   -r requirements/prod.txt
+    #   -r prod.txt
     #   hubspot-api-client
 sentry-sdk==2.25.0
-    # via -r requirements/prod.txt
+    # via -r prod.txt
 six==1.16.0
     # via
-    #   -r requirements/prod.txt
+    #   -r prod.txt
     #   hubspot-api-client
     #   python-dateutil
 sqlalchemy==2.0.38
     # via
-    #   -r requirements/prod.txt
+    #   -r prod.txt
     #   alembic
     #   data-tasks
 sqlparse==0.5.0
     # via
-    #   -r requirements/prod.txt
+    #   -r prod.txt
     #   data-tasks
 tabulate==0.9.0
     # via
-    #   -r requirements/prod.txt
+    #   -r prod.txt
     #   data-tasks
 typing-extensions==4.9.0
     # via
-    #   -r requirements/prod.txt
+    #   -r prod.txt
     #   alembic
     #   pytest-factoryboy
     #   sqlalchemy
 urllib3==1.26.20
     # via
-    #   -r requirements/prod.txt
+    #   -r prod.txt
     #   hubspot-api-client
     #   requests
     #   sentry-sdk
