@@ -45,6 +45,7 @@ source = ["report", "tests/unit"]
 omit = [
     "*/report/__main__.py",
     "*/report/app.py",
+    "*/report/_version.py",
 ]
 
 [tool.coverage.paths]
