@@ -139,7 +139,7 @@ typing-extensions==4.9.0
     #   alembic
     #   pytest-factoryboy
     #   sqlalchemy
-urllib3==1.26.20
+urllib3==2.5.0
     # via
     #   -r prod.txt
     #   hubspot-api-client
