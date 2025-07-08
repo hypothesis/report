@@ -149,6 +149,7 @@ pluggy==1.5.0
     #   -r requirements/functests.txt
     #   -r requirements/tests.txt
     #   pytest
+    #   pytest-cov
 psycopg2==2.9.10
     # via
     #   -r requirements/functests.txt
@@ -172,7 +173,7 @@ pytest==8.3.5
     #   -r requirements/tests.txt
     #   pytest-cov
     #   pytest-factoryboy
-pytest-cov==6.1.1
+pytest-cov==6.2.1
     # via -r requirements/tests.txt
 pytest-factoryboy==2.7.0
     # via
