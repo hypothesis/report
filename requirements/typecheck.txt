@@ -55,7 +55,7 @@ mypy==1.17.1
     # via -r requirements/typecheck.in
 mypy-extensions==1.0.0
     # via mypy
-newrelic==10.12.0
+newrelic==10.16.0
     # via -r requirements/prod.txt
 packaging==24.1
     # via build
