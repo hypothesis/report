@@ -30,7 +30,7 @@ factory-boy==3.3.3
     #   pytest-factoryboy
 faker==22.1.0
     # via factory-boy
-freezegun==1.5.1
+freezegun==1.5.5
     # via -r requirements/tests.in
 greenlet==3.0.3
     # via
