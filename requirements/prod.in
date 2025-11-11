@@ -1,3 +1,4 @@
+pip==25.2
 sqlalchemy
 psycopg2
 alembic
