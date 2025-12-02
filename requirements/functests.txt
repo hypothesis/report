@@ -82,7 +82,7 @@ pip-tools==7.5.2
     #   pip-sync-faster
 pluggy==1.5.0
     # via pytest
-psycopg2==2.9.10
+psycopg2==2.9.11
     # via
     #   -r requirements/prod.txt
     #   data-tasks
