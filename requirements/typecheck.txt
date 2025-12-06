@@ -109,7 +109,7 @@ typing-extensions==4.15.0
     #   alembic
     #   mypy
     #   sqlalchemy
-urllib3==2.5.0
+urllib3==2.6.0
     # via
     #   -r prod.txt
     #   hubspot-api-client
