@@ -5,71 +5,71 @@
 #    pip-compile --allow-unsafe requirements/typecheck.in
 #
 alembic==1.17.1
-    # via -r prod.txt
+    # via -r requirements/prod.txt
 build==1.2.2
     # via pip-tools
 certifi==2024.7.4
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   hubspot-api-client
     #   requests
     #   sentry-sdk
 charset-normalizer==3.4.0
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   requests
 click==8.1.7
     # via pip-tools
 data-tasks==0.0.5
-    # via -r prod.txt
+    # via -r requirements/prod.txt
 greenlet==3.0.3
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   sqlalchemy
 hubspot-api-client==11.1.0
-    # via -r prod.txt
+    # via -r requirements/prod.txt
 idna==3.10
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   requests
 importlib-metadata==8.4.0
     # via pip-sync-faster
 importlib-resources==6.5.2
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   data-tasks
 jinja2==3.1.6
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   data-tasks
 mako==1.3.0
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   alembic
 markupsafe==2.1.3
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   jinja2
     #   mako
 mypy==1.18.2
-    # via -r typecheck.in
+    # via -r requirements/typecheck.in
 mypy-extensions==1.0.0
     # via mypy
 newrelic==10.16.0
-    # via -r prod.txt
+    # via -r requirements/prod.txt
 packaging==24.1
     # via build
 pathspec==0.12.1
     # via mypy
 pip-sync-faster==0.0.5
-    # via -r typecheck.in
+    # via -r requirements/typecheck.in
 pip-tools==7.5.2
     # via
-    #   -r typecheck.in
+    #   -r requirements/typecheck.in
     #   pip-sync-faster
-psycopg2==2.9.10
+psycopg2==2.9.11
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   data-tasks
 pyproject-hooks==1.1.0
     # via
@@ -77,41 +77,41 @@ pyproject-hooks==1.1.0
     #   pip-tools
 python-dateutil==2.8.2
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   hubspot-api-client
 requests==2.32.4
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   hubspot-api-client
 sentry-sdk==2.32.0
-    # via -r prod.txt
+    # via -r requirements/prod.txt
 six==1.16.0
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   hubspot-api-client
     #   python-dateutil
 sqlalchemy==2.0.43
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   alembic
     #   data-tasks
 sqlparse==0.5.0
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   data-tasks
 tabulate==0.9.0
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   data-tasks
 typing-extensions==4.15.0
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   alembic
     #   mypy
     #   sqlalchemy
 urllib3==2.6.0
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   hubspot-api-client
     #   requests
     #   sentry-sdk
@@ -123,7 +123,7 @@ zipp==3.20.1
 # The following packages are considered to be unsafe in a requirements file:
 pip==25.3
     # via
-    #   -r prod.txt
+    #   -r requirements/prod.txt
     #   pip-tools
 setuptools==78.1.1
     # via pip-tools
