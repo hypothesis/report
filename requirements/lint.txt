@@ -235,7 +235,7 @@ typing-extensions==4.15.0
     #   alembic
     #   pytest-factoryboy
     #   sqlalchemy
-urllib3==2.6.0
+urllib3==2.6.3
     # via
     #   -r functests.txt
     #   -r tests.txt
