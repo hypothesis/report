@@ -112,7 +112,7 @@ python-dateutil==2.8.2
     #   faker
     #   freezegun
     #   hubspot-api-client
-requests==2.32.4
+requests==2.33.0
     # via
     #   -r prod.txt
     #   hubspot-api-client
