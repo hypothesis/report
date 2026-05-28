@@ -75,7 +75,7 @@ hubspot-api-client==11.1.0
     # via
     #   -r functests.txt
     #   -r tests.txt
-idna==3.10
+idna==3.15
     # via
     #   -r functests.txt
     #   -r tests.txt
