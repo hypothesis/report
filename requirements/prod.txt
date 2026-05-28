@@ -41,7 +41,7 @@ psycopg2==2.9.12
     #   data-tasks
 python-dateutil==2.8.2
     # via hubspot-api-client
-requests==2.32.4
+requests==2.33.0
     # via hubspot-api-client
 sentry-sdk==2.32.0
     # via -r prod.in
