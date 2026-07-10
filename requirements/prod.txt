@@ -69,5 +69,5 @@ urllib3==2.6.3
     #   sentry-sdk
 
 # The following packages are considered to be unsafe in a requirements file:
-pip==26.1
+pip==26.1.2
     # via -r prod.in
